@@ -20,7 +20,7 @@ export default function Onboarding() {
   return (
     <div className="grid grid-flow-row gap-6 py-60 text-center">
       <svg
-        className="mx-auto h-10 w-10 text-gray-400"
+        className="mx-auto size-10 text-gray-400"
         aria-hidden="true"
         width="512"
         height="512"
@@ -58,7 +58,7 @@ export default function Onboarding() {
           target={target}
         >
           <svg
-            className="-ml-0.5 mr-1.5 h-5 w-5"
+            className="-ml-0.5 mr-1.5 s-5"
             viewBox="0 0 20 20"
             fill="currentColor"
             aria-hidden="true"

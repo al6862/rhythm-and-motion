@@ -4,18 +4,18 @@
  */
 import { visionTool } from "@sanity/vision";
 import { PluginOptions, defineConfig } from "sanity";
-import {
-  presentationTool,
-  defineDocuments,
-  defineLocations,
-  type DocumentLocation,
-} from "sanity/presentation";
+// import {
+//   presentationTool,
+//   defineDocuments,
+//   defineLocations,
+//   type DocumentLocation,
+// } from "sanity/presentation";
 import { structureTool } from "sanity/structure";
 
 import { apiVersion, dataset, projectId, studioUrl } from "@/sanity/lib/api";
-import { pageStructure, singletonPlugin } from "@/sanity/plugins/settings";
-import { assistWithPresets } from "@/sanity/plugins/assist";
-import { resolveHref } from "@/sanity/lib/utils";
+import { schema } from '@/sanity/schemas'
+import { structure, singletonPlugin } from '@/sanity/structure'
+// import { resolveHref } from "@/sanity/lib/utils";
 
 const homeLocation = {
   title: "Home",
@@ -26,15 +26,7 @@ export default defineConfig({
   basePath: studioUrl,
   projectId,
   dataset,
-  schema: {
-    types: [
-      // // Singletons
-      // settings,
-      // // Documents
-      // post,
-      // author,
-    ],
-  },
+  schema,
   plugins: [
     // presentationTool({
     //   resolve: {
@@ -69,9 +61,9 @@ export default defineConfig({
     //   },
     //   previewUrl: { previewMode: { enable: "/api/draft-mode/enable" } },
     // }),
-    // structureTool({ structure: pageStructure([settings]) }),
+    structureTool({ structure }),
     // Configures the global "new document" button, and document actions, to suit the Settings document singleton
-    // singletonPlugin([settings.name]),
+    singletonPlugin(),
     // Vision lets you query your content with GROQ in the studio
     // https://www.sanity.io/docs/the-vision-plugin
     process.env.NODE_ENV === "development" &&

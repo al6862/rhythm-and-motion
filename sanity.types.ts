@@ -176,3 +176,47 @@ export type Slug = {
 
 export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | SiteSettings | Page | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Seo | Slug;
 export declare const internalGroqTypeReferenceTo: unique symbol;
+// Source: ./sanity/lib/queries.ts
+// Variable: siteSettingsQuery
+// Query: *[_type == 'siteSettings'][0] {        seo {    ...,    'openGraphImage': openGraphImage.asset->url,},    }
+export type SiteSettingsQueryResult = {
+  seo: {
+    _type: "seo";
+    metaTitle?: string;
+    metaDescription?: string;
+    openGraphTitle?: string;
+    openGraphDescription?: string;
+    openGraphImage: string | null;
+    includeInSitemap?: boolean;
+    disallowRobots?: boolean;
+    initSeo?: boolean;
+  } | null;
+} | null;
+// Variable: pageQuery
+// Query: {    'page': *[_type == 'page' && $slug == slug.current][0] {        title,        content[]->{    ...,},        seo {    ...,    'openGraphImage': openGraphImage.asset->url,},    }}
+export type PageQueryResult = {
+  page: {
+    title: string | null;
+    content: null;
+    seo: {
+      _type: "seo";
+      metaTitle?: string;
+      metaDescription?: string;
+      openGraphTitle?: string;
+      openGraphDescription?: string;
+      openGraphImage: string | null;
+      includeInSitemap?: boolean;
+      disallowRobots?: boolean;
+      initSeo?: boolean;
+    } | null;
+  } | null;
+};
+
+// Query TypeMap
+import "@sanity/client";
+declare module "@sanity/client" {
+  interface SanityQueries {
+    "\n    *[_type == 'siteSettings'][0] {\n        seo {\n    ...,\n    'openGraphImage': openGraphImage.asset->url,\n},\n    }\n": SiteSettingsQueryResult;
+    "{\n    'page': *[_type == 'page' && $slug == slug.current][0] {\n        title,\n        content[]->{\n    ...,\n},\n        seo {\n    ...,\n    'openGraphImage': openGraphImage.asset->url,\n},\n    }\n}": PageQueryResult;
+  }
+}

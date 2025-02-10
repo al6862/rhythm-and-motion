@@ -1,15 +1,8 @@
-import Link from "next/link";
-import { Suspense } from "react";
-
 import { sanityFetch } from "@/sanity/lib/fetch";
+import { homepageQuery } from "@/sanity/lib/queries";
 
 export default async function Page() {
-  // const [settings, heroPost] = await Promise.all([
-  //   sanityFetch({
-  //     query: settingsQuery,
-  //   }),
-  //   sanityFetch({ query: heroQuery }),
-  // ]);
+  const data = await sanityFetch({ query: homepageQuery });
 
   return (
     <div>

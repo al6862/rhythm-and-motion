@@ -1,34 +1,34 @@
-import { DocumentIcon as icon } from '@sanity/icons';
+import { DocumentIcon as icon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
 
 export const page = defineType({
-  name: 'page',
-  title: 'Page',
-  type: 'document',
+  name: "page",
+  title: "Page",
+  type: "document",
   icon,
   groups: [
-    { name: 'main', title: 'Main' },
-    { name: 'seo', title: 'SEO' },
+    { name: "main", title: "Main" },
+    { name: "seo", title: "SEO" },
   ],
   fields: [
     defineField({
-      name: 'title',
-      title: 'Title',
-      group: 'main',
-      type: 'string',
-      validation: Rule => Rule.required(),
+      name: "title",
+      title: "Title",
+      group: "main",
+      type: "string",
+      validation: (Rule) => Rule.required(),
     }),
 
     defineField({
-      name: 'slug',
-      title: 'Slug',
-      group: 'main',
-      type: 'slug',
+      name: "slug",
+      title: "Slug",
+      group: "main",
+      type: "slug",
       options: {
-        source: 'title',
+        source: "title",
         maxLength: 150,
       },
-      validation: Rule => Rule.required(),
+      validation: (Rule) => Rule.required(),
     }),
 
     // defineField({
@@ -62,19 +62,19 @@ export const page = defineType({
     // }),
 
     defineField({
-      name: 'seo',
-      type: 'seo',
-      group: 'seo',
+      name: "seo",
+      type: "seo",
+      group: "seo",
     }),
   ],
 
   preview: {
     select: {
-      title: 'title',
+      title: "title",
     },
 
     prepare({ title }) {
       return { title };
-    }
-  }
+    },
+  },
 });

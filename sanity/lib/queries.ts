@@ -1,14 +1,13 @@
 import { defineQuery } from "next-sanity";
 
-
 const seoData = `{
     ...,
     'openGraphImage': openGraphImage.asset->url,
-}`
+}`;
 
 const contentData = `{
     ...,
-}`
+}`;
 
 export const siteSettingsQuery = defineQuery(`
     *[_type == 'siteSettings'][0] {

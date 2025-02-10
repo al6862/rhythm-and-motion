@@ -1,17 +1,11 @@
 import { definePlugin } from "sanity";
-import type {StructureResolver} from 'sanity/structure'
+import type { StructureResolver } from "sanity/structure";
 
 // https://www.sanity.io/docs/structure-builder-cheat-sheet
 
-const singletonTypes = [
-  'homepage',
-  'siteSettings',
-];
+const singletonTypes = ["homepage", "siteSettings"];
 
-const documentsHiddenFromContentList = [
-  'homepage',
-  'page',
-];
+const documentsHiddenFromContentList = ["homepage", "page"];
 
 export const singletonPlugin = definePlugin(() => {
   return {
@@ -42,43 +36,52 @@ export const singletonPlugin = definePlugin(() => {
 
 export const structure: StructureResolver = (S) =>
   S.list()
-    .title('Content')
+    .title("Content")
     .items([
       S.listItem()
-        .id('homepage')
-        .schemaType('homepage')
-        .title('Homepage')
+        .id("homepage")
+        .schemaType("homepage")
+        .title("Homepage")
         .child(
-          S.document().id('homepage').schemaType('homepage').documentId('homepage')
+          S.document()
+            .id("homepage")
+            .schemaType("homepage")
+            .documentId("homepage"),
         ),
 
       S.listItem()
-        .title('Pages')
+        .title("Pages")
         .child(
-          S.documentTypeList('page')
-            .defaultOrdering([{ field: '_createdAt', direction: 'asc' }])
+          S.documentTypeList("page").defaultOrdering([
+            { field: "_createdAt", direction: "asc" },
+          ]),
         ),
 
       S.divider(),
       // Removes singletons from main list
-      ...S.documentTypeListItems().filter((listItem) => ![
-        ...documentsHiddenFromContentList,
-        ...singletonTypes,
-      ].includes(listItem.getId() || '')),
+      ...S.documentTypeListItems().filter(
+        (listItem) =>
+          ![...documentsHiddenFromContentList, ...singletonTypes].includes(
+            listItem.getId() || "",
+          ),
+      ),
 
       S.listItem()
-        .title('Site Settings')
+        .title("Site Settings")
         .child(
           S.list()
-            .title('Settings Documents')
+            .title("Settings Documents")
             .items([
               S.listItem()
-                .id('siteSettings')
-                .schemaType('siteSettings')
-                .title('SEO')
+                .id("siteSettings")
+                .schemaType("siteSettings")
+                .title("SEO")
                 .child(
-                  S.editor().id('siteSettings').schemaType('siteSettings').documentId('siteSettings')
+                  S.editor()
+                    .id("siteSettings")
+                    .schemaType("siteSettings")
+                    .documentId("siteSettings"),
                 ),
-            ])
+            ]),
         ),
-    ])
+    ]);

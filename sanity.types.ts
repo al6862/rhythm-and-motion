@@ -77,6 +77,15 @@ export type SiteSettings = {
   seo?: Seo;
 };
 
+export type Homepage = {
+  _id: string;
+  _type: "homepage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  seo?: Seo;
+};
+
 export type Page = {
   _id: string;
   _type: "page";
@@ -174,7 +183,22 @@ export type Slug = {
   source?: string;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | SiteSettings | Page | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Seo | Slug;
+export type AllSanitySchemaTypes =
+  | SanityImagePaletteSwatch
+  | SanityImagePalette
+  | SanityImageDimensions
+  | SanityFileAsset
+  | Geopoint
+  | SiteSettings
+  | Homepage
+  | Page
+  | SanityImageCrop
+  | SanityImageHotspot
+  | SanityImageAsset
+  | SanityAssetSourceData
+  | SanityImageMetadata
+  | Seo
+  | Slug;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./sanity/lib/queries.ts
 // Variable: siteSettingsQuery
@@ -192,6 +216,29 @@ export type SiteSettingsQueryResult = {
     initSeo?: boolean;
   } | null;
 } | null;
+// Variable: homepageQuery
+// Query: {    'homepage': *[_type == 'homepage'][0] {        ...,        content[]->{    ...,},        seo {    ...,    'openGraphImage': openGraphImage.asset->url,},    }}
+export type HomepageQueryResult = {
+  homepage: {
+    _id: string;
+    _type: "homepage";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    seo: {
+      _type: "seo";
+      metaTitle?: string;
+      metaDescription?: string;
+      openGraphTitle?: string;
+      openGraphDescription?: string;
+      openGraphImage: string | null;
+      includeInSitemap?: boolean;
+      disallowRobots?: boolean;
+      initSeo?: boolean;
+    } | null;
+    content: null;
+  } | null;
+};
 // Variable: pageQuery
 // Query: {    'page': *[_type == 'page' && $slug == slug.current][0] {        title,        content[]->{    ...,},        seo {    ...,    'openGraphImage': openGraphImage.asset->url,},    }}
 export type PageQueryResult = {
@@ -217,6 +264,7 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "\n    *[_type == 'siteSettings'][0] {\n        seo {\n    ...,\n    'openGraphImage': openGraphImage.asset->url,\n},\n    }\n": SiteSettingsQueryResult;
+    "{\n    'homepage': *[_type == 'homepage'][0] {\n        ...,\n        content[]->{\n    ...,\n},\n        seo {\n    ...,\n    'openGraphImage': openGraphImage.asset->url,\n},\n    }\n}": HomepageQueryResult;
     "{\n    'page': *[_type == 'page' && $slug == slug.current][0] {\n        title,\n        content[]->{\n    ...,\n},\n        seo {\n    ...,\n    'openGraphImage': openGraphImage.asset->url,\n},\n    }\n}": PageQueryResult;
   }
 }

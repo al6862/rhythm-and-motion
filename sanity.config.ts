@@ -13,14 +13,14 @@ import { PluginOptions, defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 
 import { apiVersion, dataset, projectId, studioUrl } from "@/sanity/lib/api";
-import { schema } from '@/sanity/schemas'
-import { structure, singletonPlugin } from '@/sanity/structure'
+import { schema } from "@/sanity/schemas";
+import { structure, singletonPlugin } from "@/sanity/structure";
 // import { resolveHref } from "@/sanity/lib/utils";
 
-const homeLocation = {
-  title: "Home",
-  href: "/",
-} satisfies DocumentLocation;
+// const homeLocation = {
+//   title: "Home",
+//   href: "/",
+// } satisfies DocumentLocation;
 
 export default defineConfig({
   basePath: studioUrl,

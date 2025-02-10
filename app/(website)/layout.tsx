@@ -13,11 +13,12 @@ import { siteSettingsQuery } from "@/sanity/lib/queries";
 import type React from "react";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { seo } = await sanityFetch({
-    query: siteSettingsQuery,
-    // Metadata should never contain stega
-    stega: false,
-  }) || {};
+  const { seo } =
+    (await sanityFetch({
+      query: siteSettingsQuery,
+      // Metadata should never contain stega
+      stega: false,
+    })) || {};
 
   const title = seo?.metaTitle || "Rhythm & Motion";
   const description = seo?.metaDescription || "";

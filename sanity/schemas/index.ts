@@ -18,5 +18,5 @@ const objects = [seo];
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   // types: [...documents, ...objects, ...modules,],
-  types: [...documents, ...objects,],
+  types: [...documents, ...objects],
 };

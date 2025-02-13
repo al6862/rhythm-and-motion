@@ -1,3 +1,68 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+  font-size: 10px;
+}
+
+h1,
+.h1,
+.hxxl {
+  @apply font-fg text-[4.8rem] font-normal leading-[0.9] tracking-normal lg:text-[9rem] lg:leading-[0.8];
+}
+
+h2,
+.h2,
+.hxl {
+  @apply font-fg text-[4.5rem] font-normal leading-[0.88] tracking-[0.045rem] lg:text-[5.8rem] lg:tracking-[0.058rem];
+}
+
+h3,
+.h3,
+.hl {
+  @apply font-fg text-[3.6rem] font-normal leading-[0.89] tracking-normal lg:text-[4.8rem];
+}
+
+h4,
+.h4,
+.medium {
+  @apply font-fg text-[3.2rem] font-normal leading-[0.89] tracking-normal;
+}
+
+.cta {
+  @apply font-folio text-[2rem] font-medium leading-none tracking-normal;
+}
+
+.menu {
+  @apply font-fg text-[1.6rem] font-normal leading-none tracking-normal lg:text-[1.4rem];
+}
+
+.input {
+  @apply font-fg text-[1.6rem] font-normal leading-none tracking-normal;
+}
+
+body,
+.body {
+  @apply font-fg-atf text-[1.4rem] font-normal leading-[1.4] tracking-normal;
+}
+
+.body-medium {
+  @apply font-fg-atf text-[1.4rem] font-medium leading-[1.4] tracking-normal;
+}
+
+.caption {
+  @apply font-fg-atf text-[1.2rem] font-normal italic leading-[1.4] tracking-[0.036rem];
+}
+
+.button {
+  @apply relative rounded-[0.7rem] p-[2.1rem] font-folio text-[2rem] font-medium leading-none tracking-normal text-white transition-all;
+}
+
+.button::before {
+  @apply absolute left-0 top-0 h-full w-full rounded-[0.7rem] bg-white opacity-20 content-[""];
+}
+
+.button:hover {
+  @apply bg-white text-black;
+}

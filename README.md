@@ -1,6 +1,7 @@
 # Rhythm and Motion site
 
 This project is a Next.js 15 application with Sanity.
+This is a test to see if vercel will build this branch.
 
 ## Commands
 

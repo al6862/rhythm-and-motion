@@ -5,6 +5,13 @@ const seoData = `{
     'openGraphImage': openGraphImage.asset->url,
 }`;
 
+const imageData = `{
+    caption,
+    'assetId': asset->_id,
+    'assetPath': asset->path,
+    'aspectRatio': asset->metadata.dimensions.aspectRatio,
+}`;
+
 const linkTypeData = `
   _type == "link" => {
     ...,
@@ -15,6 +22,10 @@ const linkTypeData = `
 const centeredTextData = `{
     _id,
     _type,
+    marginY,
+    'bgColor': bgColor.hex,
+    'textColor': textColor.hex,
+    image ${imageData},
     content[] {
       ...,
       ${linkTypeData},

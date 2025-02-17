@@ -10,12 +10,13 @@ import { centeredText } from "./modules/centeredText";
 
 /* Object imports */
 import { seo } from "./objects/seo";
+import { imageAlt } from "./objects/imageAlt";
 
 const documents = [page, homepage, siteSettings];
 
 const modules = [centeredText];
 
-const objects = [seo];
+const objects = [seo, imageAlt];
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [...documents, ...objects, ...modules],

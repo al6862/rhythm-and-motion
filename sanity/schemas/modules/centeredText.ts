@@ -14,6 +14,25 @@ export const centeredText = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "marginY",
+      title: "Top and Bottom Margin",
+      type: "number",
+      initialValue: 250,
+      validation: (Rule) => Rule.max(300).min(100),
+    }),
+    defineField({
+      name: "bgColor",
+      title: "Background Color",
+      type: "color",
+    }),
+    defineField({
+      name: "image",
+      title: "Background Image",
+      description:
+        "If no background image uploaded, background color is used instead.",
+      type: "imageAlt",
+    }),
+    defineField({
       name: "content",
       title: "Content",
       type: "array",
@@ -38,6 +57,11 @@ export const centeredText = defineType({
           },
         }),
       ],
+    }),
+    defineField({
+      name: "textColor",
+      title: "Text Color",
+      type: "color",
     }),
   ],
 

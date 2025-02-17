@@ -9,7 +9,7 @@ export default function Content({ data }: Props) {
     ? data.map((c) => {
         switch (c._type) {
           case "centeredText":
-            return <CenteredText key={c._id} content={c.content} />;
+            return <CenteredText key={c._id} content={c} />;
 
           default:
             return (

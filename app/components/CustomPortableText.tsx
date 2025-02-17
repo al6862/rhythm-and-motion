@@ -37,10 +37,12 @@ export function CustomPortableText({ value }: { value: PortableTextBlock[] }) {
     types: {
       link: ({ value }) => {
         return (
-          <div className="mt-[3.4rem]">
-            <Link link={value}>
-              <span className="button">{value.text}</span>
-            </Link>
+          <div className="mt-[5.5rem]">
+              <span className="button">
+                <Link link={value}>
+                  {value.text}
+                </Link>
+              </span>
           </div>
         );
       },

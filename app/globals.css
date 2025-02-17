@@ -66,3 +66,15 @@ body,
 .button:hover {
   @apply bg-white text-black;
 }
+
+.rte h3 + p {
+  @apply mt-[3.4rem];
+}
+
+.rte h1 + p {
+  @apply mt-[6rem];
+}
+
+.rte p + h3 {
+  @apply mt-[6rem];
+}

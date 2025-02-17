@@ -1,11 +1,16 @@
+import { type PortableTextBlock } from "next-sanity";
 import { CustomPortableText } from "./CustomPortableText";
 
-export default function CenteredText({ content }) {
+type Props = {
+  content: PortableTextBlock[];
+};
+
+export default function CenteredText({ content }: Props) {
   return (
     <div>
-      {content.content && (
+      {content && (
         <div className={`rte`}>
-          <CustomPortableText value={content.content} />
+          <CustomPortableText value={content} />
         </div>
       )}
     </div>

@@ -367,6 +367,13 @@
         },
         "optional": true
       },
+      "marginY": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "number"
+        },
+        "optional": true
+      },
       "bgColor": {
         "type": "objectAttribute",
         "value": {

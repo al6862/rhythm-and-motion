@@ -28,17 +28,17 @@ export default function CenteredText({ content }: Props) {
         color: textColor,
       }}
     >
-      {image && 
+      {image && (
         <Image
           src={image?.assetPath}
           width={2880}
           height={1720}
           alt={image?.caption || "missing alt"}
-          className="absolute top-0 -z-10 w-full h-full object-cover"
-        /> 
-      }
+          className="absolute top-0 -z-10 size-full object-cover"
+        />
+      )}
       {content?.content && (
-        <div className="rte lg:max-w-[49.2rem] text-center mx-[3rem] lg:mx-auto">
+        <div className="rte mx-12 text-center lg:mx-auto lg:max-w-[49.2rem]">
           <CustomPortableText value={content?.content} />
         </div>
       )}

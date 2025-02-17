@@ -1,4 +1,12 @@
-export default function sanityLoader({ src, width, quality }: {src: any; width: any; quality: any;}) {
+export default function sanityLoader({
+  src,
+  width,
+  quality,
+}: {
+  src: any;
+  width: any;
+  quality: any;
+}) {
   const url = new URL(`https://cdn.sanity.io/${src}`);
 
   url.searchParams.set("auto", "format");

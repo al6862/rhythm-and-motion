@@ -75,6 +75,7 @@ export type CenteredText = {
   _updatedAt: string;
   _rev: string;
   title?: string;
+  marginY?: number;
   bgColor?: Color;
   image?: {
     asset?: {
@@ -356,7 +357,7 @@ export type SiteSettingsQueryResult = {
   } | null;
 } | null;
 // Variable: homepageQuery
-// Query: {    'homepage': *[_type == 'homepage'][0] {        ...,        content[]->{    ...,    _type == 'centeredText' => {    _id,    _type,    'bgColor': bgColor.hex,    'textColor': textColor.hex,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    content[] {      ...,        _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },},},        seo {    ...,    'openGraphImage': openGraphImage.asset->url,},    }}
+// Query: {    'homepage': *[_type == 'homepage'][0] {        ...,        content[]->{    ...,    _type == 'centeredText' => {    _id,    _type,    marginY,    'bgColor': bgColor.hex,    'textColor': textColor.hex,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    content[] {      ...,        _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },},},        seo {    ...,    'openGraphImage': openGraphImage.asset->url,},    }}
 export type HomepageQueryResult = {
   homepage: {
     _id: string;
@@ -371,6 +372,7 @@ export type HomepageQueryResult = {
       _updatedAt: string;
       _rev: string;
       title?: string;
+      marginY: number | null;
       bgColor: string | null;
       image: {
         caption: string | null;
@@ -430,7 +432,7 @@ export type HomepageQueryResult = {
   } | null;
 };
 // Variable: pageQuery
-// Query: {    'page': *[_type == 'page' && $slug == slug.current][0] {        title,        content[]->{    ...,    _type == 'centeredText' => {    _id,    _type,    'bgColor': bgColor.hex,    'textColor': textColor.hex,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    content[] {      ...,        _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },},},        seo {    ...,    'openGraphImage': openGraphImage.asset->url,},    }}
+// Query: {    'page': *[_type == 'page' && $slug == slug.current][0] {        title,        content[]->{    ...,    _type == 'centeredText' => {    _id,    _type,    marginY,    'bgColor': bgColor.hex,    'textColor': textColor.hex,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    content[] {      ...,        _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },},},        seo {    ...,    'openGraphImage': openGraphImage.asset->url,},    }}
 export type PageQueryResult = {
   page: {
     title: string | null;
@@ -441,6 +443,7 @@ export type PageQueryResult = {
       _updatedAt: string;
       _rev: string;
       title?: string;
+      marginY: number | null;
       bgColor: string | null;
       image: {
         caption: string | null;
@@ -504,7 +507,7 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "\n    *[_type == 'siteSettings'][0] {\n        seo {\n    ...,\n    'openGraphImage': openGraphImage.asset->url,\n},\n    }\n": SiteSettingsQueryResult;
-    "{\n    'homepage': *[_type == 'homepage'][0] {\n        ...,\n        content[]->{\n    ...,\n    _type == 'centeredText' => {\n    _id,\n    _type,\n    'bgColor': bgColor.hex,\n    'textColor': textColor.hex,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    content[] {\n      ...,\n      \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n},\n        seo {\n    ...,\n    'openGraphImage': openGraphImage.asset->url,\n},\n    }\n}": HomepageQueryResult;
-    "{\n    'page': *[_type == 'page' && $slug == slug.current][0] {\n        title,\n        content[]->{\n    ...,\n    _type == 'centeredText' => {\n    _id,\n    _type,\n    'bgColor': bgColor.hex,\n    'textColor': textColor.hex,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    content[] {\n      ...,\n      \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n},\n        seo {\n    ...,\n    'openGraphImage': openGraphImage.asset->url,\n},\n    }\n}": PageQueryResult;
+    "{\n    'homepage': *[_type == 'homepage'][0] {\n        ...,\n        content[]->{\n    ...,\n    _type == 'centeredText' => {\n    _id,\n    _type,\n    marginY,\n    'bgColor': bgColor.hex,\n    'textColor': textColor.hex,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    content[] {\n      ...,\n      \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n},\n        seo {\n    ...,\n    'openGraphImage': openGraphImage.asset->url,\n},\n    }\n}": HomepageQueryResult;
+    "{\n    'page': *[_type == 'page' && $slug == slug.current][0] {\n        title,\n        content[]->{\n    ...,\n    _type == 'centeredText' => {\n    _id,\n    _type,\n    marginY,\n    'bgColor': bgColor.hex,\n    'textColor': textColor.hex,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    content[] {\n      ...,\n      \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n},\n        seo {\n    ...,\n    'openGraphImage': openGraphImage.asset->url,\n},\n    }\n}": PageQueryResult;
   }
 }

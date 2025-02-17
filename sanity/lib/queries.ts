@@ -5,8 +5,25 @@ const seoData = `{
     'openGraphImage': openGraphImage.asset->url,
 }`;
 
+const linkTypeData = `
+  _type == "link" => {
+    ...,
+    internalLink->{_type,slug,title}
+  }
+`;
+
+const centeredTextData = `{
+    _id,
+    _type,
+    content[] {
+      ...,
+      ${linkTypeData},
+    },
+}`;
+
 const contentData = `{
     ...,
+    _type == 'centeredText' => ${centeredTextData},
 }`;
 
 export const siteSettingsQuery = defineQuery(`

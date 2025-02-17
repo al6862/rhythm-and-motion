@@ -11,7 +11,7 @@ export default async function Page({ params }: Props) {
 
   return (
     <main>
-      <Content data={data?.homepage?.content} />
+      <Content data={data?.page?.content} />
     </main>
   );
 }

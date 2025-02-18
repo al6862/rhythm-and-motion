@@ -11,33 +11,21 @@ export const homepage = defineType({
     { name: "seo", title: "SEO" },
   ],
   fields: [
-    //  defineField({
-    //     name: 'content',
-    //     title: 'Content',
-    //     group: 'main',
-    //     type: 'array',
-    //     of: [
-    //       {
-    //         type: 'reference',
-    //         to: [
-    //           { type: 'backgroundImageText' },
-    //           { type: 'fullBleedHero' },
-    //           { type: 'insetHero' },
-    //           { type: 'fullWidthInsetHero' },
-    //           { type: 'socialFeed' },
-    //           { type: 'storeLocations' },
-    //           { type: 'categoryCards' },
-    //           { type: 'squiggle' },
-    //           { type: 'contentCarousel' },
-    //           { type: 'productCarousel' },
-    //           { type: 'bigTextImage' },
-    //         ],
-    //       },
-    //     ],
-    //   }),
+    defineField({
+      name: "content",
+      title: "Content",
+      group: "main",
+      type: "array",
+      of: [
+        {
+          type: "reference",
+          to: [{ type: "centeredText" }],
+        },
+      ],
+    }),
 
     defineField({
-      name: "seo",
+      name: "SEO",
       type: "seo",
       group: "seo",
     }),

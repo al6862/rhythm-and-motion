@@ -31,38 +31,21 @@ export const page = defineType({
       validation: (Rule) => Rule.required(),
     }),
 
-    // defineField({
-    //   name: 'content',
-    //   title: 'Content',
-    //   group: 'main',
-    //   type: 'array',
-    //   of: [
-    //     {
-    //       type: 'reference',
-    //       to: [
-    //         { type: 'backgroundImageText' },
-    //         { type: 'categoryCards' },
-    //         { type: 'centeredText' },
-    //         { type: 'contentCarousel' },
-    //         { type: 'faq' },
-    //         { type: 'featuredArticle' },
-    //         { type: 'fullBleedHero' },
-    //         { type: 'fullWidthInsetHero' },
-    //         { type: 'fullWidthTextHero' },
-    //         { type: 'insetHero' },
-    //         { type: 'productCarousel' },
-    //         { type: 'socialFeed' },
-    //         { type: 'splitImageText'},
-    //         { type: 'squiggle' },
-    //         { type: 'storeLocations' },
-    //         { type: 'contactForm' },
-    //       ],
-    //     },
-    //   ],
-    // }),
+    defineField({
+      name: "content",
+      title: "Content",
+      group: "main",
+      type: "array",
+      of: [
+        {
+          type: "reference",
+          to: [{ type: "centeredText" }],
+        },
+      ],
+    }),
 
     defineField({
-      name: "seo",
+      name: "SEO",
       type: "seo",
       group: "seo",
     }),

@@ -5,8 +5,10 @@ export function resolveHref(
   slug?: string,
 ): string | undefined {
   switch (documentType) {
-    // case "post":
-    //   return slug ? `/posts/${slug}` : undefined;
+    case "homepage":
+      return "/";
+    case "page":
+      return slug ? `/${slug}` : undefined;
     default:
       console.warn("Invalid document type:", documentType);
       return undefined;

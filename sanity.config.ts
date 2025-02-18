@@ -15,6 +15,8 @@ import { structureTool } from "sanity/structure";
 import { apiVersion, dataset, projectId, studioUrl } from "@/sanity/lib/api";
 import { schema } from "@/sanity/schemas";
 import { structure, singletonPlugin } from "@/sanity/structure";
+import { linkField } from "sanity-plugin-link-field";
+import { colorInput } from "@sanity/color-input";
 // import { resolveHref } from "@/sanity/lib/utils";
 
 // const homeLocation = {
@@ -28,6 +30,10 @@ export default defineConfig({
   dataset,
   schema,
   plugins: [
+    linkField({
+      linkableSchemaTypes: ["page", "homepage"],
+    }),
+    colorInput(),
     // presentationTool({
     //   resolve: {
     //     mainDocuments: defineDocuments([

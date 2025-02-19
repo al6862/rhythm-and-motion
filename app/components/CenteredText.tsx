@@ -1,5 +1,6 @@
 import { type PortableTextBlock } from "next-sanity";
 import { CustomPortableText } from "./CustomPortableText";
+import type { ImageData } from "../types/ImageData";
 import Image from "next/image";
 
 type Props = {
@@ -8,10 +9,7 @@ type Props = {
     bgColor: string;
     textColor: string;
     content: PortableTextBlock[];
-    image: {
-      caption: string;
-      assetPath: string;
-    };
+    image: ImageData;
   };
 };
 

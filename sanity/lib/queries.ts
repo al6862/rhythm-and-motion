@@ -32,9 +32,17 @@ const centeredTextData = `{
     },
 }`;
 
+const photoGalleryData = defineQuery(`{
+    _id,
+    _type,
+    'bgColor': bgColor.hex,
+    photos[] ${imageData}
+}`);
+
 const contentData = `{
     ...,
     _type == 'centeredText' => ${centeredTextData},
+    _type == 'photoGallery' => ${photoGalleryData},
 }`;
 
 export const siteSettingsQuery = defineQuery(`

@@ -4,14 +4,14 @@ import { type SchemaTypeDefinition } from "sanity";
 import { page, homepage, siteSettings } from "./documents";
 
 /* Module Imports */
-import { centeredText } from "./modules";
+import { centeredText, photoGallery } from "./modules";
 
 /* Object imports */
 import { seo, imageAlt } from "./objects";
 
 const documents = [page, homepage, siteSettings];
 
-const modules = [centeredText];
+const modules = [centeredText, photoGallery];
 
 const objects = [seo, imageAlt];
 

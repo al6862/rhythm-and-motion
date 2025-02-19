@@ -39,7 +39,7 @@ export const page = defineType({
       of: [
         {
           type: "reference",
-          to: [{ type: "centeredText" }],
+          to: [{ type: "centeredText" }, { type: "photoGallery" }],
         },
       ],
     }),

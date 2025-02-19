@@ -1,16 +1,13 @@
 import { type SchemaTypeDefinition } from "sanity";
 
 /* Document Imports */
-import { page } from "./documents/page";
-import { homepage } from "./documents/homepage";
-import { siteSettings } from "./documents/siteSettings";
+import { page, homepage, siteSettings } from "./documents";
 
 /* Module Imports */
-import { centeredText } from "./modules/centeredText";
+import { centeredText } from "./modules";
 
 /* Object imports */
-import { seo } from "./objects/seo";
-import { imageAlt } from "./objects/imageAlt";
+import { seo, imageAlt } from "./objects";
 
 const documents = [page, homepage, siteSettings];
 

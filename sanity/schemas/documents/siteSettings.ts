@@ -6,7 +6,7 @@ export const siteSettings = defineType({
   type: "document",
   fields: [
     defineField({
-      name: "seo",
+      name: "SEO",
       type: "seo",
     }),
   ],

@@ -39,10 +39,22 @@ const photoGalleryData = defineQuery(`{
     photos[] ${imageData}
 }`);
 
+const classesSlideshowData = `{
+    _id,
+    classes[] {
+    ...,
+    image ${imageData},
+    'bgColor': bgColor.hex,
+    'video': video.asset->url,
+    },
+    ${linkTypeData}
+}`;
+
 const contentData = `{
     ...,
     _type == 'centeredText' => ${centeredTextData},
     _type == 'photoGallery' => ${photoGalleryData},
+    _type == 'classesSlideshow' => ${classesSlideshowData}
 }`;
 
 export const siteSettingsQuery = defineQuery(`

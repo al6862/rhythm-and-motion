@@ -887,7 +887,7 @@
           "type": "string"
         }
       },
-      "seo": {
+      "SEO": {
         "type": "objectAttribute",
         "value": {
           "type": "inline",
@@ -939,7 +939,7 @@
         },
         "optional": true
       },
-      "desktopNavList": {
+      "navList": {
         "type": "objectAttribute",
         "value": {
           "type": "array",
@@ -1388,7 +1388,7 @@
         },
         "optional": true
       },
-      "seo": {
+      "SEO": {
         "type": "objectAttribute",
         "value": {
           "type": "inline",
@@ -1512,7 +1512,7 @@
         },
         "optional": true
       },
-      "seo": {
+      "SEO": {
         "type": "objectAttribute",
         "value": {
           "type": "inline",

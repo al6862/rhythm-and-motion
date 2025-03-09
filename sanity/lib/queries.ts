@@ -51,6 +51,20 @@ export const siteSettingsQuery = defineQuery(`
     }
 `);
 
+export const headerQuery = defineQuery(`{
+    'header': *[_type == 'header'][0] {
+        ...,
+        navList[] {
+            ...,
+            ${linkTypeData},
+        },
+        mobileNavList[] {
+            ...,
+            ${linkTypeData},
+        }
+    }
+}`);
+
 export const homepageQuery = defineQuery(`{
     'homepage': *[_type == 'homepage'][0] {
         ...,

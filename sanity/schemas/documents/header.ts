@@ -14,8 +14,22 @@ export const header = defineType({
     }),
 
     defineField({
-      name: "desktopNavList",
-      title: "Desktop Nav List",
+      name: "navList",
+      title: "Navigation Link List",
+      type: "array",
+      of: [
+        {
+          type: "link",
+          options: {
+            enableText: true,
+          },
+        },
+      ],
+    }),
+
+    defineField({
+      name: "mobileNavList",
+      title: "Additional Mobile Link List",
       type: "array",
       of: [
         {

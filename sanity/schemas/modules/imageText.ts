@@ -14,6 +14,12 @@ export const imageText = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "header",
+      title: "Header",
+      type: "string",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: "bgColor",
       title: "Background Color",
       type: "color",

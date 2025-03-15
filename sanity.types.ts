@@ -138,6 +138,51 @@ export type CenteredText = {
   textColor?: Color;
 };
 
+export type ImageText = {
+  _id: string;
+  _type: "imageText";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  bgColor?: Color;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    caption?: string;
+    _type: "imageAlt";
+  };
+  content?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "normal" | "h1" | "h2" | "h3" | "h4";
+        listItem?: "bullet" | "number";
+        markDefs?: Array<{
+          href?: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }
+    | ({
+        _key: string;
+      } & Link)
+  >;
+};
+
 export type ImageAlt = {
   _type: "imageAlt";
   asset?: {
@@ -255,6 +300,12 @@ export type Homepage = {
         _type: "reference";
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "photoGallery";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "imageText";
       }
   >;
   SEO?: Seo;
@@ -379,6 +430,7 @@ export type AllSanitySchemaTypes =
   | Geopoint
   | PhotoGallery
   | CenteredText
+  | ImageText
   | ImageAlt
   | SiteSettings
   | Header
@@ -548,6 +600,50 @@ export type HomepageQueryResult = {
               }
           > | null;
           textColor: string | null;
+        }
+      | {
+          _id: string;
+          _type: "imageText";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          title?: string;
+          bgColor?: Color;
+          image?: {
+            asset?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+            };
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            caption?: string;
+            _type: "imageAlt";
+          };
+          content?: Array<
+            | ({
+                _key: string;
+              } & Link)
+            | {
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h1" | "h2" | "h3" | "h4" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs?: Array<{
+                  href?: string;
+                  _type: "link";
+                  _key: string;
+                }>;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }
+          >;
         }
       | {
           _id: string;

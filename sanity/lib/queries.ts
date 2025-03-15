@@ -50,11 +50,23 @@ const classesSlideshowData = `{
     ${linkTypeData}
 }`;
 
+const imageTextData = `{
+    _id,
+    ...,
+    image ${imageData},
+    'bgColor': bgColor.hex,
+    content[] {
+      ...,
+      ${linkTypeData},
+    },
+}`;
+
 const contentData = `{
     ...,
     _type == 'centeredText' => ${centeredTextData},
     _type == 'photoGallery' => ${photoGalleryData},
     _type == 'classesSlideshow' => ${classesSlideshowData}
+    _type == 'imageText' => ${imageTextData},
 }`;
 
 export const siteSettingsQuery = defineQuery(`

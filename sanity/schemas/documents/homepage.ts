@@ -23,6 +23,7 @@ export const homepage = defineType({
             { type: "centeredText" },
             { type: "photoGallery" },
             { type: "classesSlideshow" },
+            { type: "imageText" },
           ],
         },
       ],

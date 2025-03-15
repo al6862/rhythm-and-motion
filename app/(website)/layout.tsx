@@ -6,7 +6,7 @@ import { VisualEditing } from "next-sanity";
 import { draftMode } from "next/headers";
 
 import AlertBanner from "./alert-banner";
-import { Header } from "@/app/components/Header"
+import { Header } from "@/app/components/Header";
 
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { headerQuery, siteSettingsQuery } from "@/sanity/lib/queries";
@@ -53,14 +53,14 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const { isEnabled: isDraftMode } = await draftMode();
-  const { header } = await sanityFetch({query: headerQuery})
+  const { header } = await sanityFetch({ query: headerQuery });
 
   return (
     <html lang="en" className="bg-white text-black">
       <body>
         <section className="min-h-screen">
           {isDraftMode && <AlertBanner />}
-          <Header data={{...header}} />
+          <Header data={{ ...header }} />
           {children}
         </section>
         {isDraftMode && <VisualEditing />}

@@ -1,80 +1,115 @@
-'use client'
+"use client";
 
 import { type LinkProps } from "sanity-plugin-link-field/component";
-import LogoPrimary from "./LogoPrimary"
-import NextLink from "next/link"
-import { Link } from "./Link"
-import { usePathname } from 'next/navigation'
-import { useRef, useEffect, useState } from 'react'
-import { Router } from "next/router";
+import LogoPrimary from "./LogoPrimary";
+import NextLink from "next/link";
+import { Link } from "./Link";
+import { usePathname } from "next/navigation";
+import { useRef, useEffect, useState } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 type Props = {
-    navList: LinkProps[];
-    mobileNavList: LinkProps[];
-    promo: string;
+  navList: LinkProps[];
+  mobileNavList: LinkProps[];
 };
 
-export function Header({ data } : Protrues) {
-  const { navList, mobileNavList, promo } = data
-  const pathname = usePathname()
-  const [menuIsOpen, setMenuIsOpen] = useState(false)
-  const container = useRef()
+export function Header({ data }: Props) {
+  const { navList, mobileNavList } = data;
+  const pathname = usePathname();
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const container = useRef();
+  gsap.registerPlugin(useGSAP);
 
-  const handleMenuClick = (event) => {
-    setMenuIsOpen(!menuIsOpen)
-  }
+  const handleMenuClick = () => {
+    setMenuIsOpen(!menuIsOpen);
+  };
 
   useEffect(() => {
-    setMenuIsOpen(false)
-  }, [pathname])
+    setMenuIsOpen(false);
+  }, [pathname]);
+
+  useGSAP(
+    () => {
+      if (menuIsOpen) {
+        gsap.to(".menu-drawer", { autoAlpha: 1 });
+        gsap.to(".menu-text", { autoAlpha: 0 });
+      } else {
+        gsap.to(".menu-drawer", { autoAlpha: 0 });
+        gsap.to(".menu-text", { autoAlpha: 1 });
+      }
+    },
+    { dependencies: [menuIsOpen], scope: container },
+  );
 
   return (
-    <nav ref={container} className="fixed top-0 text-white z-10 flex justify-between w-full">
-        <NextLink href={`/`}>
-          <div className="w-[20rem] mt-[1.6rem] ml-[1.6rem]">
-              <LogoPrimary />
-          </div>
-        </NextLink>
-        <div className="max-md:hidden p-[1.6rem] flex gap-[3rem]">
-          {navList?.map((item, i) => {
-            const itemColor = item.internalLink?.slug.current != pathname.split("/")[1] && pathname != "/"? 'text-black' : 'text-white';
+    <nav className="fixed top-0 z-10 flex w-full justify-between text-white">
+      <NextLink href={`/`}>
+        <div className="ml-[1.6rem] mt-[1.6rem] w-80">
+          <LogoPrimary />
+        </div>
+      </NextLink>
+      <div className="flex gap-12 p-[1.6rem] max-md:hidden">
+        {navList?.map((item) => {
+          const itemColor =
+            item.internalLink?.slug.current != pathname.split("/")[1] &&
+            pathname != "/"
+              ? "text-black"
+              : "text-white";
 
-            return (
-              <span key={item._key} className={`${itemColor} menu`} >
-                <Link link={item}>{item.text}</Link>
-              </span>
-            )
-          })}
+          return (
+            <span key={item._key} className={`${itemColor} menu`}>
+              <Link link={item}>{item.text}</Link>
+            </span>
+          );
+        })}
+      </div>
+      <div className="md:hidden" ref={container}>
+        <div
+          className={`menu-text menu opacity-1 cursor-pointer p-[1.6rem]`}
+          onClick={handleMenuClick}
+        >
+          Menu
         </div>
-        <div className="md:hidden overlayContainer opacity-1">
-          <div className={`p-[1.6rem] menu cursor-pointer ${menuIsOpen && 'hidden'}`} onClick={handleMenuClick}>Menu</div>
-          <div className={`fixed top-0 left-0 w-full h-full p-[1.6rem] pb-[3.4rem] bg-black ${!menuIsOpen && 'hidden'} flex flex-col justify-between`}>
-            <div>
-              <div className="flex justify-between w-full">
-                <div className="w-[20rem] cursor-pointer" onClick={handleMenuClick}>
-                  <LogoPrimary />
-                </div>
-                <div className={`ml-auto w-fit menu cursor-pointer ${!menuIsOpen && 'hidden'}`} onClick={handleMenuClick}>Close</div>
+        <div
+          className={`menu-drawer fixed left-0 top-0 flex size-full flex-col justify-between bg-black p-[1.6rem] pb-[3.4rem] opacity-0`}
+        >
+          <div>
+            <div className="flex w-full justify-between">
+              <div
+                className="w-80 cursor-pointer"
+                onClick={handleMenuClick}
+              >
+                <LogoPrimary />
               </div>
-              <div className="mt-[16.8rem] flex flex-col gap-[1.6rem]">
-                {navList?.map((item, i) => (
-                    <span key={item._key} className={`text-white ml-auto hl`} >
-                      <Link link={item} onClick={handleMenuClick}>{item.text}</Link>
-                    </span>
-                  )
-                )}
+              <div
+                className={`close-text menu ml-auto w-fit cursor-pointer`}
+                onClick={handleMenuClick}
+              >
+                Close
               </div>
             </div>
-            <div className="flex flex-col flex-wrap gap-[0.8rem] max-h-[18.4rem]">
-              {mobileNavList?.map((item, i) => (
-                  <span key={item._key} className={`text-white menu`} >
-                    <Link link={item} onClick={handleMenuClick}>{item.text}</Link>
-                  </span>
-                )
-              )}
+            <div className="mt-[16.8rem] flex flex-col gap-[1.6rem]">
+              {navList?.map((item) => (
+                <span key={item._key} className={`hl ml-auto text-white`}>
+                  <Link link={item} onClick={handleMenuClick}>
+                    {item.text}
+                  </Link>
+                </span>
+              ))}
             </div>
           </div>
+          <div className="flex max-h-[18.4rem] flex-col flex-wrap gap-[0.8rem]">
+            {mobileNavList?.map((item) => (
+              <span key={item._key} className={`menu text-white`}>
+                <Link link={item} onClick={handleMenuClick}>
+                  {item.text}
+                </Link>
+              </span>
+            ))}
+          </div>
         </div>
+      </div>
     </nav>
   );
 }

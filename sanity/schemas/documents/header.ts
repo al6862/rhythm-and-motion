@@ -6,14 +6,6 @@ export const header = defineType({
   type: "document",
   fields: [
     defineField({
-      name: "promo",
-      title: "Optional Promo Bar",
-      type: "string",
-      description: "Leave blank to hide on front end",
-      initialValue: "Lorem ipsum dolor sit amet",
-    }),
-
-    defineField({
       name: "navList",
       title: "Navigation Link List",
       type: "array",

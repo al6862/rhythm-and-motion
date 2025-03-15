@@ -1217,6 +1217,13 @@
         },
         "optional": true
       },
+      "header": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "bgColor": {
         "type": "objectAttribute",
         "value": {

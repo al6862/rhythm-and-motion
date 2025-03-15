@@ -204,6 +204,7 @@ export type ImageText = {
   _updatedAt: string;
   _rev: string;
   title?: string;
+  header?: string;
   bgColor?: Color;
   image?: {
     asset?: {
@@ -595,6 +596,315 @@ export type HeaderQueryResult = {
     }> | null;
   } | null;
 };
+// Variable: homepageQuery
+// Query: {    'homepage': *[_type == 'homepage'][0] {        ...,        content[]->{    ...,    _type == 'centeredText' => {    _id,    _type,    marginY,    'bgColor': bgColor.hex,    'textColor': textColor.hex,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    content[] {      ...,        _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },},    _type == 'photoGallery' => {    _id,    _type,    'bgColor': bgColor.hex,    photos[] {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,}},    _type == 'classesSlideshow' => {    _id,    classes[] {    ...,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    'bgColor': bgColor.hex,    'video': video.asset->url,    },      _type == "link" => {    ...,    internalLink->{_type,slug,title}  }},    _type == 'imageText' => {    _id,    ...,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    'bgColor': bgColor.hex,    content[] {      ...,        _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },},},        SEO {    ...,    'openGraphImage': openGraphImage.asset->url,},    }}
+export type HomepageQueryResult = {
+  homepage: {
+    _id: string;
+    _type: "homepage";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    content: Array<
+      | {
+          _id: string;
+          _type: "centeredText";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          title?: string;
+          marginY: number | null;
+          bgColor: string | null;
+          image: {
+            caption: string | null;
+            assetId: string | null;
+            assetPath: string | null;
+            aspectRatio: number | null;
+          } | null;
+          content: Array<
+            | {
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h1" | "h2" | "h3" | "h4" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs?: Array<{
+                  href?: string;
+                  _type: "link";
+                  _key: string;
+                }>;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }
+            | {
+                _key: string;
+                _type: "link";
+                text?: string;
+                type?: string;
+                internalLink:
+                  | {
+                      _type: "homepage";
+                      slug: null;
+                      title: null;
+                    }
+                  | {
+                      _type: "page";
+                      slug: Slug | null;
+                      title: string | null;
+                    }
+                  | null;
+                url?: string;
+                email?: string;
+                phone?: string;
+                value?: string;
+                blank?: boolean;
+                parameters?: string;
+                anchor?: string;
+              }
+          > | null;
+          textColor: string | null;
+        }
+      | {
+          _id: string;
+          _type: "classesSlideshow";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          title?: string;
+          classes: Array<{
+            className?: string;
+            bgColor: string | null;
+            image: {
+              caption: string | null;
+              assetId: string | null;
+              assetPath: string | null;
+              aspectRatio: number | null;
+            } | null;
+            video: string | null;
+            content?: Array<
+              | ({
+                  _key: string;
+                } & Link)
+              | {
+                  children?: Array<{
+                    marks?: Array<string>;
+                    text?: string;
+                    _type: "span";
+                    _key: string;
+                  }>;
+                  style?: "h1" | "h2" | "h3" | "h4" | "normal";
+                  listItem?: "bullet" | "number";
+                  markDefs?: Array<{
+                    href?: string;
+                    _type: "link";
+                    _key: string;
+                  }>;
+                  level?: number;
+                  _type: "block";
+                  _key: string;
+                }
+            >;
+            _key: string;
+          }> | null;
+          link?: Link;
+        }
+      | {
+          _id: string;
+          _type: "imageText";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          title?: string;
+          header?: string;
+          bgColor: string | null;
+          image: {
+            caption: string | null;
+            assetId: string | null;
+            assetPath: string | null;
+            aspectRatio: number | null;
+          } | null;
+          content: Array<
+            | {
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h1" | "h2" | "h3" | "h4" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs?: Array<{
+                  href?: string;
+                  _type: "link";
+                  _key: string;
+                }>;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }
+            | {
+                _key: string;
+                _type: "link";
+                text?: string;
+                type?: string;
+                internalLink:
+                  | {
+                      _type: "homepage";
+                      slug: null;
+                      title: null;
+                    }
+                  | {
+                      _type: "page";
+                      slug: Slug | null;
+                      title: string | null;
+                    }
+                  | null;
+                url?: string;
+                email?: string;
+                phone?: string;
+                value?: string;
+                blank?: boolean;
+                parameters?: string;
+                anchor?: string;
+              }
+          > | null;
+        }
+      | {
+          _id: string;
+          _type: "photoGallery";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          title?: string;
+          bgColor: string | null;
+          photos: Array<{
+            caption: string | null;
+            assetId: string | null;
+            assetPath: string | null;
+            aspectRatio: number | null;
+          }> | null;
+        }
+    > | null;
+    SEO: {
+      _type: "seo";
+      metaTitle?: string;
+      metaDescription?: string;
+      openGraphTitle?: string;
+      openGraphDescription?: string;
+      openGraphImage: string | null;
+      includeInSitemap?: boolean;
+      disallowRobots?: boolean;
+      initSeo?: boolean;
+    } | null;
+  } | null;
+};
+// Variable: pageQuery
+// Query: {    'page': *[_type == 'page' && $slug == slug.current][0] {        ...,        title,        content[]->{    ...,    _type == 'centeredText' => {    _id,    _type,    marginY,    'bgColor': bgColor.hex,    'textColor': textColor.hex,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    content[] {      ...,        _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },},    _type == 'photoGallery' => {    _id,    _type,    'bgColor': bgColor.hex,    photos[] {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,}},    _type == 'classesSlideshow' => {    _id,    classes[] {    ...,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    'bgColor': bgColor.hex,    'video': video.asset->url,    },      _type == "link" => {    ...,    internalLink->{_type,slug,title}  }},    _type == 'imageText' => {    _id,    ...,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    'bgColor': bgColor.hex,    content[] {      ...,        _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },},},        SEO {    ...,    'openGraphImage': openGraphImage.asset->url,},    }}
+export type PageQueryResult = {
+  page: {
+    _id: string;
+    _type: "page";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    title: string | null;
+    slug?: Slug;
+    content: Array<
+      | {
+          _id: string;
+          _type: "centeredText";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          title?: string;
+          marginY: number | null;
+          bgColor: string | null;
+          image: {
+            caption: string | null;
+            assetId: string | null;
+            assetPath: string | null;
+            aspectRatio: number | null;
+          } | null;
+          content: Array<
+            | {
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h1" | "h2" | "h3" | "h4" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs?: Array<{
+                  href?: string;
+                  _type: "link";
+                  _key: string;
+                }>;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }
+            | {
+                _key: string;
+                _type: "link";
+                text?: string;
+                type?: string;
+                internalLink:
+                  | {
+                      _type: "homepage";
+                      slug: null;
+                      title: null;
+                    }
+                  | {
+                      _type: "page";
+                      slug: Slug | null;
+                      title: string | null;
+                    }
+                  | null;
+                url?: string;
+                email?: string;
+                phone?: string;
+                value?: string;
+                blank?: boolean;
+                parameters?: string;
+                anchor?: string;
+              }
+          > | null;
+          textColor: string | null;
+        }
+      | {
+          _id: string;
+          _type: "photoGallery";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          title?: string;
+          bgColor: string | null;
+          photos: Array<{
+            caption: string | null;
+            assetId: string | null;
+            assetPath: string | null;
+            aspectRatio: number | null;
+          }> | null;
+        }
+    > | null;
+    SEO: {
+      _type: "seo";
+      metaTitle?: string;
+      metaDescription?: string;
+      openGraphTitle?: string;
+      openGraphDescription?: string;
+      openGraphImage: string | null;
+      includeInSitemap?: boolean;
+      disallowRobots?: boolean;
+      initSeo?: boolean;
+    } | null;
+  } | null;
+};
 
 // Query TypeMap
 import "@sanity/client";
@@ -603,5 +913,7 @@ declare module "@sanity/client" {
     "{\n    _id,\n    _type,\n    'bgColor': bgColor.hex,\n    photos[] {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n}\n}": PhotoGalleryDataResult;
     "\n    *[_type == 'siteSettings'][0] {\n        SEO {\n    ...,\n    'openGraphImage': openGraphImage.asset->url,\n},\n    }\n": SiteSettingsQueryResult;
     "{\n    'header': *[_type == 'header'][0] {\n        navList[] {\n            ...,\n            \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n        },\n        mobileNavList[] {\n            ...,\n            \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n        }\n    }\n}": HeaderQueryResult;
+    "{\n    'homepage': *[_type == 'homepage'][0] {\n        ...,\n        content[]->{\n    ...,\n    _type == 'centeredText' => {\n    _id,\n    _type,\n    marginY,\n    'bgColor': bgColor.hex,\n    'textColor': textColor.hex,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    content[] {\n      ...,\n      \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n    _type == 'photoGallery' => {\n    _id,\n    _type,\n    'bgColor': bgColor.hex,\n    photos[] {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n}\n},\n    _type == 'classesSlideshow' => {\n    _id,\n    classes[] {\n    ...,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    'bgColor': bgColor.hex,\n    'video': video.asset->url,\n    },\n    \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n\n},\n    _type == 'imageText' => {\n    _id,\n    ...,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    'bgColor': bgColor.hex,\n    content[] {\n      ...,\n      \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n},\n        SEO {\n    ...,\n    'openGraphImage': openGraphImage.asset->url,\n},\n    }\n}": HomepageQueryResult;
+    "{\n    'page': *[_type == 'page' && $slug == slug.current][0] {\n        ...,\n        title,\n        content[]->{\n    ...,\n    _type == 'centeredText' => {\n    _id,\n    _type,\n    marginY,\n    'bgColor': bgColor.hex,\n    'textColor': textColor.hex,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    content[] {\n      ...,\n      \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n    _type == 'photoGallery' => {\n    _id,\n    _type,\n    'bgColor': bgColor.hex,\n    photos[] {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n}\n},\n    _type == 'classesSlideshow' => {\n    _id,\n    classes[] {\n    ...,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    'bgColor': bgColor.hex,\n    'video': video.asset->url,\n    },\n    \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n\n},\n    _type == 'imageText' => {\n    _id,\n    ...,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    'bgColor': bgColor.hex,\n    content[] {\n      ...,\n      \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n},\n        SEO {\n    ...,\n    'openGraphImage': openGraphImage.asset->url,\n},\n    }\n}": PageQueryResult;
   }
 }

@@ -65,7 +65,7 @@ const contentData = `{
     ...,
     _type == 'centeredText' => ${centeredTextData},
     _type == 'photoGallery' => ${photoGalleryData},
-    _type == 'classesSlideshow' => ${classesSlideshowData}
+    _type == 'classesSlideshow' => ${classesSlideshowData},
     _type == 'imageText' => ${imageTextData},
 }`;
 

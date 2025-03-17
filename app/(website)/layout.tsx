@@ -60,7 +60,7 @@ export default async function RootLayout({
       <body>
         <section className="min-h-screen">
           {isDraftMode && <AlertBanner />}
-          <Header data={ header } />
+          <Header data={header} />
           {children}
         </section>
         {isDraftMode && <VisualEditing />}

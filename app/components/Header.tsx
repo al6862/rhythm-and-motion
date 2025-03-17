@@ -13,10 +13,10 @@ type Props = {
   data: {
     navList: any[] | null;
     mobileNavList: any[] | null;
-  } | null
+  } | null;
 };
 
-export function Header({ data } : Props) {
+export function Header({ data }: Props) {
   const navList = data?.navList;
   const mobileNavList = data?.mobileNavList;
   const pathname = usePathname();
@@ -54,14 +54,14 @@ export function Header({ data } : Props) {
       </NextLink>
       <div className="flex gap-12 p-[1.6rem] max-md:hidden">
         {navList?.map((link) => {
-          let linkColor = "text-white"
-          
+          let linkColor = "text-white";
+
           if (link && isInternalLink(link as LinkValue)) {
             linkColor =
-            link.internalLink?.slug?.current != pathname.split("/")[1] &&
-            pathname != "/"
-              ? "text-black"
-              : "text-white";
+              link.internalLink?.slug?.current != pathname.split("/")[1] &&
+              pathname != "/"
+                ? "text-black"
+                : "text-white";
           }
 
           return (
@@ -83,10 +83,7 @@ export function Header({ data } : Props) {
         >
           <div>
             <div className="flex w-full justify-between">
-              <div
-                className="w-80 cursor-pointer"
-                onClick={handleMenuClick}
-              >
+              <div className="w-80 cursor-pointer" onClick={handleMenuClick}>
                 <LogoPrimary />
               </div>
               <div

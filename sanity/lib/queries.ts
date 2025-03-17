@@ -47,22 +47,36 @@ const contentData = `{
 
 export const siteSettingsQuery = defineQuery(`
     *[_type == 'siteSettings'][0] {
-        seo ${seoData},
+        SEO ${seoData},
     }
 `);
+
+export const headerQuery = defineQuery(`{
+    'header': *[_type == 'header'][0] {
+        navList[] {
+            ...,
+            ${linkTypeData},
+        },
+        mobileNavList[] {
+            ...,
+            ${linkTypeData},
+        }
+    }
+}`);
 
 export const homepageQuery = defineQuery(`{
     'homepage': *[_type == 'homepage'][0] {
         ...,
         content[]->${contentData},
-        seo ${seoData},
+        SEO ${seoData},
     }
 }`);
 
 export const pageQuery = defineQuery(`{
     'page': *[_type == 'page' && $slug == slug.current][0] {
+        ...,
         title,
         content[]->${contentData},
-        seo ${seoData},
+        SEO ${seoData},
     }
 }`);

@@ -6,22 +6,23 @@ import { VisualEditing } from "next-sanity";
 import { draftMode } from "next/headers";
 
 import AlertBanner from "./alert-banner";
+import { Header } from "@/app/components/Header";
 
 import { sanityFetch } from "@/sanity/lib/fetch";
-import { siteSettingsQuery } from "@/sanity/lib/queries";
+import { headerQuery, siteSettingsQuery } from "@/sanity/lib/queries";
 
 import type React from "react";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { seo } =
+  const { SEO } =
     (await sanityFetch({
       query: siteSettingsQuery,
       // Metadata should never contain stega
       stega: false,
     })) || {};
 
-  const title = seo?.metaTitle || "Rhythm & Motion";
-  const description = seo?.metaDescription || "";
+  const title = SEO?.metaTitle || "Rhythm & Motion";
+  const description = SEO?.metaDescription || "";
 
   return {
     metadataBase: new URL("https://www.rhythmandmotion.com/"),
@@ -31,13 +32,13 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     description,
     openGraph: {
-      title: seo?.openGraphTitle,
-      description: seo?.openGraphDescription,
+      title: SEO?.openGraphTitle,
+      description: SEO?.openGraphDescription,
       url: "https://www.rhythmandmotion.com/",
       siteName: title,
       images: [
         {
-          url: seo?.openGraphImage || "",
+          url: SEO?.openGraphImage || "",
           width: 800,
           height: 600,
         },
@@ -52,13 +53,15 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const { isEnabled: isDraftMode } = await draftMode();
+  const { header } = await sanityFetch({ query: headerQuery });
 
   return (
     <html lang="en" className="bg-white text-black">
       <body>
         <section className="min-h-screen">
           {isDraftMode && <AlertBanner />}
-          <main>{children}</main>
+          <Header data={header} />
+          {children}
         </section>
         {isDraftMode && <VisualEditing />}
         <SpeedInsights />

@@ -157,7 +157,25 @@ export type SiteSettings = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  seo?: Seo;
+  SEO?: Seo;
+};
+
+export type Header = {
+  _id: string;
+  _type: "header";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  navList?: Array<
+    {
+      _key: string;
+    } & Link
+  >;
+  mobileNavList?: Array<
+    {
+      _key: string;
+    } & Link
+  >;
 };
 
 export type Color = {
@@ -363,6 +381,7 @@ export type AllSanitySchemaTypes =
   | CenteredText
   | ImageAlt
   | SiteSettings
+  | Header
   | Color
   | RgbaColor
   | HsvaColor
@@ -388,9 +407,9 @@ export type PhotoGalleryDataResult = {
   photos: never;
 };
 // Variable: siteSettingsQuery
-// Query: *[_type == 'siteSettings'][0] {        seo {    ...,    'openGraphImage': openGraphImage.asset->url,},    }
+// Query: *[_type == 'siteSettings'][0] {        SEO {    ...,    'openGraphImage': openGraphImage.asset->url,},    }
 export type SiteSettingsQueryResult = {
-  seo: {
+  SEO: {
     _type: "seo";
     metaTitle?: string;
     metaDescription?: string;
@@ -402,8 +421,64 @@ export type SiteSettingsQueryResult = {
     initSeo?: boolean;
   } | null;
 } | null;
+// Variable: headerQuery
+// Query: {    'header': *[_type == 'header'][0] {        navList[] {            ...,              _type == "link" => {    ...,    internalLink->{_type,slug,title}  },        },        mobileNavList[] {            ...,              _type == "link" => {    ...,    internalLink->{_type,slug,title}  },        }    }}
+export type HeaderQueryResult = {
+  header: {
+    navList: Array<{
+      _key: string;
+      _type: "link";
+      text?: string;
+      type?: string;
+      internalLink:
+        | {
+            _type: "homepage";
+            slug: null;
+            title: null;
+          }
+        | {
+            _type: "page";
+            slug: Slug | null;
+            title: string | null;
+          }
+        | null;
+      url?: string;
+      email?: string;
+      phone?: string;
+      value?: string;
+      blank?: boolean;
+      parameters?: string;
+      anchor?: string;
+    }> | null;
+    mobileNavList: Array<{
+      _key: string;
+      _type: "link";
+      text?: string;
+      type?: string;
+      internalLink:
+        | {
+            _type: "homepage";
+            slug: null;
+            title: null;
+          }
+        | {
+            _type: "page";
+            slug: Slug | null;
+            title: string | null;
+          }
+        | null;
+      url?: string;
+      email?: string;
+      phone?: string;
+      value?: string;
+      blank?: boolean;
+      parameters?: string;
+      anchor?: string;
+    }> | null;
+  } | null;
+};
 // Variable: homepageQuery
-// Query: {    'homepage': *[_type == 'homepage'][0] {        ...,        content[]->{    ...,    _type == 'centeredText' => {    _id,    _type,    marginY,    'bgColor': bgColor.hex,    'textColor': textColor.hex,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    content[] {      ...,        _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },},    _type == 'photoGallery' => {    _id,    _type,    'bgColor': bgColor.hex,    photos[] {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,}},},        seo {    ...,    'openGraphImage': openGraphImage.asset->url,},    }}
+// Query: {    'homepage': *[_type == 'homepage'][0] {        ...,        content[]->{    ...,    _type == 'centeredText' => {    _id,    _type,    marginY,    'bgColor': bgColor.hex,    'textColor': textColor.hex,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    content[] {      ...,        _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },},    _type == 'photoGallery' => {    _id,    _type,    'bgColor': bgColor.hex,    photos[] {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,}},},        SEO {    ...,    'openGraphImage': openGraphImage.asset->url,},    }}
 export type HomepageQueryResult = {
   homepage: {
     _id: string;
@@ -490,15 +565,30 @@ export type HomepageQueryResult = {
           }> | null;
         }
     > | null;
-    SEO?: Seo;
-    seo: null;
+    SEO: {
+      _type: "seo";
+      metaTitle?: string;
+      metaDescription?: string;
+      openGraphTitle?: string;
+      openGraphDescription?: string;
+      openGraphImage: string | null;
+      includeInSitemap?: boolean;
+      disallowRobots?: boolean;
+      initSeo?: boolean;
+    } | null;
   } | null;
 };
 // Variable: pageQuery
-// Query: {    'page': *[_type == 'page' && $slug == slug.current][0] {        title,        content[]->{    ...,    _type == 'centeredText' => {    _id,    _type,    marginY,    'bgColor': bgColor.hex,    'textColor': textColor.hex,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    content[] {      ...,        _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },},    _type == 'photoGallery' => {    _id,    _type,    'bgColor': bgColor.hex,    photos[] {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,}},},        seo {    ...,    'openGraphImage': openGraphImage.asset->url,},    }}
+// Query: {    'page': *[_type == 'page' && $slug == slug.current][0] {        ...,        title,        content[]->{    ...,    _type == 'centeredText' => {    _id,    _type,    marginY,    'bgColor': bgColor.hex,    'textColor': textColor.hex,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    content[] {      ...,        _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },},    _type == 'photoGallery' => {    _id,    _type,    'bgColor': bgColor.hex,    photos[] {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,}},},        SEO {    ...,    'openGraphImage': openGraphImage.asset->url,},    }}
 export type PageQueryResult = {
   page: {
+    _id: string;
+    _type: "page";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
     title: string | null;
+    slug?: Slug;
     content: Array<
       | {
           _id: string;
@@ -578,7 +668,17 @@ export type PageQueryResult = {
           }> | null;
         }
     > | null;
-    seo: null;
+    SEO: {
+      _type: "seo";
+      metaTitle?: string;
+      metaDescription?: string;
+      openGraphTitle?: string;
+      openGraphDescription?: string;
+      openGraphImage: string | null;
+      includeInSitemap?: boolean;
+      disallowRobots?: boolean;
+      initSeo?: boolean;
+    } | null;
   } | null;
 };
 
@@ -587,8 +687,9 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "{\n    _id,\n    _type,\n    'bgColor': bgColor.hex,\n    photos[] {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n}\n}": PhotoGalleryDataResult;
-    "\n    *[_type == 'siteSettings'][0] {\n        seo {\n    ...,\n    'openGraphImage': openGraphImage.asset->url,\n},\n    }\n": SiteSettingsQueryResult;
-    "{\n    'homepage': *[_type == 'homepage'][0] {\n        ...,\n        content[]->{\n    ...,\n    _type == 'centeredText' => {\n    _id,\n    _type,\n    marginY,\n    'bgColor': bgColor.hex,\n    'textColor': textColor.hex,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    content[] {\n      ...,\n      \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n    _type == 'photoGallery' => {\n    _id,\n    _type,\n    'bgColor': bgColor.hex,\n    photos[] {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n}\n},\n},\n        seo {\n    ...,\n    'openGraphImage': openGraphImage.asset->url,\n},\n    }\n}": HomepageQueryResult;
-    "{\n    'page': *[_type == 'page' && $slug == slug.current][0] {\n        title,\n        content[]->{\n    ...,\n    _type == 'centeredText' => {\n    _id,\n    _type,\n    marginY,\n    'bgColor': bgColor.hex,\n    'textColor': textColor.hex,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    content[] {\n      ...,\n      \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n    _type == 'photoGallery' => {\n    _id,\n    _type,\n    'bgColor': bgColor.hex,\n    photos[] {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n}\n},\n},\n        seo {\n    ...,\n    'openGraphImage': openGraphImage.asset->url,\n},\n    }\n}": PageQueryResult;
+    "\n    *[_type == 'siteSettings'][0] {\n        SEO {\n    ...,\n    'openGraphImage': openGraphImage.asset->url,\n},\n    }\n": SiteSettingsQueryResult;
+    "{\n    'header': *[_type == 'header'][0] {\n        navList[] {\n            ...,\n            \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n        },\n        mobileNavList[] {\n            ...,\n            \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n        }\n    }\n}": HeaderQueryResult;
+    "{\n    'homepage': *[_type == 'homepage'][0] {\n        ...,\n        content[]->{\n    ...,\n    _type == 'centeredText' => {\n    _id,\n    _type,\n    marginY,\n    'bgColor': bgColor.hex,\n    'textColor': textColor.hex,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    content[] {\n      ...,\n      \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n    _type == 'photoGallery' => {\n    _id,\n    _type,\n    'bgColor': bgColor.hex,\n    photos[] {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n}\n},\n},\n        SEO {\n    ...,\n    'openGraphImage': openGraphImage.asset->url,\n},\n    }\n}": HomepageQueryResult;
+    "{\n    'page': *[_type == 'page' && $slug == slug.current][0] {\n        ...,\n        title,\n        content[]->{\n    ...,\n    _type == 'centeredText' => {\n    _id,\n    _type,\n    marginY,\n    'bgColor': bgColor.hex,\n    'textColor': textColor.hex,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    content[] {\n      ...,\n      \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n    _type == 'photoGallery' => {\n    _id,\n    _type,\n    'bgColor': bgColor.hex,\n    photos[] {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n}\n},\n},\n        SEO {\n    ...,\n    'openGraphImage': openGraphImage.asset->url,\n},\n    }\n}": PageQueryResult;
   }
 }

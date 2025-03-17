@@ -1,6 +1,6 @@
 "use client";
 
-import { type LinkProps } from "sanity-plugin-link-field/component";
+import { isInternalLink, type LinkValue } from "sanity-plugin-link-field";
 import LogoPrimary from "./LogoPrimary";
 import NextLink from "next/link";
 import { Link } from "./Link";
@@ -10,15 +10,17 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
 type Props = {
-  navList: LinkProps[];
-  mobileNavList: LinkProps[];
+  data: {
+    navList: LinkValue[];
+    mobileNavList: LinkValue[];
+  }
 };
 
-export function Header({ data }: Props) {
+export function Header({ data } : Props) {
   const { navList, mobileNavList } = data;
   const pathname = usePathname();
   const [menuIsOpen, setMenuIsOpen] = useState(false);
-  const container = useRef();
+  const container = useRef<HTMLDivElement>(null);
   gsap.registerPlugin(useGSAP);
 
   const handleMenuClick = () => {
@@ -50,16 +52,20 @@ export function Header({ data }: Props) {
         </div>
       </NextLink>
       <div className="flex gap-12 p-[1.6rem] max-md:hidden">
-        {navList?.map((item) => {
-          const itemColor =
-            item.internalLink?.slug.current != pathname.split("/")[1] &&
+        {navList?.map((link) => {
+          let linkColor = "text-white"
+          
+          if (isInternalLink(link)) {
+            linkColor =
+            link.internalLink?.slug?.current != pathname.split("/")[1] &&
             pathname != "/"
               ? "text-black"
               : "text-white";
+          }
 
           return (
-            <span key={item._key} className={`${itemColor} menu`}>
-              <Link link={item}>{item.text}</Link>
+            <span key={link._key} className={`${linkColor} menu`}>
+              <Link link={link}>{link.text}</Link>
             </span>
           );
         })}

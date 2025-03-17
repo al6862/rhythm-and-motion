@@ -932,13 +932,6 @@
           "type": "string"
         }
       },
-      "promo": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
       "navList": {
         "type": "objectAttribute",
         "value": {

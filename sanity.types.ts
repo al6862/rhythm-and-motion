@@ -166,7 +166,6 @@ export type Header = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  promo?: string;
   navList?: Array<
     {
       _key: string;
@@ -431,7 +430,6 @@ export type HeaderQueryResult = {
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
-    promo?: string;
     navList: Array<{
       _key: string;
       _type: "link";

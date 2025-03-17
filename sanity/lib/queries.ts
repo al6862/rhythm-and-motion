@@ -53,7 +53,6 @@ export const siteSettingsQuery = defineQuery(`
 
 export const headerQuery = defineQuery(`{
     'header': *[_type == 'header'][0] {
-        ...,
         navList[] {
             ...,
             ${linkTypeData},

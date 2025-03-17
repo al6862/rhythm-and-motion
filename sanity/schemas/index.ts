@@ -1,19 +1,19 @@
 import { type SchemaTypeDefinition } from "sanity";
 
 /* Document Imports */
-import { header, homepage, page, siteSettings } from "./documents";
+import { page, homepage, siteSettings } from "./documents";
 
 /* Module Imports */
 import { centeredText, photoGallery } from "./modules";
 
 /* Object imports */
-import { imageAlt, seo } from "./objects";
+import { seo, imageAlt } from "./objects";
 
-const documents = [header, homepage, page, siteSettings];
+const documents = [page, homepage, siteSettings];
 
 const modules = [centeredText, photoGallery];
 
-const objects = [imageAlt, seo];
+const objects = [seo, imageAlt];
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [...documents, ...objects, ...modules],

@@ -1,6 +1,6 @@
 "use client";
 
-import { isInternalLink, type LinkValue } from "sanity-plugin-link-field";
+import { isInternalLink, LinkValue } from "sanity-plugin-link-field";
 import LogoPrimary from "./LogoPrimary";
 import NextLink from "next/link";
 import { Link } from "./Link";
@@ -11,13 +11,14 @@ import { useGSAP } from "@gsap/react";
 
 type Props = {
   data: {
-    navList: LinkValue[];
-    mobileNavList: LinkValue[];
-  }
+    navList: any[] | null;
+    mobileNavList: any[] | null;
+  } | null
 };
 
 export function Header({ data } : Props) {
-  const { navList, mobileNavList } = data;
+  const navList = data?.navList;
+  const mobileNavList = data?.mobileNavList;
   const pathname = usePathname();
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const container = useRef<HTMLDivElement>(null);
@@ -55,7 +56,7 @@ export function Header({ data } : Props) {
         {navList?.map((link) => {
           let linkColor = "text-white"
           
-          if (isInternalLink(link)) {
+          if (link && isInternalLink(link as LinkValue)) {
             linkColor =
             link.internalLink?.slug?.current != pathname.split("/")[1] &&
             pathname != "/"
@@ -65,7 +66,7 @@ export function Header({ data } : Props) {
 
           return (
             <span key={link._key} className={`${linkColor} menu`}>
-              <Link link={link}>{link.text}</Link>
+              <Link link={link as LinkValue}>{link.text}</Link>
             </span>
           );
         })}
@@ -96,20 +97,20 @@ export function Header({ data } : Props) {
               </div>
             </div>
             <div className="mt-[16.8rem] flex flex-col gap-[1.6rem]">
-              {navList?.map((item) => (
-                <span key={item._key} className={`hl ml-auto text-white`}>
-                  <Link link={item} onClick={handleMenuClick}>
-                    {item.text}
+              {navList?.map((link) => (
+                <span key={link._key} className={`hl ml-auto text-white`}>
+                  <Link link={link as LinkValue} onClick={handleMenuClick}>
+                    {link.text}
                   </Link>
                 </span>
               ))}
             </div>
           </div>
           <div className="flex max-h-[18.4rem] flex-col flex-wrap gap-[0.8rem]">
-            {mobileNavList?.map((item) => (
-              <span key={item._key} className={`menu text-white`}>
-                <Link link={item} onClick={handleMenuClick}>
-                  {item.text}
+            {mobileNavList?.map((link) => (
+              <span key={link._key} className={`menu text-white`}>
+                <Link link={link as LinkValue} onClick={handleMenuClick}>
+                  {link.text}
                 </Link>
               </span>
             ))}

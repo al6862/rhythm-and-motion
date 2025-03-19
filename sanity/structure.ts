@@ -5,7 +5,12 @@ import type { StructureResolver } from "sanity/structure";
 
 const singletonTypes = ["header", "homepage", "siteSettings"];
 
-const documentsHiddenFromContentList = ["page", "centeredText", "photoGallery"];
+const documentsHiddenFromContentList = [
+  "page",
+  "centeredText",
+  "photoGallery",
+  "imageText",
+];
 
 export const singletonPlugin = definePlugin(() => {
   return {
@@ -83,6 +88,13 @@ export const structure: StructureResolver = (S) =>
                 .title("Photo Gallery")
                 .child(
                   S.documentTypeList("photoGallery").defaultOrdering([
+                    { field: "_createdAt", direction: "asc" },
+                  ]),
+                ),
+              S.listItem()
+                .title("Image Text Block")
+                .child(
+                  S.documentTypeList("imageText").defaultOrdering([
                     { field: "_createdAt", direction: "asc" },
                   ]),
                 ),

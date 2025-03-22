@@ -8,7 +8,7 @@ type PhotoGalleryProps = {
   };
 };
 
-export default function CenteredText({ content }: PhotoGalleryProps) {
+export default function PhotoGallery({ content }: PhotoGalleryProps) {
   const { bgColor, photos } = content;
 
   return (

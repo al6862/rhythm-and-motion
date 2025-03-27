@@ -24,6 +24,9 @@ export function CustomPortableText({ value }: { value: PortableTextBlock[] }) {
       normal: ({ children }) => {
         return <p className={"body"}>{children}</p>;
       },
+      caption: ({ children }) => {
+        return <p className={"caption"}>{children}</p>;
+      },
     },
     marks: {
       link: ({ children, value }) => {

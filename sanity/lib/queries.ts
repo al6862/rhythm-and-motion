@@ -76,6 +76,25 @@ export const headerQuery = defineQuery(`{
     }
 }`);
 
+export const footerQuery = defineQuery(`{
+    'footer': *[_type == 'footer'][0] {
+        linkLists[] {
+            links [] {
+                ...,
+                ${linkTypeData},
+            },
+        },   
+        newsletterContent[] {
+            ...,
+            ${linkTypeData},
+        },
+        footerContent[] {
+            ...,
+            ${linkTypeData},
+        },
+    }
+}`);
+
 export const homepageQuery = defineQuery(`{
     'homepage': *[_type == 'homepage'][0] {
         ...,

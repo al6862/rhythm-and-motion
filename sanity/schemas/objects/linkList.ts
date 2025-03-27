@@ -1,25 +1,25 @@
-import { ListIcon, LinkIcon } from '@sanity/icons'
+import { ListIcon, LinkIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
 
 export const linkList = defineType({
-  name: 'linkList',
-  title: 'Link List',
-  type: 'object',
+  name: "linkList",
+  title: "Link List",
+  type: "object",
   icon: ListIcon,
   fields: [
     defineField({
-      name:'title',
-      title: 'Title',
-      type: 'string',
+      name: "title",
+      title: "Title",
+      type: "string",
     }),
 
     defineField({
-      name: 'links',
-      title: 'Links',
-      type: 'array',
+      name: "links",
+      title: "Links",
+      type: "array",
       of: [
         {
-          type: 'link',
+          type: "link",
           icon: LinkIcon,
           options: {
             enableText: true,
@@ -31,7 +31,7 @@ export const linkList = defineType({
 
   preview: {
     select: {
-      title: 'title'
+      title: "title",
     },
 
     prepare: ({ title }) => ({ title }),

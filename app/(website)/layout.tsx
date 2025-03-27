@@ -7,10 +7,14 @@ import { draftMode } from "next/headers";
 
 import AlertBanner from "./alert-banner";
 import { Header } from "@/app/components/Header";
-import { Footer } from "@/app/components/Footer"
+import { Footer } from "@/app/components/Footer";
 
 import { sanityFetch } from "@/sanity/lib/fetch";
-import { headerQuery, footerQuery, siteSettingsQuery } from "@/sanity/lib/queries";
+import {
+  headerQuery,
+  footerQuery,
+  siteSettingsQuery,
+} from "@/sanity/lib/queries";
 
 import type React from "react";
 
@@ -54,7 +58,10 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const { isEnabled: isDraftMode } = await draftMode();
-  const [{ header }, { footer }] = await Promise.all([sanityFetch({ query: headerQuery }), sanityFetch({ query: footerQuery })]);
+  const [{ header }, footer] = await Promise.all([
+    sanityFetch({ query: headerQuery }),
+    sanityFetch({ query: footerQuery }),
+  ]);
 
   return (
     <html lang="en" className="bg-white text-black">

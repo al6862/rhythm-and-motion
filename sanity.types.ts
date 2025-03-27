@@ -194,9 +194,17 @@ export type CenteredText = {
 export type LinkList = {
   _type: "linkList";
   title?: string;
+<<<<<<< HEAD
   links?: Array<{
     _key: string;
   } & Link>;
+=======
+  links?: Array<
+    {
+      _key: string;
+    } & Link
+  >;
+>>>>>>> e419b494309623905972d632aff45b505afdb3c6
 };
 
 export type ImageAlt = {
@@ -227,9 +235,17 @@ export type Footer = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+<<<<<<< HEAD
   linkLists?: Array<{
     _key: string;
   } & LinkList>;
+=======
+  linkLists?: Array<
+    {
+      _key: string;
+    } & LinkList
+  >;
+>>>>>>> e419b494309623905972d632aff45b505afdb3c6
   newsletterContent?: Array<{
     children?: Array<{
       marks?: Array<string>;
@@ -472,7 +488,38 @@ export type Slug = {
   source?: string;
 };
 
+<<<<<<< HEAD
 export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | Geopoint | ClassesSlideshow | SanityFileAsset | PhotoGallery | CenteredText | LinkList | ImageAlt | SiteSettings | Footer | Header | Color | RgbaColor | HsvaColor | HslaColor | Link | Homepage | Page | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Seo | Slug;
+=======
+export type AllSanitySchemaTypes =
+  | SanityImagePaletteSwatch
+  | SanityImagePalette
+  | SanityImageDimensions
+  | Geopoint
+  | ClassesSlideshow
+  | SanityFileAsset
+  | PhotoGallery
+  | CenteredText
+  | LinkList
+  | ImageAlt
+  | SiteSettings
+  | Footer
+  | Header
+  | Color
+  | RgbaColor
+  | HsvaColor
+  | HslaColor
+  | Link
+  | Homepage
+  | Page
+  | SanityImageCrop
+  | SanityImageHotspot
+  | SanityImageAsset
+  | SanityAssetSourceData
+  | SanityImageMetadata
+  | Seo
+  | Slug;
+>>>>>>> e419b494309623905972d632aff45b505afdb3c6
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./sanity/lib/queries.ts
 // Variable: photoGalleryData
@@ -558,15 +605,18 @@ export type FooterQueryResult = {
         _type: "link";
         text?: string;
         type?: string;
-        internalLink: {
-          _type: "homepage";
-          slug: null;
-          title: null;
-        } | {
-          _type: "page";
-          slug: Slug | null;
-          title: string | null;
-        } | null;
+        internalLink:
+          | {
+              _type: "homepage";
+              slug: null;
+              title: null;
+            }
+          | {
+              _type: "page";
+              slug: Slug | null;
+              title: string | null;
+            }
+          | null;
         url?: string;
         email?: string;
         phone?: string;
@@ -848,7 +898,7 @@ declare module "@sanity/client" {
     "{\n    _id,\n    _type,\n    'bgColor': bgColor.hex,\n    photos[] {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n}\n}": PhotoGalleryDataResult;
     "\n    *[_type == 'siteSettings'][0] {\n        SEO {\n    ...,\n    'openGraphImage': openGraphImage.asset->url,\n},\n    }\n": SiteSettingsQueryResult;
     "{\n    'header': *[_type == 'header'][0] {\n        navList[] {\n            ...,\n            \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n        },\n        mobileNavList[] {\n            ...,\n            \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n        }\n    }\n}": HeaderQueryResult;
-    "{\n    'footer': *[_type == 'footer'][0] {\n        linkLists[] {\n            links [] {\n                ...,\n                \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n            },\n        },   \n        newsletterContent[] {\n            ...,\n            \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n        },\n        footerContent[] {\n            ...,\n            \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n        },\n    }\n}": FooterQueryResult;
+    '{\n    \'footer\': *[_type == \'footer\'][0] {\n        linkLists[] {\n            links [] {\n                ...,\n                \n  _type == "link" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n            },\n        },   \n        newsletterContent[] {\n            ...,\n            \n  _type == "link" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n        },\n        footerContent[] {\n            ...,\n            \n  _type == "link" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n        },\n    }\n}': FooterQueryResult;
     "{\n    'homepage': *[_type == 'homepage'][0] {\n        ...,\n        content[]->{\n    ...,\n    _type == 'centeredText' => {\n    _id,\n    _type,\n    marginY,\n    'bgColor': bgColor.hex,\n    'textColor': textColor.hex,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    content[] {\n      ...,\n      \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n    _type == 'photoGallery' => {\n    _id,\n    _type,\n    'bgColor': bgColor.hex,\n    photos[] {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n}\n},\n    _type == 'classesSlideshow' => {\n    _id,\n    classes[] {\n    ...,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    'bgColor': bgColor.hex,\n    'video': video.asset->url,\n    },\n    \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n\n}\n},\n        SEO {\n    ...,\n    'openGraphImage': openGraphImage.asset->url,\n},\n    }\n}": HomepageQueryResult;
     "{\n    'page': *[_type == 'page' && $slug == slug.current][0] {\n        ...,\n        title,\n        content[]->{\n    ...,\n    _type == 'centeredText' => {\n    _id,\n    _type,\n    marginY,\n    'bgColor': bgColor.hex,\n    'textColor': textColor.hex,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    content[] {\n      ...,\n      \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n    _type == 'photoGallery' => {\n    _id,\n    _type,\n    'bgColor': bgColor.hex,\n    photos[] {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n}\n},\n    _type == 'classesSlideshow' => {\n    _id,\n    classes[] {\n    ...,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    'bgColor': bgColor.hex,\n    'video': video.asset->url,\n    },\n    \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n\n}\n},\n        SEO {\n    ...,\n    'openGraphImage': openGraphImage.asset->url,\n},\n    }\n}": PageQueryResult;
   }

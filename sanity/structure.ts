@@ -130,15 +130,15 @@ export const structure: StructureResolver = (S) =>
                 ),
 
               S.listItem()
-              .id("footer")
-              .schemaType("footer")
-              .title("Footer")
-              .child(
-                S.editor()
-                  .id("footer")
-                  .schemaType("footer")
-                  .documentId("footer"),
-              ),
+                .id("footer")
+                .schemaType("footer")
+                .title("Footer")
+                .child(
+                  S.editor()
+                    .id("footer")
+                    .schemaType("footer")
+                    .documentId("footer"),
+                ),
             ]),
         ),
     ]);

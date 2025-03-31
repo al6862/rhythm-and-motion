@@ -52,7 +52,7 @@ body,
 }
 
 .caption {
-  @apply font-fg-atf text-[1.2rem] font-normal italic leading-[1.4] tracking-[0.036rem];
+  @apply font-fg-atf text-[1.2rem] font-normal leading-[1.4] tracking-[0.036rem];
 }
 
 .button {

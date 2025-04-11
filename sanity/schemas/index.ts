@@ -4,12 +4,17 @@ import { type SchemaTypeDefinition } from "sanity";
 import { header, homepage, footer, page, siteSettings } from "./documents";
 
 /* Module Imports */
-import { centeredText, photoGallery, classesSlideshow } from "./modules";
+import {
+  centeredText,
+  photoGallery,
+  classesSlideshow,
+  imageText,
+} from "./modules";
 
 /* Object imports */
 import { imageAlt, linkList, seo } from "./objects";
 
-const documents = [header, homepage, footer, page, siteSettings];
+const documents = [header, homepage, footer, page, siteSettings, imageText];
 
 const modules = [centeredText, photoGallery, classesSlideshow];
 

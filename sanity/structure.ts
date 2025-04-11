@@ -8,8 +8,9 @@ const singletonTypes = ["header", "footer", "homepage", "siteSettings"];
 const documentsHiddenFromContentList = [
   "page",
   "centeredText",
-  "photoGallery",
   "classesSlideshow",
+  "photoGallery",
+  "imageText",
 ];
 
 export const singletonPlugin = definePlugin(() => {
@@ -95,6 +96,13 @@ export const structure: StructureResolver = (S) =>
                 .title("Classes Slideshow")
                 .child(
                   S.documentTypeList("classesSlideshow").defaultOrdering([
+                    { field: "_createdAt", direction: "asc" },
+                  ]),
+                ),
+              S.listItem()
+                .title("Image Text Block")
+                .child(
+                  S.documentTypeList("imageText").defaultOrdering([
                     { field: "_createdAt", direction: "asc" },
                   ]),
                 ),

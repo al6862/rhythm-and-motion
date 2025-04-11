@@ -6,9 +6,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        folio: ["var(--font-folio)", "sans-serif"],
-        fg: ["var(--franklin-gothic)", "sans-serif"],
-        "fg-atf": ["var(--franklin-gothic-atf)", "sans-serif"],
+        folio: ["var(--font-folio)", "Helvetica Neue", "sans-serif"],
+        fg: ["var(--franklin-gothic)", "Libre Franklin", "sans-serif"],
+        "fg-atf": ["var(--franklin-gothic-atf)", "Libre Franklin", "sans-serif"],
       },
       colors: {
         white: "#FFFFFF",

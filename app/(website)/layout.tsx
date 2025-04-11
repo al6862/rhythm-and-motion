@@ -18,6 +18,26 @@ import {
 
 import type React from "react";
 
+import localFont from "next/font/local";
+
+const folio = localFont({
+  variable: "--font-folio",
+  src: [
+    {
+      path: '../fonts/Folio-Med.otf',
+    },
+  ],
+})
+
+const franklinGothic = localFont({
+  variable: "--franklin-gothic",
+  src: [
+    {
+      path: '../fonts/FranklinGothicStd-Condensed.otf',
+    },
+  ],
+})
+
 export async function generateMetadata(): Promise<Metadata> {
   const { SEO } =
     (await sanityFetch({
@@ -65,7 +85,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className="bg-white text-black">
-      <body>
+      <body className={`${folio.variable} ${franklinGothic.variable} antialiased`}>
         <section className="min-h-screen">
           {isDraftMode && <AlertBanner />}
           <Header data={header} />

@@ -25,6 +25,7 @@ const folio = localFont({
   src: [
     {
       path: '../fonts/Folio-Med.otf',
+      weight: '500',
     },
   ],
 })
@@ -34,6 +35,103 @@ const franklinGothic = localFont({
   src: [
     {
       path: '../fonts/FranklinGothicStd-Condensed.otf',
+      weight: '400',
+    },
+  ],
+})
+
+const franklinGothicATF = localFont({
+  variable: "--franklin-gothic-atf",
+  src: [
+    {
+      path: '../fonts/FranklinGothic-Thin.otf',
+      weight: '100',
+      style: 'normal',
+    },
+    {
+      path: '../fonts/FranklinGothic-ThinItalic.otf',
+      weight: '100',
+      style: 'italic',
+    },
+    {
+      path: '../fonts/FranklinGothic-ExtraLight.otf',
+      weight: '200',
+      style: 'normal',
+    },
+    {
+      path: '../fonts/FranklinGothic-ExtraLightItalic.otf',
+      weight: '200',
+      style: 'italic',
+    },
+    {
+      path: '../fonts/FranklinGothic-Light.otf',
+      weight: '300',
+      style: 'normal',
+    },
+    {
+      path: '../fonts/FranklinGothic-LightItalic.otf',
+      weight: '300',
+      style: 'italic',
+    },
+    {
+      path: '../fonts/FranklinGothic-Regular.otf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../fonts/FranklinGothic-RegularItalic.otf',
+      weight: '400',
+      style: 'italic',
+    },
+    {
+      path: '../fonts/FranklinGothic-Medium.otf',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: '../fonts/FranklinGothic-MediumItalic.otf',
+      weight: '500',
+      style: 'italic',
+    },
+    {
+      path: '../fonts/FranklinGothic-Bold.otf',
+      weight: '600',
+      style: 'normal',
+    },
+    {
+      path: '../fonts/FranklinGothic-BoldItalic.otf',
+      weight: '600',
+      style: 'italic',
+    },
+    {
+      path: '../fonts/FranklinGothic-Heavy.otf',
+      weight: '700',
+      style: 'normal',
+    },
+    {
+      path: '../fonts/FranklinGothic-HeavyItalic.otf',
+      weight: '700',
+      style: 'italic',
+    },
+    {
+      path: '../fonts/FranklinGothic-Black.otf',
+      weight: '800',
+      style: 'normal',
+    },
+    {
+      path: '../fonts/FranklinGothic-BlackItalic.otf',
+      weight: '800',
+      style: 'italic',
+    },
+    {
+      path: '../fonts/FranklinGothic-Ultra.otf',
+      weight: '900',
+      style: 'normal',
+    },
+    {
+      path: '../fonts/FranklinGothic-UltraItalic.otf',
+      weight: '900',
+      style: 'italic',
     },
   ],
 })
@@ -85,7 +183,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className="bg-white text-black">
-      <body className={`${folio.variable} ${franklinGothic.variable} antialiased`}>
+      <body className={`${folio.variable} ${franklinGothic.variable} ${franklinGothicATF.variable} antialiased`}>
         <section className="min-h-screen">
           {isDraftMode && <AlertBanner />}
           <Header data={header} />

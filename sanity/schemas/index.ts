@@ -6,17 +6,18 @@ import { header, homepage, footer, page, siteSettings } from "./documents";
 /* Module Imports */
 import {
   centeredText,
-  photoGallery,
   classesSlideshow,
   imageText,
+  hero,
+  photoGallery,
 } from "./modules";
 
 /* Object imports */
 import { imageAlt, linkList, seo } from "./objects";
 
-const documents = [header, homepage, footer, page, siteSettings, imageText];
+const documents = [header, homepage, footer, page, siteSettings];
 
-const modules = [centeredText, photoGallery, classesSlideshow];
+const modules = [centeredText, classesSlideshow, imageText, hero, photoGallery];
 
 const objects = [imageAlt, linkList, seo];
 

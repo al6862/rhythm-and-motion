@@ -8,7 +8,11 @@ export default {
       fontFamily: {
         folio: ["var(--font-folio)", "Helvetica Neue", "sans-serif"],
         fg: ["var(--franklin-gothic)", "Libre Franklin", "sans-serif"],
-        "fg-atf": ["var(--franklin-gothic-atf)", "Libre Franklin", "sans-serif"],
+        "fg-atf": [
+          "var(--franklin-gothic-atf)",
+          "Libre Franklin",
+          "sans-serif",
+        ],
       },
       colors: {
         white: "#FFFFFF",
@@ -22,8 +26,8 @@ export default {
         black: "#0D0D0D",
       },
       animation: {
-        'spin-slow': 'spin 4800ms linear infinite',
-      }
+        "spin-slow": "spin 4800ms linear infinite",
+      },
     },
   },
   future: {

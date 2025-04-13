@@ -20,10 +20,11 @@ export const homepage = defineType({
         {
           type: "reference",
           to: [
+            { type: "hero" },
             { type: "centeredText" },
-            { type: "photoGallery" },
             { type: "classesSlideshow" },
             { type: "imageText" },
+            { type: "photoGallery" },
           ],
         },
       ],

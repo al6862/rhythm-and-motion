@@ -22,7 +22,10 @@ export function Footer({ data }: { data: FooterQueryResult }) {
             {footer?.linkLists &&
               footer?.linkLists.map((linkList, i) => {
                 return (
-                  <div key={i} className="lg:w-1/3 flex flex-col gap-[1.6rem] menu">
+                  <div
+                    key={i}
+                    className="menu flex flex-col gap-[1.6rem] lg:w-1/3"
+                  >
                     {linkList?.links &&
                       linkList?.links.map((link) => {
                         return (

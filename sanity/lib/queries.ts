@@ -61,12 +61,22 @@ const imageTextData = `{
     },
 }`;
 
+const heroData = `{
+    _id,
+    title,
+    header,
+    content,
+    featuredImages[] ${imageData},
+    secondaryImages[] ${imageData},
+}`;
+
 const contentData = `{
     ...,
     _type == 'centeredText' => ${centeredTextData},
-    _type == 'photoGallery' => ${photoGalleryData},
     _type == 'classesSlideshow' => ${classesSlideshowData},
     _type == 'imageText' => ${imageTextData},
+    _type == 'hero' => ${heroData},
+    _type == 'photoGallery' => ${photoGalleryData},
 }`;
 
 export const siteSettingsQuery = defineQuery(`

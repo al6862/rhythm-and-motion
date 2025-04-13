@@ -21,6 +21,9 @@ export default {
         brown: "#724026",
         black: "#0D0D0D",
       },
+      animation: {
+        'spin-slow': 'spin 4800ms linear infinite',
+      }
     },
   },
   future: {

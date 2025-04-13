@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { homepageQuery } from "@/sanity/lib/queries";
 import Content from "@/app/components/Content";
+import { Suspense } from "react";
+import Loading from "../loading";
 
 export async function generateMetadata(): Promise<Metadata> {
   const data =
@@ -40,8 +42,8 @@ export default async function Page() {
   const data = await sanityFetch({ query: homepageQuery });
 
   return (
-    <main>
+    <section>
       <Content data={data?.homepage?.content} />
-    </main>
+    </section>
   );
 }

@@ -182,17 +182,15 @@ export default async function RootLayout({
   ]);
 
   return (
-    <html lang="en" className="bg-white text-black">
-      <body className={`${folio.variable} ${franklinGothic.variable} ${franklinGothicATF.variable} antialiased`}>
-        <section className="min-h-screen">
-          {isDraftMode && <AlertBanner />}
-          <Header data={header} />
-          {children}
-          <Footer data={footer} />
-        </section>
-        {isDraftMode && <VisualEditing />}
-        <SpeedInsights />
-      </body>
-    </html>
+    <main className={`${folio.variable} ${franklinGothic.variable} ${franklinGothicATF.variable} antialiased`}>
+      <section className="min-h-screen">
+        {isDraftMode && <AlertBanner />}
+        <Header data={header} />
+        {children}
+        <Footer data={footer} />
+      </section>
+      {isDraftMode && <VisualEditing />}
+      <SpeedInsights />
+    </main>
   );
 }

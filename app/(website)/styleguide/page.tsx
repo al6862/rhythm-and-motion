@@ -1,6 +1,6 @@
 export default async function Page() {
   return (
-    <main className="bg-gray py-4">
+    <section className="bg-gray py-4">
       <div className="flex flex-wrap gap-4">
         <div className="flex items-center justify-center rounded-[0.7rem] bg-white p-[2.1rem] lg:text-[2rem]">
           bg-white
@@ -76,6 +76,6 @@ export default async function Page() {
         <span className="button">Next: Dancer&apos;s Bill of Rights</span>
         <pre> .button</pre>
       </div>
-    </main>
+    </section>
   );
 }

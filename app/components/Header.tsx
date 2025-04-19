@@ -46,7 +46,7 @@ export function Header({ data }: Props) {
   );
 
   return (
-    <nav className="hidden fixed top-0 z-10 flex w-full justify-between text-white">
+    <nav className="fixed top-0 z-10 flex hidden w-full justify-between text-white">
       <NextLink href={`/`}>
         <div className="ml-[1.6rem] mt-[1.6rem] w-80">
           <LogoPrimary />

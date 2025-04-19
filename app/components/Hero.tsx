@@ -36,8 +36,7 @@ export default function Hero({ content }: { content: HeroProps }) {
       gsap.set(".rightImage", { y: -1 * motionEle.current.offsetHeight });
     }
 
-    gsap.set(".header", {y: '100vh'});
-
+    gsap.set(".header", { y: "100vh" });
 
     gsap
       .timeline({
@@ -64,22 +63,21 @@ export default function Hero({ content }: { content: HeroProps }) {
       })
       .to(".leftImage", { autoAlpha: 0 }, "<");
 
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: ".heroHeader",
-            start: "top top",
-            end: "bottom top",
-            scrub: 1,
-            markers: true,
-          },
-        })
-        .to(".header", { y: 0 }, "<")
-        .to('.rhythmAndMotion', {autoAlpha: 0}, "<50%");
+    gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: ".heroHeader",
+          start: "top top",
+          end: "bottom top",
+          scrub: 1,
+        },
+      })
+      .to(".header", { y: 0 }, "<")
+      .to(".rhythmAndMotion", { autoAlpha: 0 }, "<50%");
   });
 
   return (
-    <div className="bg-blue overflow-hidden">
+    <div className="overflow-hidden bg-blue">
       <div className="heroTwoCol h-screen">
         <div className="rhythmAndMotion fixed top-0 z-10 flex w-full gap-[4.7%]">
           <div ref={rhythmEle} className="rhythm flex-1 p-[1.6rem]">
@@ -117,54 +115,68 @@ export default function Hero({ content }: { content: HeroProps }) {
           <Figure />
         </div>
       </div>
-      <div className="absolute top-[50vh] heroHeader h-[50vh]"></div>
-      <div className="relative h-[150vh] flex justify-center items-center">
-        <h2 className="max-w-[50rem] z-10 text-white text-center">{content.header}</h2>
-        <div className="absolute bottom-[7rem] right-[8rem] z-10 max-w-[30.6rem] text-white">
+      <div className="heroHeader absolute top-[50vh] h-[75vh]"></div>
+      <div className="relative flex h-[150vh] items-center justify-center">
+        <h2 className="z-10 max-w-[50rem] text-center text-white">
+          {content.header}
+        </h2>
+        <div className="absolute bottom-28 right-32 z-10 max-w-[30.6rem] text-white">
           <CustomPortableText value={content.content} />
         </div>
-        {secondaryImages[0] && <Image
-          src={secondaryImages[0].assetPath}
-          alt={secondaryImages[0].caption || "missing alt"}
-          height={1000}
-          width={1000}
-          className="w-[20vw] absolute top-0 left-[12vw]"
-        />}
-        {secondaryImages[1] && <Image
-          src={secondaryImages[1].assetPath}
-          alt={secondaryImages[1].caption || "missing alt"}
-          height={1000}
-          width={1000}
-          className="w-[20vw] absolute top-[15vh] left-[65vw]"
-        />}
-        {secondaryImages[2] && <Image
-          src={secondaryImages[2].assetPath}
-          alt={secondaryImages[2].caption || "missing alt"}
-          height={1000}
-          width={1000}
-          className="w-[20vw] absolute top-[70vh] left-[6vw]"
-        />}
-        {secondaryImages[3] && <Image
-          src={secondaryImages[3].assetPath}
-          alt={secondaryImages[3].caption || "missing alt"}
-          height={1000}
-          width={1000}
-          className="w-[20vw] absolute top-[100vh] left-[55vw]"
-        />}
-        {secondaryImages[4] && <Image
-          src={secondaryImages[4].assetPath}
-          alt={secondaryImages[4].caption || "missing alt"}
-          height={1000}
-          width={1000}
-          className="w-[20vw] absolute top-[35vh] left-[90vw]"
-        />}
-        {secondaryImages[5] && <Image
-          src={secondaryImages[5].assetPath}
-          alt={secondaryImages[5].caption || "missing alt"}
-          height={1000}
-          width={1000}
-          className="w-[20vw] absolute top-[50vh] left-[-17vw]"
-        />}        
+        {secondaryImages[0] && (
+          <Image
+            src={secondaryImages[0].assetPath}
+            alt={secondaryImages[0].caption || "missing alt"}
+            height={1000}
+            width={1000}
+            className="absolute left-[12vw] top-0 w-[20vw]"
+          />
+        )}
+        {secondaryImages[1] && (
+          <Image
+            src={secondaryImages[1].assetPath}
+            alt={secondaryImages[1].caption || "missing alt"}
+            height={1000}
+            width={1000}
+            className="absolute left-[65vw] top-[15vh] w-[20vw]"
+          />
+        )}
+        {secondaryImages[2] && (
+          <Image
+            src={secondaryImages[2].assetPath}
+            alt={secondaryImages[2].caption || "missing alt"}
+            height={1000}
+            width={1000}
+            className="absolute left-[6vw] top-[70vh] w-[20vw]"
+          />
+        )}
+        {secondaryImages[3] && (
+          <Image
+            src={secondaryImages[3].assetPath}
+            alt={secondaryImages[3].caption || "missing alt"}
+            height={1000}
+            width={1000}
+            className="absolute left-[55vw] top-[100vh] w-[20vw]"
+          />
+        )}
+        {secondaryImages[4] && (
+          <Image
+            src={secondaryImages[4].assetPath}
+            alt={secondaryImages[4].caption || "missing alt"}
+            height={1000}
+            width={1000}
+            className="absolute left-[90vw] top-[35vh] w-[20vw]"
+          />
+        )}
+        {secondaryImages[5] && (
+          <Image
+            src={secondaryImages[5].assetPath}
+            alt={secondaryImages[5].caption || "missing alt"}
+            height={1000}
+            width={1000}
+            className="absolute left-[-17vw] top-[50vh] w-[20vw]"
+          />
+        )}
       </div>
     </div>
   );

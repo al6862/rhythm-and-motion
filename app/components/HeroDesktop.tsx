@@ -21,43 +21,49 @@ export default function HeroDesktop({ content }: { content: HeroProps }) {
 
   useGSAP(() => {
     if (window.innerWidth >= 768) {
-        if (rhythmEle.current) {
-            gsap.set(".leftImage", { y: rhythmEle.current.offsetHeight, autoAlpha: 1 });
-        }
-
-        if (motionEle.current) {
-            gsap.set(".rightImage", { y: -1 * motionEle.current.offsetHeight, autoAlpha: 1 });
-        }
-
-        gsap.set(".header", { y: "100vh", autoAlpha: 1 });
-
-        gsap
-            .timeline({
-            scrollTrigger: {
-                trigger: ".heroTwoCol",
-                start: "top top",
-                end: "bottom top",
-                scrub: 1,
-            },
-            })
-            .to(".ampersand", { y: 0 }, "<")
-            .to(".motion", { y: 0 }, "<")
-            .to(".figure", { x: 0 }, "<")
-            .to(".leftImage", { autoAlpha: 0 }, "<50%");
-
-        gsap
-            .timeline({
-            scrollTrigger: {
-                trigger: ".heroHeader",
-                start: "top top",
-                end: "bottom top",
-                scrub: 1,
-            },
-            })
-            .to(".header", { y: 0 }, "<")
-            .to(".rhythmAndMotion", { autoAlpha: 0 }, "<50%");
+      if (rhythmEle.current) {
+        gsap.set(".leftImage", {
+          y: rhythmEle.current.offsetHeight,
+          autoAlpha: 1,
+        });
       }
-  })
+
+      if (motionEle.current) {
+        gsap.set(".rightImage", {
+          y: -1 * motionEle.current.offsetHeight,
+          autoAlpha: 1,
+        });
+      }
+
+      gsap.set(".header", { y: "100vh", autoAlpha: 1 });
+
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: ".heroTwoCol",
+            start: "top top",
+            end: "bottom top",
+            scrub: 1,
+          },
+        })
+        .to(".ampersand", { y: 0 }, "<")
+        .to(".motion", { y: 0 }, "<")
+        .to(".figure", { x: 0 }, "<")
+        .to(".leftImage", { autoAlpha: 0 }, "<50%");
+
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: ".heroHeader",
+            start: "top top",
+            end: "bottom top",
+            scrub: 1,
+          },
+        })
+        .to(".header", { y: 0 }, "<")
+        .to(".rhythmAndMotion", { autoAlpha: 0 }, "<50%");
+    }
+  });
 
   return (
     <div className="overflow-hidden bg-blue">
@@ -104,9 +110,7 @@ export default function HeroDesktop({ content }: { content: HeroProps }) {
       </div>
       <div className="heroHeader absolute top-[50vh] h-[75vh]"></div>
       <div className="relative flex h-[150vh] items-center justify-center">
-        <h2 className="z-10 max-w-[50rem] text-center text-white">
-          {header}
-        </h2>
+        <h2 className="z-10 max-w-[50rem] text-center text-white">{header}</h2>
         <div className="absolute bottom-28 right-32 z-10 max-w-[30.6rem] text-white">
           <CustomPortableText value={content.content} />
         </div>
@@ -116,7 +120,7 @@ export default function HeroDesktop({ content }: { content: HeroProps }) {
             alt={secondaryImages[0].caption || "missing alt"}
             height={1000}
             width={1000}
-            className="opacity-85 absolute left-[12vw] top-0 w-[20vw]"
+            className="absolute left-[12vw] top-0 w-[20vw] opacity-85"
           />
         )}
         {secondaryImages[1] && (
@@ -125,7 +129,7 @@ export default function HeroDesktop({ content }: { content: HeroProps }) {
             alt={secondaryImages[1].caption || "missing alt"}
             height={1000}
             width={1000}
-            className="opacity-85 absolute left-[65vw] top-[15vh] w-[20vw]"
+            className="absolute left-[65vw] top-[15vh] w-[20vw] opacity-85"
           />
         )}
         {secondaryImages[2] && (
@@ -134,7 +138,7 @@ export default function HeroDesktop({ content }: { content: HeroProps }) {
             alt={secondaryImages[2].caption || "missing alt"}
             height={1000}
             width={1000}
-            className="opacity-85 absolute left-[6vw] top-[70vh] w-[20vw]"
+            className="absolute left-[6vw] top-[70vh] w-[20vw] opacity-85"
           />
         )}
         {secondaryImages[3] && (
@@ -143,7 +147,7 @@ export default function HeroDesktop({ content }: { content: HeroProps }) {
             alt={secondaryImages[3].caption || "missing alt"}
             height={1000}
             width={1000}
-            className="opacity-85 absolute left-[55vw] top-[100vh] w-[20vw]"
+            className="absolute left-[55vw] top-[100vh] w-[20vw] opacity-85"
           />
         )}
         {secondaryImages[4] && (
@@ -152,7 +156,7 @@ export default function HeroDesktop({ content }: { content: HeroProps }) {
             alt={secondaryImages[4].caption || "missing alt"}
             height={1000}
             width={1000}
-            className="opacity-85 absolute left-[90vw] top-[35vh] w-[20vw]"
+            className="absolute left-[90vw] top-[35vh] w-[20vw] opacity-85"
           />
         )}
         {secondaryImages[5] && (
@@ -161,7 +165,7 @@ export default function HeroDesktop({ content }: { content: HeroProps }) {
             alt={secondaryImages[5].caption || "missing alt"}
             height={1000}
             width={1000}
-            className="opacity-85 absolute left-[-17vw] top-[50vh] w-[20vw]"
+            className="absolute left-[-17vw] top-[50vh] w-[20vw] opacity-85"
           />
         )}
       </div>

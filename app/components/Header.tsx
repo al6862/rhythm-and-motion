@@ -46,10 +46,10 @@ export function Header({ data }: Props) {
   );
 
   useEffect(() => {
-    if (!document.querySelector('.hero')) {
+    if (!document.querySelector(".hero")) {
       gsap.to(".header", { autoAlpha: 1 });
     }
-  }, [])
+  }, []);
 
   return (
     <nav className="header invisible fixed top-0 z-10 flex w-full justify-between text-white">

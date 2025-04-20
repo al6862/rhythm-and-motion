@@ -20,5 +20,5 @@ export default function Hero({ content }: { content: HeroProps }) {
         <HeroMobile content={content} />
       </div>
     </div>
-  )
+  );
 }

@@ -78,3 +78,7 @@ body,
 .rte p + h3 {
   @apply mt-[6rem];
 }
+
+.scrollbar-width-none {
+  scrollbar-width: none;
+}

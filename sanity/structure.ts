@@ -9,8 +9,9 @@ const documentsHiddenFromContentList = [
   "page",
   "centeredText",
   "classesSlideshow",
-  "photoGallery",
   "imageText",
+  "hero",
+  "photoGallery",
 ];
 
 export const singletonPlugin = definePlugin(() => {
@@ -86,13 +87,6 @@ export const structure: StructureResolver = (S) =>
                   ]),
                 ),
               S.listItem()
-                .title("Photo Gallery")
-                .child(
-                  S.documentTypeList("photoGallery").defaultOrdering([
-                    { field: "_createdAt", direction: "asc" },
-                  ]),
-                ),
-              S.listItem()
                 .title("Classes Slideshow")
                 .child(
                   S.documentTypeList("classesSlideshow").defaultOrdering([
@@ -103,6 +97,20 @@ export const structure: StructureResolver = (S) =>
                 .title("Image Text Block")
                 .child(
                   S.documentTypeList("imageText").defaultOrdering([
+                    { field: "_createdAt", direction: "asc" },
+                  ]),
+                ),
+              S.listItem()
+                .title("Hero")
+                .child(
+                  S.documentTypeList("hero").defaultOrdering([
+                    { field: "_createdAt", direction: "asc" },
+                  ]),
+                ),
+              S.listItem()
+                .title("Photo Gallery")
+                .child(
+                  S.documentTypeList("photoGallery").defaultOrdering([
                     { field: "_createdAt", direction: "asc" },
                   ]),
                 ),

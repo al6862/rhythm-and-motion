@@ -45,8 +45,8 @@ export default async function Page({ params }: Props) {
   const data = await sanityFetch({ query: pageQuery, params });
 
   return (
-    <main>
+    <section>
       <Content data={data?.page?.content} />
-    </main>
+    </section>
   );
 }

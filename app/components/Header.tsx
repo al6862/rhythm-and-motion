@@ -45,8 +45,14 @@ export function Header({ data }: Props) {
     { dependencies: [menuIsOpen], scope: container },
   );
 
+  useEffect(() => {
+    if (!document.querySelector(".hero")) {
+      gsap.to(".header", { autoAlpha: 1 });
+    }
+  }, []);
+
   return (
-    <nav className="fixed top-0 z-10 flex w-full justify-between text-white">
+    <nav className="header invisible fixed top-0 z-10 flex w-full justify-between text-white">
       <NextLink href={`/`}>
         <div className="ml-[1.6rem] mt-[1.6rem] w-80">
           <LogoPrimary />

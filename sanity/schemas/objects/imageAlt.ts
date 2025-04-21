@@ -21,11 +21,5 @@ export const imageAlt = defineType({
       title: "caption",
       media: "imageAlt",
     },
-    prepare: ({ title, media }) => {
-      return {
-        title: title,
-        media,
-      };
-    },
   },
 });

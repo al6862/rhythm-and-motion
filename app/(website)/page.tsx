@@ -40,8 +40,8 @@ export default async function Page() {
   const data = await sanityFetch({ query: homepageQuery });
 
   return (
-    <main>
+    <section>
       <Content data={data?.homepage?.content} />
-    </main>
+    </section>
   );
 }

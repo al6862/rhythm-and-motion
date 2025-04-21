@@ -88,7 +88,63 @@ const videoData = `{
     'video': video.asset->url,
     hasBorder,
     'borderColor': borderColor.hex,
-}`
+}`;
+
+const danceClassData = `{
+    _id,
+    _type,
+    classType {
+        ...,
+        ${linkTypeData},
+    },
+    instructor {
+        ...,
+        ${linkTypeData},
+    },
+    mode,
+    dayOfWeek,
+    startTime,
+}`;
+
+const danceStudioData = `{
+    _id,
+    header {
+        studioTitle,
+        studioSubTitle,
+    },
+    studioAddress,
+    location,
+    slug,
+    studioDescription[] {
+        ...,
+        ${linkTypeData},
+    },
+    'bgColor': bgColor.hex,    
+    image ${imageData},
+    danceClasses[] ${danceClassData},
+    partnerSite {
+        ...,
+        ${linkTypeData},
+    },
+    partnerLink {
+        ...,
+        ${linkTypeData},
+    }
+}`;
+
+const partnersData = `{
+    _id,
+    _type,
+    title,
+    header,
+    'bgColor': bgColor.hex,    
+    image ${imageData},
+    studios[] -> ${danceStudioData},
+    link {
+        ...,
+        ${linkTypeData},
+    }
+}`;
 
 const contentData = `{
     ...,
@@ -96,10 +152,16 @@ const contentData = `{
     _type == 'classesSlideshow' => ${classesSlideshowData},
     _type == 'imageText' => ${imageTextData},
     _type == 'hero' => ${heroData},
+    _type == 'partners' => ${partnersData},
     _type == 'photoGallery' => ${photoGalleryData},
     _type == 'splitImageAndText' => ${splitImageAndTextData},
     _type == 'video' => ${videoData},
 }`;
+
+export const partnersQuery = defineQuery(`{
+    'partners': *[_type == 'partners'][0] ${partnersData},
+    
+}`);
 
 export const siteSettingsQuery = defineQuery(`
     *[_type == 'siteSettings'][0] {

@@ -10,12 +10,13 @@ import {
   imageText,
   hero,
   photoGallery,
+  partners,
   splitImageAndText,
   video,
 } from "./modules";
 
 /* Object imports */
-import { imageAlt, linkList, seo } from "./objects";
+import { danceClass, danceStudio, imageAlt, linkList, seo } from "./objects";
 
 const documents = [header, homepage, footer, page, siteSettings];
 
@@ -25,11 +26,12 @@ const modules = [
   imageText,
   hero,
   photoGallery,
+  partners,
   splitImageAndText,
   video,
 ];
 
-const objects = [imageAlt, linkList, seo];
+const objects = [danceClass, danceStudio, imageAlt, linkList, seo];
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [...documents, ...objects, ...modules],

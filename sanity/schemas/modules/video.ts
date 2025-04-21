@@ -1,4 +1,4 @@
-import { DocumentVideoIcon } from '@sanity/icons'
+import { DocumentVideoIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
 
 export const video = defineType({
@@ -16,7 +16,8 @@ export const video = defineType({
     defineField({
       name: "video",
       title: "Video",
-      description: "Ensure video is an mp4 file for functionality across browsers",
+      description:
+        "Ensure video is an mp4 file for functionality across browsers",
       type: "file",
       validation: (Rule) => Rule.required(),
     }),

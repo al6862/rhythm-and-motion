@@ -27,7 +27,7 @@ export default function Content({ data }: Props) {
           case "splitImageAndText":
             return <SplitImageAndText key={c._id} content={c} />;
           case "video":
-              return <Video key={c._id} content={c} />;
+            return <Video key={c._id} content={c} />;
           default:
             return (
               <h1 key={c._id} className="text-center">

@@ -38,7 +38,7 @@ export default function ClassesSlideshow({ content }: ClassesSlideshowProps) {
         <div>
           {classes.map((item, index) => (
             <h1
-              key={crypto.randomUUID()}
+              key={index}
               className={`h1 cursor-pointer text-white transition-all ease-in-out ${
                 activeClassIndex !== index ? "opacity-50" : ""
               }`}
@@ -56,7 +56,7 @@ export default function ClassesSlideshow({ content }: ClassesSlideshowProps) {
       <div className="relative z-10 flex size-full text-white">
         {classes.map((item, index) => (
           <div
-            key={crypto.randomUUID()}
+            key={index}
             className={`absolute inset-0 mx-auto flex max-w-[306px] items-center justify-center text-center transition-all duration-700 ease-in-out ${
               activeClassIndex === index
                 ? "opacity-100"
@@ -79,7 +79,7 @@ export default function ClassesSlideshow({ content }: ClassesSlideshowProps) {
               muted
               loop
               playsInline
-              key={crypto.randomUUID()}
+              key={index}
               className={`absolute top-0 -z-10 size-full object-cover transition-all duration-700 ease-in-out ${
                 activeClassIndex === index
                   ? "opacity-100"
@@ -104,7 +104,7 @@ export default function ClassesSlideshow({ content }: ClassesSlideshowProps) {
               src={item.image.assetPath}
               width={2880}
               height={1720}
-              key={crypto.randomUUID()}
+              key={index}
               alt={item.image.caption || "missing alt"}
             />
           );

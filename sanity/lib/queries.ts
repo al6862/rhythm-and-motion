@@ -72,13 +72,15 @@ const heroData = `{
 
 const splitImageAndTextData = `{
     _id,
+    layout,
+    'bgColor': bgColor.hex,    
+    'textColor': textColor.hex,
     image ${imageData},
     header,
     content[] {
       ...,
       ${linkTypeData},
     },
-    layout,
 }`
 
 const contentData = `{

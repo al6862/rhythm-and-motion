@@ -1,19 +1,22 @@
 import { PortableTextBlock } from "next-sanity";
 import { ImageData } from "../types";
 import Image from "next/image";
+import { CustomPortableText } from "./CustomPortableText";
 
 type Props = {
+    layout: string;
+    bgColor: string;
+    textColor: string;
     image: ImageData;
     header: string;
     content: PortableTextBlock[];
-    layout: string;
 }
 
 export default function SplitImageAndText({content}:{content: Props}) {
-    const {image, header, layout} = content
+    const {layout, bgColor, textColor, image, header} = content
     return (
-        <div className={`flex`}>
-            <div className="relative w-[50vw] h-screen">
+        <div className={`flex` + (layout == "right"? ` flex-row-reverse` : ``)} style={{backgroundColor: bgColor, color: textColor}}>
+            <div className="shrink-0 relative w-[50vw] h-screen">
                 <Image
                     src={image.assetPath}
                     alt={image.caption || "missing alt"}
@@ -21,8 +24,9 @@ export default function SplitImageAndText({content}:{content: Props}) {
                     className="object-cover"
                 />
             </div>
-            <div>
-                <h2>{header}</h2>
+            <div className="p-[6rem] flex items-center">
+                {header && <h2>{header}</h2>}
+                {content.content && <CustomPortableText value={content.content}/>}
             </div>
         </div>
     )

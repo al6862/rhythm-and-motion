@@ -14,9 +14,34 @@ export const splitImageAndText = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "layout",
+      title: "Layout",
+      type: "string",
+      options: {
+        list: [
+          {title: 'Image left', value: 'left'},
+          {title: 'Image right', value: 'right'}
+        ],
+        layout: 'radio',
+      },
+    }),
+    defineField({
+      name: "bgColor",
+      title: "Background Color",
+      type: "color",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "textColor",
+      title: "Text Color",
+      type: "color",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: "image",
       title: "Image",
       type: "imageAlt",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "header",
@@ -48,18 +73,6 @@ export const splitImageAndText = defineType({
           },
         }),
       ],
-    }),
-    defineField({
-      name: "layout",
-      title: "Layout",
-      type: "string",
-      options: {
-        list: [
-          {title: 'Image left', value: 'left'},
-          {title: 'Image right', value: 'right'}
-        ],
-        layout: 'radio',
-      },
     }),
   ],
   

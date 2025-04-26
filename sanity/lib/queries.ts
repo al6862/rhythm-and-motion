@@ -74,6 +74,7 @@ const videoData = `{
     _id,
     'video': video.asset->url,
     hasBorder,
+    'borderColor': borderColor.hex,
 }`
 
 const contentData = `{

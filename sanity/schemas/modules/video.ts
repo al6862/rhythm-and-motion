@@ -25,6 +25,12 @@ export const video = defineType({
       type: "boolean",
       initialValue: false,
     }),
+    defineField({
+      name: "borderColor",
+      title: "Border Color",
+      type: "color",
+      description: "Only applied if border is added.",
+    }),
   ],
 
   preview: {

@@ -42,10 +42,72 @@ export function Footer({ data }: { data: FooterQueryResult }) {
       </div>
       <div className="pt-24">
         {footer?.newsletterContent && (
-          <div className="md:max-h-[6.2rem] md:max-w-[32.8rem]">
-            <CustomPortableText
-              value={footer?.newsletterContent as PortableTextBlock[]}
-            />
+          <div className="flex gap-[1.6rem] max-md:flex-col md:gap-[3.8rem]">
+            <div className="md:max-h-[6.2rem] md:max-w-[32.8rem]">
+              <CustomPortableText
+                value={footer?.newsletterContent as PortableTextBlock[]}
+              />
+            </div>
+            <div id="mc_embed_shell">
+              <div id="mc_embed_signup">
+                <form
+                  action="https://rhythmandmotion.us11.list-manage.com/subscribe/post?u=192147a1880cfec1a55caa391&amp;id=ce24e458a6&amp;f_id=007115e1f0"
+                  method="post"
+                  id="mc-embedded-subscribe-form"
+                  name="mc-embedded-subscribe-form"
+                  className="validate"
+                  target="_self"
+                  noValidate
+                >
+                  <div
+                    id="mc_embed_signup_scroll"
+                    className="flex w-full gap-[1.6rem] md:w-[32.8rem]"
+                  >
+                    <div className="mc-field-group flex-1">
+                      <input
+                        type="email"
+                        name="EMAIL"
+                        placeholder="Your email address"
+                        className="required email input size-full border-b border-dashed bg-transparent"
+                        id="mce-EMAIL"
+                        required
+                      />
+                    </div>
+                    <div
+                      aria-hidden="true"
+                      style={{ position: "absolute", left: "-5000px" }}
+                    >
+                      <input
+                        type="text"
+                        name="b_192147a1880cfec1a55caa391_ce24e458a6"
+                        tabIndex={-1}
+                      />
+                    </div>
+                    <div className="clear">
+                      <input
+                        type="submit"
+                        name="subscribe"
+                        id="mc-embedded-subscribe"
+                        className="button bg-white/20"
+                        defaultValue="Submit"
+                      />
+                    </div>
+                  </div>
+                  <div id="mce-responses" className="clear">
+                    <div
+                      className="response"
+                      id="mce-error-response"
+                      style={{ display: "none" }}
+                    ></div>
+                    <div
+                      className="response"
+                      id="mce-success-response"
+                      style={{ display: "none" }}
+                    ></div>
+                  </div>
+                </form>
+              </div>
+            </div>
           </div>
         )}
         <div className="mt-24 md:flex md:items-end">

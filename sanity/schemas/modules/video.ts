@@ -18,6 +18,7 @@ export const video = defineType({
       title: "Video",
       description: "Ensure video is an mp4 file for functionality across browsers",
       type: "file",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "hasBorder",

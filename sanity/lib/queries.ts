@@ -70,6 +70,12 @@ const heroData = `{
     secondaryImages[] ${imageData},
 }`;
 
+const videoData = `{
+    _id,
+    'video': video.asset->url,
+    hasBorder,
+}`
+
 const contentData = `{
     ...,
     _type == 'centeredText' => ${centeredTextData},
@@ -77,6 +83,7 @@ const contentData = `{
     _type == 'imageText' => ${imageTextData},
     _type == 'hero' => ${heroData},
     _type == 'photoGallery' => ${photoGalleryData},
+    _type == 'video' => ${videoData},
 }`;
 
 export const siteSettingsQuery = defineQuery(`

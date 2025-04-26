@@ -12,6 +12,7 @@ const documentsHiddenFromContentList = [
   "imageText",
   "hero",
   "photoGallery",
+  "video",
 ];
 
 export const singletonPlugin = definePlugin(() => {
@@ -111,6 +112,13 @@ export const structure: StructureResolver = (S) =>
                 .title("Photo Gallery")
                 .child(
                   S.documentTypeList("photoGallery").defaultOrdering([
+                    { field: "_createdAt", direction: "asc" },
+                  ]),
+                ),
+              S.listItem()
+                .title("Video")
+                .child(
+                  S.documentTypeList("video").defaultOrdering([
                     { field: "_createdAt", direction: "asc" },
                   ]),
                 ),

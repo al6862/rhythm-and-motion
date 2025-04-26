@@ -18,7 +18,14 @@ import { imageAlt, linkList, seo } from "./objects";
 
 const documents = [header, homepage, footer, page, siteSettings];
 
-const modules = [centeredText, classesSlideshow, imageText, hero, photoGallery, splitImageAndText];
+const modules = [
+  centeredText,
+  classesSlideshow,
+  imageText,
+  hero,
+  photoGallery,
+  splitImageAndText,
+];
 
 const objects = [imageAlt, linkList, seo];
 

@@ -1,4 +1,4 @@
-import { SplitVerticalIcon, SquareIcon } from '@sanity/icons'
+import { SplitVerticalIcon, SquareIcon } from "@sanity/icons";
 import { defineField, defineType, defineArrayMember } from "sanity";
 
 export const splitImageAndText = defineType({
@@ -19,10 +19,10 @@ export const splitImageAndText = defineType({
       type: "string",
       options: {
         list: [
-          {title: 'Image left', value: 'left'},
-          {title: 'Image right', value: 'right'}
+          { title: "Image left", value: "left" },
+          { title: "Image right", value: "right" },
         ],
-        layout: 'radio',
+        layout: "radio",
       },
     }),
     defineField({
@@ -75,7 +75,6 @@ export const splitImageAndText = defineType({
       ],
     }),
   ],
-  
 
   preview: {
     select: {

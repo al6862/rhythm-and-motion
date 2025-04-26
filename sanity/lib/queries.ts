@@ -81,7 +81,7 @@ const splitImageAndTextData = `{
       ...,
       ${linkTypeData},
     },
-}`
+}`;
 
 const contentData = `{
     ...,

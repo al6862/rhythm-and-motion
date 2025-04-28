@@ -12,6 +12,7 @@ const documentsHiddenFromContentList = [
   "imageText",
   "hero",
   "photoGallery",
+  "splitImageAndText",
   "video",
 ];
 
@@ -112,6 +113,13 @@ export const structure: StructureResolver = (S) =>
                 .title("Photo Gallery")
                 .child(
                   S.documentTypeList("photoGallery").defaultOrdering([
+                    { field: "_createdAt", direction: "asc" },
+                  ]),
+                ),
+              S.listItem()
+                .title("Split Image And Text")
+                .child(
+                  S.documentTypeList("splitImageAndText").defaultOrdering([
                     { field: "_createdAt", direction: "asc" },
                   ]),
                 ),

@@ -3,6 +3,7 @@ import ClassesSlideshow from "./ClassesSlideshow";
 import ImageText from "./ImageText";
 import Hero from "./Hero";
 import PhotoGallery from "./PhotoGallery";
+import SplitImageAndText from "./SplitImageAndText";
 import Video from "./Video";
 
 type Props = {
@@ -23,6 +24,8 @@ export default function Content({ data }: Props) {
             return <Hero key={c._id} content={c} />;
           case "photoGallery":
             return <PhotoGallery key={c._id} content={c} />;
+          case "splitImageAndText":
+            return <SplitImageAndText key={c._id} content={c} />;
           case "video":
               return <Video key={c._id} content={c} />;
           default:

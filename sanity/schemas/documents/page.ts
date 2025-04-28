@@ -41,10 +41,17 @@ export const page = defineType({
           type: "reference",
           to: [
             { type: "hero" },
+            
+            { type: "hero" },
             { type: "centeredText" },
             { type: "classesSlideshow" },
             { type: "imageText" },
+           
+            { type: "classesSlideshow" },
+            { type: "imageText" },
             { type: "photoGallery" },
+            { type: "splitImageAndText" },
+          ,
             { type: "video"},
           ],
         },

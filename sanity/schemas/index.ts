@@ -10,6 +10,7 @@ import {
   imageText,
   hero,
   photoGallery,
+  splitImageAndText,
   video,
 } from "./modules";
 
@@ -18,7 +19,14 @@ import { imageAlt, linkList, seo } from "./objects";
 
 const documents = [header, homepage, footer, page, siteSettings];
 
-const modules = [centeredText, classesSlideshow, imageText, hero, photoGallery, video];
+const modules = [
+  centeredText,
+  classesSlideshow,
+  imageText,
+  hero,
+  photoGallery,
+  splitImageAndText,
+, video];
 
 const objects = [imageAlt, linkList, seo];
 

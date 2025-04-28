@@ -70,6 +70,19 @@ const heroData = `{
     secondaryImages[] ${imageData},
 }`;
 
+const splitImageAndTextData = `{
+    _id,
+    layout,
+    'bgColor': bgColor.hex,    
+    'textColor': textColor.hex,
+    image ${imageData},
+    header,
+    content[] {
+      ...,
+      ${linkTypeData},
+    },
+}`;
+
 const videoData = `{
     _id,
     'video': video.asset->url,
@@ -84,6 +97,7 @@ const contentData = `{
     _type == 'imageText' => ${imageTextData},
     _type == 'hero' => ${heroData},
     _type == 'photoGallery' => ${photoGalleryData},
+    _type == 'splitImageAndText' => ${splitImageAndTextData},
     _type == 'video' => ${videoData},
 }`;
 

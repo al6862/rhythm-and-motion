@@ -25,6 +25,7 @@ export const homepage = defineType({
             { type: "classesSlideshow" },
             { type: "imageText" },
             { type: "photoGallery" },
+            { type: "splitImageAndText" },
             { type: "video"},
           ],
         },

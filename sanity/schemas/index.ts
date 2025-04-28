@@ -26,7 +26,8 @@ const modules = [
   hero,
   photoGallery,
   splitImageAndText,
-, video];
+  video,
+];
 
 const objects = [imageAlt, linkList, seo];
 

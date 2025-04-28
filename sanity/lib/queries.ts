@@ -83,6 +83,13 @@ const splitImageAndTextData = `{
     },
 }`;
 
+const videoData = `{
+    _id,
+    'video': video.asset->url,
+    hasBorder,
+    'borderColor': borderColor.hex,
+}`
+
 const contentData = `{
     ...,
     _type == 'centeredText' => ${centeredTextData},
@@ -91,6 +98,7 @@ const contentData = `{
     _type == 'hero' => ${heroData},
     _type == 'photoGallery' => ${photoGalleryData},
     _type == 'splitImageAndText' => ${splitImageAndTextData},
+    _type == 'video' => ${videoData},
 }`;
 
 export const siteSettingsQuery = defineQuery(`

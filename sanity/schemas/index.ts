@@ -11,6 +11,7 @@ import {
   hero,
   photoGallery,
   splitImageAndText,
+  video,
 } from "./modules";
 
 /* Object imports */
@@ -25,6 +26,7 @@ const modules = [
   hero,
   photoGallery,
   splitImageAndText,
+  video,
 ];
 
 const objects = [imageAlt, linkList, seo];

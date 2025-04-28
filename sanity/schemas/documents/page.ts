@@ -46,6 +46,7 @@ export const page = defineType({
             { type: "imageText" },
             { type: "photoGallery" },
             { type: "splitImageAndText" },
+            { type: "video"},
           ],
         },
       ],

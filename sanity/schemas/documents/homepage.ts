@@ -26,6 +26,7 @@ export const homepage = defineType({
             { type: "imageText" },
             { type: "photoGallery" },
             { type: "splitImageAndText" },
+            { type: "video"},
           ],
         },
       ],

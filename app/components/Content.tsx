@@ -5,6 +5,7 @@ import Hero from "./Hero";
 import PhotoGallery from "./PhotoGallery";
 import SplitImageAndText from "./SplitImageAndText";
 import Video from "./Video";
+import Partners from "./Partners";
 
 type Props = {
   data: any[] | null | undefined;
@@ -22,6 +23,8 @@ export default function Content({ data }: Props) {
             return <ImageText key={c._id} content={c} />;
           case "hero":
             return <Hero key={c._id} content={c} />;
+          case "partners":
+            return <Partners key={c._id} content={c} />;
           case "photoGallery":
             return <PhotoGallery key={c._id} content={c} />;
           case "splitImageAndText":

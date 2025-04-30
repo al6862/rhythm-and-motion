@@ -30,7 +30,7 @@ export const teachers = defineType({
       type: "imageAlt",
     }),
     defineField({
-      name: "teachersList",
+      name: "teachers",
       title: "Teachers",
       type: "array",
       of: [

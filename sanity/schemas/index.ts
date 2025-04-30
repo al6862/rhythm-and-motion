@@ -17,7 +17,14 @@ import {
 } from "./modules";
 
 /* Object imports */
-import { danceClass, danceStudio, imageAlt, linkList, seo, teacher } from "./objects";
+import {
+  danceClass,
+  danceStudio,
+  imageAlt,
+  linkList,
+  seo,
+  teacher,
+} from "./objects";
 
 const documents = [header, homepage, footer, page, siteSettings];
 

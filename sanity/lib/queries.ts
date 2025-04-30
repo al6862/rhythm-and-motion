@@ -147,9 +147,9 @@ const partnersData = `{
 }`;
 
 const teacherData = `{
-    _id,
-    _type,
+    ...,
     name,
+    slug,
     pronouns,
     image ${imageData},
     blurb,

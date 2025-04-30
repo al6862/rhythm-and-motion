@@ -47,6 +47,7 @@ export const page = defineType({
             { type: "partners" },
             { type: "photoGallery" },
             { type: "splitImageAndText" },
+            { type: "teachers" },
             { type: "video" },
           ],
         },

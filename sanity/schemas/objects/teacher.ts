@@ -7,8 +7,18 @@ export const teacher = defineType({
   fields: [
     defineField({
       name: "name",
-      title: "Name",
+      title: "Teacher Name",
       type: "string",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "slug",
+      title: "Slug",
+      type: "slug",
+      options: {
+        source: "name",
+        maxLength: 150,
+      },
       validation: (Rule) => Rule.required(),
     }),
     defineField({

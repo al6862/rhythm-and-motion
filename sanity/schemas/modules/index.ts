@@ -5,4 +5,5 @@ export * from "./imageText";
 export * from "./partners";
 export * from "./photoGallery";
 export * from "./splitImageAndText";
+export * from "./teachers";
 export * from "./video";

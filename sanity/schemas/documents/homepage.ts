@@ -27,6 +27,7 @@ export const homepage = defineType({
             { type: "partners" },
             { type: "photoGallery" },
             { type: "splitImageAndText" },
+            { type: "teachers" },
             { type: "video" },
           ],
         },

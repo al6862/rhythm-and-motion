@@ -72,6 +72,7 @@ export const communityEvent = defineType({
       name: "endDate",
       title: "Event End Date",
       type: "date",
+      validation: (Rule) => Rule.required(),
     }),
   ],
 

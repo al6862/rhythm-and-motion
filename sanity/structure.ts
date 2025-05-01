@@ -21,7 +21,6 @@ const documentsHiddenFromContentList = [
   "teachers",
   "teacher",
   "video",
-  
 ];
 
 export const singletonPlugin = definePlugin(() => {

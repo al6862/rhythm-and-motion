@@ -7,6 +7,7 @@ import SplitImageAndText from "./SplitImageAndText";
 import Teachers from "./Teachers";
 import Video from "./Video";
 import Partners from "./Partners";
+import Community from "./Community";
 
 type Props = {
   data: any[] | null | undefined;
@@ -20,6 +21,8 @@ export default function Content({ data }: Props) {
             return <CenteredText key={c._id} content={c} />;
           case "classesSlideshow":
             return <ClassesSlideshow key={c._id} content={c} />;
+          case "community":
+            return <Community key={c._id} content={c} />;
           case "imageText":
             return <ImageText key={c._id} content={c} />;
           case "hero":

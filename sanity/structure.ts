@@ -9,6 +9,7 @@ const documentsHiddenFromContentList = [
   "page",
   "centeredText",
   "classesSlideshow",
+  "igGallery",
   "imageText",
   "hero",
   "photoGallery",
@@ -92,6 +93,13 @@ export const structure: StructureResolver = (S) =>
                 .title("Classes Slideshow")
                 .child(
                   S.documentTypeList("classesSlideshow").defaultOrdering([
+                    { field: "_createdAt", direction: "asc" },
+                  ]),
+                ),
+              S.listItem()
+                .title("Instagram Gallery")
+                .child(
+                  S.documentTypeList("igGallery").defaultOrdering([
                     { field: "_createdAt", direction: "asc" },
                   ]),
                 ),

@@ -46,6 +46,74 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type Video = {
+  _id: string;
+  _type: "video";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  video?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+    };
+    _type: "file";
+  };
+  hasBorder?: boolean;
+  borderColor?: Color;
+};
+
+export type SplitImageAndText = {
+  _id: string;
+  _type: "splitImageAndText";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  layout?: "left" | "right";
+  bgColor?: Color;
+  textColor?: Color;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    caption?: string;
+    _type: "imageAlt";
+  };
+  header?: string;
+  content?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "normal" | "h1" | "h2" | "h3" | "h4";
+        listItem?: "bullet" | "number";
+        markDefs?: Array<{
+          href?: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }
+    | ({
+        _key: string;
+      } & Link)
+  >;
+};
+
 export type PhotoGallery = {
   _id: string;
   _type: "photoGallery";
@@ -167,6 +235,17 @@ export type ImageText = {
         _key: string;
       } & Link)
   >;
+};
+
+export type IgGallery = {
+  _id: string;
+  _type: "igGallery";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  bgColor?: Color;
+  igEmbeds?: Array<string>;
 };
 
 export type ClassesSlideshow = {
@@ -484,6 +563,12 @@ export type Homepage = {
         _ref: string;
         _type: "reference";
         _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "igGallery";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "imageText";
       }
     | {
@@ -491,6 +576,18 @@ export type Homepage = {
         _type: "reference";
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "photoGallery";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "splitImageAndText";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "video";
       }
   >;
   SEO?: Seo;
@@ -509,13 +606,49 @@ export type Page = {
         _ref: string;
         _type: "reference";
         _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "hero";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "centeredText";
       }
     | {
         _ref: string;
         _type: "reference";
         _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "classesSlideshow";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "igGallery";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "imageText";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "photoGallery";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "splitImageAndText";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "video";
       }
   >;
   SEO?: Seo;
@@ -612,9 +745,12 @@ export type AllSanitySchemaTypes =
   | SanityImagePalette
   | SanityImageDimensions
   | Geopoint
+  | Video
+  | SplitImageAndText
   | PhotoGallery
   | Hero
   | ImageText
+  | IgGallery
   | ClassesSlideshow
   | SanityFileAsset
   | CenteredText
@@ -646,6 +782,13 @@ export type PhotoGalleryDataResult = {
   _type: never;
   bgColor: never;
   photos: never;
+};
+// Variable: igGalleryData
+// Query: {    _id,    'bgColor': bgColor.hex,    igEmbeds[]}
+export type IgGalleryDataResult = {
+  _id: never;
+  bgColor: never;
+  igEmbeds: never;
 };
 // Variable: siteSettingsQuery
 // Query: *[_type == 'siteSettings'][0] {        SEO {    ...,    'openGraphImage': openGraphImage.asset->url,},    }
@@ -788,7 +931,7 @@ export type FooterQueryResult = {
   } | null;
 };
 // Variable: homepageQuery
-// Query: {    'homepage': *[_type == 'homepage'][0] {        ...,        content[]->{    ...,    _type == 'centeredText' => {    _id,    _type,    marginY,    'bgColor': bgColor.hex,    'textColor': textColor.hex,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    content[] {      ...,        _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },},    _type == 'classesSlideshow' => {    _id,    classes[] {    ...,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    'bgColor': bgColor.hex,    'video': video.asset->url,    },      _type == "link" => {    ...,    internalLink->{_type,slug,title}  }},    _type == 'imageText' => {    _id,    ...,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    'bgColor': bgColor.hex,    content[] {      ...,        _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },},    _type == 'hero' => {    _id,    title,    header,    content,    featuredImages[] {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    secondaryImages[] {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},},    _type == 'photoGallery' => {    _id,    _type,    'bgColor': bgColor.hex,    photos[] {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,}},},        SEO {    ...,    'openGraphImage': openGraphImage.asset->url,},    }}
+// Query: {    'homepage': *[_type == 'homepage'][0] {        ...,        content[]->{    ...,    _type == 'centeredText' => {    _id,    _type,    marginY,    'bgColor': bgColor.hex,    'textColor': textColor.hex,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    content[] {      ...,        _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },},    _type == 'classesSlideshow' => {    _id,    classes[] {    ...,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    'bgColor': bgColor.hex,    'video': video.asset->url,    },      _type == "link" => {    ...,    internalLink->{_type,slug,title}  }},    _type == 'igGallery' => {    _id,    'bgColor': bgColor.hex,    igEmbeds[]},    _type == 'imageText' => {    _id,    ...,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    'bgColor': bgColor.hex,    content[] {      ...,        _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },},    _type == 'hero' => {    _id,    title,    header,    content,    featuredImages[] {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    secondaryImages[] {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},},    _type == 'photoGallery' => {    _id,    _type,    'bgColor': bgColor.hex,    photos[] {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,}},    _type == 'splitImageAndText' => {    _id,    layout,    'bgColor': bgColor.hex,        'textColor': textColor.hex,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    header,    content[] {      ...,        _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },},    _type == 'video' => {    _id,    'video': video.asset->url,    hasBorder,    'borderColor': borderColor.hex,},},        SEO {    ...,    'openGraphImage': openGraphImage.asset->url,},    }}
 export type HomepageQueryResult = {
   homepage: {
     _id: string;
@@ -944,6 +1087,16 @@ export type HomepageQueryResult = {
         }
       | {
           _id: string;
+          _type: "igGallery";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          title?: string;
+          bgColor: string | null;
+          igEmbeds: Array<string> | null;
+        }
+      | {
+          _id: string;
           _type: "imageText";
           _createdAt: string;
           _updatedAt: string;
@@ -1018,6 +1171,80 @@ export type HomepageQueryResult = {
             aspectRatio: number | null;
           }> | null;
         }
+      | {
+          _id: string;
+          _type: "splitImageAndText";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          title?: string;
+          layout: "left" | "right" | null;
+          bgColor: string | null;
+          textColor: string | null;
+          image: {
+            caption: string | null;
+            assetId: string | null;
+            assetPath: string | null;
+            aspectRatio: number | null;
+          } | null;
+          header: string | null;
+          content: Array<
+            | {
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h1" | "h2" | "h3" | "h4" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs?: Array<{
+                  href?: string;
+                  _type: "link";
+                  _key: string;
+                }>;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }
+            | {
+                _key: string;
+                _type: "link";
+                text?: string;
+                type?: string;
+                internalLink:
+                  | {
+                      _type: "homepage";
+                      slug: null;
+                      title: null;
+                    }
+                  | {
+                      _type: "page";
+                      slug: Slug | null;
+                      title: string | null;
+                    }
+                  | null;
+                url?: string;
+                email?: string;
+                phone?: string;
+                value?: string;
+                blank?: boolean;
+                parameters?: string;
+                anchor?: string;
+              }
+          > | null;
+        }
+      | {
+          _id: string;
+          _type: "video";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          title?: string;
+          video: string | null;
+          hasBorder: boolean | null;
+          borderColor: string | null;
+        }
     > | null;
     SEO: {
       _type: "seo";
@@ -1033,7 +1260,7 @@ export type HomepageQueryResult = {
   } | null;
 };
 // Variable: pageQuery
-// Query: {    'page': *[_type == 'page' && $slug == slug.current][0] {        ...,        title,        content[]->{    ...,    _type == 'centeredText' => {    _id,    _type,    marginY,    'bgColor': bgColor.hex,    'textColor': textColor.hex,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    content[] {      ...,        _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },},    _type == 'classesSlideshow' => {    _id,    classes[] {    ...,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    'bgColor': bgColor.hex,    'video': video.asset->url,    },      _type == "link" => {    ...,    internalLink->{_type,slug,title}  }},    _type == 'imageText' => {    _id,    ...,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    'bgColor': bgColor.hex,    content[] {      ...,        _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },},    _type == 'hero' => {    _id,    title,    header,    content,    featuredImages[] {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    secondaryImages[] {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},},    _type == 'photoGallery' => {    _id,    _type,    'bgColor': bgColor.hex,    photos[] {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,}},},        SEO {    ...,    'openGraphImage': openGraphImage.asset->url,},    }}
+// Query: {    'page': *[_type == 'page' && $slug == slug.current][0] {        ...,        title,        content[]->{    ...,    _type == 'centeredText' => {    _id,    _type,    marginY,    'bgColor': bgColor.hex,    'textColor': textColor.hex,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    content[] {      ...,        _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },},    _type == 'classesSlideshow' => {    _id,    classes[] {    ...,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    'bgColor': bgColor.hex,    'video': video.asset->url,    },      _type == "link" => {    ...,    internalLink->{_type,slug,title}  }},    _type == 'igGallery' => {    _id,    'bgColor': bgColor.hex,    igEmbeds[]},    _type == 'imageText' => {    _id,    ...,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    'bgColor': bgColor.hex,    content[] {      ...,        _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },},    _type == 'hero' => {    _id,    title,    header,    content,    featuredImages[] {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    secondaryImages[] {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},},    _type == 'photoGallery' => {    _id,    _type,    'bgColor': bgColor.hex,    photos[] {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,}},    _type == 'splitImageAndText' => {    _id,    layout,    'bgColor': bgColor.hex,        'textColor': textColor.hex,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    header,    content[] {      ...,        _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },},    _type == 'video' => {    _id,    'video': video.asset->url,    hasBorder,    'borderColor': borderColor.hex,},},        SEO {    ...,    'openGraphImage': openGraphImage.asset->url,},    }}
 export type PageQueryResult = {
   page: {
     _id: string;
@@ -1108,6 +1335,160 @@ export type PageQueryResult = {
         }
       | {
           _id: string;
+          _type: "classesSlideshow";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          title?: string;
+          classes: Array<{
+            className?: string;
+            bgColor: string | null;
+            image: {
+              caption: string | null;
+              assetId: string | null;
+              assetPath: string | null;
+              aspectRatio: number | null;
+            } | null;
+            video: string | null;
+            content?: Array<
+              | ({
+                  _key: string;
+                } & Link)
+              | {
+                  children?: Array<{
+                    marks?: Array<string>;
+                    text?: string;
+                    _type: "span";
+                    _key: string;
+                  }>;
+                  style?: "h1" | "h2" | "h3" | "h4" | "normal";
+                  listItem?: "bullet" | "number";
+                  markDefs?: Array<{
+                    href?: string;
+                    _type: "link";
+                    _key: string;
+                  }>;
+                  level?: number;
+                  _type: "block";
+                  _key: string;
+                }
+            >;
+            _key: string;
+          }> | null;
+          link?: Link;
+        }
+      | {
+          _id: string;
+          _type: "hero";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          title: string | null;
+          header: string | null;
+          content: Array<{
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<{
+              href?: string;
+              _type: "link";
+              _key: string;
+            }>;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }> | null;
+          featuredImages: Array<{
+            caption: string | null;
+            assetId: string | null;
+            assetPath: string | null;
+            aspectRatio: number | null;
+          }> | null;
+          secondaryImages: Array<{
+            caption: string | null;
+            assetId: string | null;
+            assetPath: string | null;
+            aspectRatio: number | null;
+          }> | null;
+        }
+      | {
+          _id: string;
+          _type: "igGallery";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          title?: string;
+          bgColor: string | null;
+          igEmbeds: Array<string> | null;
+        }
+      | {
+          _id: string;
+          _type: "imageText";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          title?: string;
+          header?: string;
+          bgColor: string | null;
+          image: {
+            caption: string | null;
+            assetId: string | null;
+            assetPath: string | null;
+            aspectRatio: number | null;
+          } | null;
+          content: Array<
+            | {
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h1" | "h2" | "h3" | "h4" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs?: Array<{
+                  href?: string;
+                  _type: "link";
+                  _key: string;
+                }>;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }
+            | {
+                _key: string;
+                _type: "link";
+                text?: string;
+                type?: string;
+                internalLink:
+                  | {
+                      _type: "homepage";
+                      slug: null;
+                      title: null;
+                    }
+                  | {
+                      _type: "page";
+                      slug: Slug | null;
+                      title: string | null;
+                    }
+                  | null;
+                url?: string;
+                email?: string;
+                phone?: string;
+                value?: string;
+                blank?: boolean;
+                parameters?: string;
+                anchor?: string;
+              }
+          > | null;
+        }
+      | {
+          _id: string;
           _type: "photoGallery";
           _createdAt: string;
           _updatedAt: string;
@@ -1120,6 +1501,80 @@ export type PageQueryResult = {
             assetPath: string | null;
             aspectRatio: number | null;
           }> | null;
+        }
+      | {
+          _id: string;
+          _type: "splitImageAndText";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          title?: string;
+          layout: "left" | "right" | null;
+          bgColor: string | null;
+          textColor: string | null;
+          image: {
+            caption: string | null;
+            assetId: string | null;
+            assetPath: string | null;
+            aspectRatio: number | null;
+          } | null;
+          header: string | null;
+          content: Array<
+            | {
+                children?: Array<{
+                  marks?: Array<string>;
+                  text?: string;
+                  _type: "span";
+                  _key: string;
+                }>;
+                style?: "h1" | "h2" | "h3" | "h4" | "normal";
+                listItem?: "bullet" | "number";
+                markDefs?: Array<{
+                  href?: string;
+                  _type: "link";
+                  _key: string;
+                }>;
+                level?: number;
+                _type: "block";
+                _key: string;
+              }
+            | {
+                _key: string;
+                _type: "link";
+                text?: string;
+                type?: string;
+                internalLink:
+                  | {
+                      _type: "homepage";
+                      slug: null;
+                      title: null;
+                    }
+                  | {
+                      _type: "page";
+                      slug: Slug | null;
+                      title: string | null;
+                    }
+                  | null;
+                url?: string;
+                email?: string;
+                phone?: string;
+                value?: string;
+                blank?: boolean;
+                parameters?: string;
+                anchor?: string;
+              }
+          > | null;
+        }
+      | {
+          _id: string;
+          _type: "video";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          title?: string;
+          video: string | null;
+          hasBorder: boolean | null;
+          borderColor: string | null;
         }
     > | null;
     SEO: {
@@ -1141,10 +1596,11 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "{\n    _id,\n    _type,\n    'bgColor': bgColor.hex,\n    photos[] {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n}\n}": PhotoGalleryDataResult;
+    "{\n    _id,\n    'bgColor': bgColor.hex,\n    igEmbeds[]\n}": IgGalleryDataResult;
     "\n    *[_type == 'siteSettings'][0] {\n        SEO {\n    ...,\n    'openGraphImage': openGraphImage.asset->url,\n},\n    }\n": SiteSettingsQueryResult;
     "{\n    'header': *[_type == 'header'][0] {\n        navList[] {\n            ...,\n            \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n        },\n        mobileNavList[] {\n            ...,\n            \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n        }\n    }\n}": HeaderQueryResult;
     '{\n    \'footer\': *[_type == \'footer\'][0] {\n        linkLists[] {\n            links [] {\n                ...,\n                \n  _type == "link" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n            },\n        },   \n        newsletterContent[] {\n            ...,\n            \n  _type == "link" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n        },\n        footerContent[] {\n            ...,\n            \n  _type == "link" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n        },\n    }\n}': FooterQueryResult;
-    "{\n    'homepage': *[_type == 'homepage'][0] {\n        ...,\n        content[]->{\n    ...,\n    _type == 'centeredText' => {\n    _id,\n    _type,\n    marginY,\n    'bgColor': bgColor.hex,\n    'textColor': textColor.hex,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    content[] {\n      ...,\n      \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n    _type == 'classesSlideshow' => {\n    _id,\n    classes[] {\n    ...,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    'bgColor': bgColor.hex,\n    'video': video.asset->url,\n    },\n    \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n\n},\n    _type == 'imageText' => {\n    _id,\n    ...,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    'bgColor': bgColor.hex,\n    content[] {\n      ...,\n      \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n    _type == 'hero' => {\n    _id,\n    title,\n    header,\n    content,\n    featuredImages[] {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    secondaryImages[] {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n},\n    _type == 'photoGallery' => {\n    _id,\n    _type,\n    'bgColor': bgColor.hex,\n    photos[] {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n}\n},\n},\n        SEO {\n    ...,\n    'openGraphImage': openGraphImage.asset->url,\n},\n    }\n}": HomepageQueryResult;
-    "{\n    'page': *[_type == 'page' && $slug == slug.current][0] {\n        ...,\n        title,\n        content[]->{\n    ...,\n    _type == 'centeredText' => {\n    _id,\n    _type,\n    marginY,\n    'bgColor': bgColor.hex,\n    'textColor': textColor.hex,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    content[] {\n      ...,\n      \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n    _type == 'classesSlideshow' => {\n    _id,\n    classes[] {\n    ...,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    'bgColor': bgColor.hex,\n    'video': video.asset->url,\n    },\n    \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n\n},\n    _type == 'imageText' => {\n    _id,\n    ...,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    'bgColor': bgColor.hex,\n    content[] {\n      ...,\n      \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n    _type == 'hero' => {\n    _id,\n    title,\n    header,\n    content,\n    featuredImages[] {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    secondaryImages[] {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n},\n    _type == 'photoGallery' => {\n    _id,\n    _type,\n    'bgColor': bgColor.hex,\n    photos[] {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n}\n},\n},\n        SEO {\n    ...,\n    'openGraphImage': openGraphImage.asset->url,\n},\n    }\n}": PageQueryResult;
+    "{\n    'homepage': *[_type == 'homepage'][0] {\n        ...,\n        content[]->{\n    ...,\n    _type == 'centeredText' => {\n    _id,\n    _type,\n    marginY,\n    'bgColor': bgColor.hex,\n    'textColor': textColor.hex,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    content[] {\n      ...,\n      \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n    _type == 'classesSlideshow' => {\n    _id,\n    classes[] {\n    ...,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    'bgColor': bgColor.hex,\n    'video': video.asset->url,\n    },\n    \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n\n},\n    _type == 'igGallery' => {\n    _id,\n    'bgColor': bgColor.hex,\n    igEmbeds[]\n},\n    _type == 'imageText' => {\n    _id,\n    ...,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    'bgColor': bgColor.hex,\n    content[] {\n      ...,\n      \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n    _type == 'hero' => {\n    _id,\n    title,\n    header,\n    content,\n    featuredImages[] {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    secondaryImages[] {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n},\n    _type == 'photoGallery' => {\n    _id,\n    _type,\n    'bgColor': bgColor.hex,\n    photos[] {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n}\n},\n    _type == 'splitImageAndText' => {\n    _id,\n    layout,\n    'bgColor': bgColor.hex,    \n    'textColor': textColor.hex,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    header,\n    content[] {\n      ...,\n      \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n    _type == 'video' => {\n    _id,\n    'video': video.asset->url,\n    hasBorder,\n    'borderColor': borderColor.hex,\n},\n},\n        SEO {\n    ...,\n    'openGraphImage': openGraphImage.asset->url,\n},\n    }\n}": HomepageQueryResult;
+    "{\n    'page': *[_type == 'page' && $slug == slug.current][0] {\n        ...,\n        title,\n        content[]->{\n    ...,\n    _type == 'centeredText' => {\n    _id,\n    _type,\n    marginY,\n    'bgColor': bgColor.hex,\n    'textColor': textColor.hex,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    content[] {\n      ...,\n      \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n    _type == 'classesSlideshow' => {\n    _id,\n    classes[] {\n    ...,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    'bgColor': bgColor.hex,\n    'video': video.asset->url,\n    },\n    \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n\n},\n    _type == 'igGallery' => {\n    _id,\n    'bgColor': bgColor.hex,\n    igEmbeds[]\n},\n    _type == 'imageText' => {\n    _id,\n    ...,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    'bgColor': bgColor.hex,\n    content[] {\n      ...,\n      \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n    _type == 'hero' => {\n    _id,\n    title,\n    header,\n    content,\n    featuredImages[] {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    secondaryImages[] {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n},\n    _type == 'photoGallery' => {\n    _id,\n    _type,\n    'bgColor': bgColor.hex,\n    photos[] {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n}\n},\n    _type == 'splitImageAndText' => {\n    _id,\n    layout,\n    'bgColor': bgColor.hex,    \n    'textColor': textColor.hex,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    header,\n    content[] {\n      ...,\n      \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n    _type == 'video' => {\n    _id,\n    'video': video.asset->url,\n    hasBorder,\n    'borderColor': borderColor.hex,\n},\n},\n        SEO {\n    ...,\n    'openGraphImage': openGraphImage.asset->url,\n},\n    }\n}": PageQueryResult;
   }
 }

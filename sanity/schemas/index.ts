@@ -7,6 +7,7 @@ import { header, homepage, footer, page, siteSettings } from "./documents";
 import {
   centeredText,
   classesSlideshow,
+  igGallery,
   imageText,
   hero,
   photoGallery,
@@ -22,6 +23,7 @@ const documents = [header, homepage, footer, page, siteSettings];
 const modules = [
   centeredText,
   classesSlideshow,
+  igGallery,
   imageText,
   hero,
   photoGallery,

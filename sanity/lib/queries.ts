@@ -50,6 +50,12 @@ const classesSlideshowData = `{
     ${linkTypeData}
 }`;
 
+const igGalleryData = defineQuery(`{
+    _id,
+    'bgColor': bgColor.hex,
+    igEmbeds[]
+}`);
+
 const imageTextData = `{
     _id,
     ...,
@@ -88,12 +94,13 @@ const videoData = `{
     'video': video.asset->url,
     hasBorder,
     'borderColor': borderColor.hex,
-}`
+}`;
 
 const contentData = `{
     ...,
     _type == 'centeredText' => ${centeredTextData},
     _type == 'classesSlideshow' => ${classesSlideshowData},
+    _type == 'igGallery' => ${igGalleryData},
     _type == 'imageText' => ${imageTextData},
     _type == 'hero' => ${heroData},
     _type == 'photoGallery' => ${photoGalleryData},

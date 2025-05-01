@@ -1,5 +1,6 @@
 import CenteredText from "./CenteredText";
 import ClassesSlideshow from "./ClassesSlideshow";
+import IGGallery from "./IGGallery";
 import ImageText from "./ImageText";
 import Hero from "./Hero";
 import PhotoGallery from "./PhotoGallery";
@@ -18,6 +19,8 @@ export default function Content({ data }: Props) {
             return <CenteredText key={c._id} content={c} />;
           case "classesSlideshow":
             return <ClassesSlideshow key={c._id} content={c} />;
+          case "igGallery":
+            return <IGGallery key={c._id} content={c} />;
           case "imageText":
             return <ImageText key={c._id} content={c} />;
           case "hero":
@@ -27,7 +30,7 @@ export default function Content({ data }: Props) {
           case "splitImageAndText":
             return <SplitImageAndText key={c._id} content={c} />;
           case "video":
-              return <Video key={c._id} content={c} />;
+            return <Video key={c._id} content={c} />;
           default:
             return (
               <h1 key={c._id} className="text-center">

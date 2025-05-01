@@ -1,13 +1,37 @@
+"use client"
+
 import { PageQueryResult } from "@/sanity.types";
 import DOMPurify from "isomorphic-dompurify";
+import { useEffect } from "react";
 
 type IGGalleryProps = Extract<
   NonNullable<NonNullable<NonNullable<PageQueryResult>["page"]>["content"]>[0],
   { _type: "igGallery" }
 >;
 
+declare global {
+    interface Window {
+        instgrm: any;
+    }
+}
+
 export default function IGGallery({ content }: { content: IGGalleryProps }) {
   const { bgColor, igEmbeds } = content;
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "//www.instagram.com/embed.js";
+    script.async = true;
+    document.body.appendChild(script);
+  
+    return () => {
+      script.remove();
+  
+      // Remove the property added by the IG embed script
+      // so the embed will work again on re-mount.
+      if (window.instgrm) delete window.instgrm;
+    };
+  });
 
   return (
     <div

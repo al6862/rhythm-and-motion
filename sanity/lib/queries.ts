@@ -96,17 +96,138 @@ const videoData = `{
     'borderColor': borderColor.hex,
 }`;
 
+const danceClassData = `{
+    _id,
+    _type,
+    classType {
+        ...,
+        ${linkTypeData},
+    },
+    instructor {
+        ...,
+        ${linkTypeData},
+    },
+    mode,
+    dayOfWeek,
+    startTime,
+}`;
+
+const danceStudioData = `{
+    _id,
+    header {
+        studioTitle,
+        studioSubTitle,
+    },
+    studioAddress,
+    location,
+    slug,
+    studioDescription[] {
+        ...,
+        ${linkTypeData},
+    },
+    'bgColor': bgColor.hex,    
+    image ${imageData},
+    danceClasses[] ${danceClassData},
+    partnerSite {
+        ...,
+        ${linkTypeData},
+    },
+    partnerLink {
+        ...,
+        ${linkTypeData},
+    }
+}`;
+
+const partnersData = `{
+    _id,
+    _type,
+    title,
+    header,
+    'bgColor': bgColor.hex,    
+    image ${imageData},
+    studios[] -> ${danceStudioData},
+    link {
+        ...,
+        ${linkTypeData},
+    }
+}`;
+
+const teacherData = `{
+    ...,
+    name,
+    slug,
+    pronouns,
+    image ${imageData},
+    blurb,
+    studio {
+        ...,
+        ${linkTypeData},
+    },
+    ${linkTypeData}    
+}`;
+
+const teachersData = `{
+    _id,
+    _type,
+    title,
+    header,
+    'bgColor': bgColor.hex,    
+    image ${imageData},
+    "teachers": teachers[] | order(name asc) ${teacherData},
+}`;
+
+const communityEventData = `{
+    _id,
+    _type,
+    title,
+    slug,
+    location,
+    address,
+    startDate,
+    endDate,
+    image ${imageData},
+    content[] {
+        ...,
+        ${linkTypeData},
+    },
+}`;
+
+const communityData = `{
+    _id,
+    _type,
+    title,
+    header,
+    image ${imageData},
+    events[] -> ${communityEventData},
+}`;
+
 const contentData = `{
     ...,
     _type == 'centeredText' => ${centeredTextData},
     _type == 'classesSlideshow' => ${classesSlideshowData},
+    _type == 'community' => ${communityData},
     _type == 'igGallery' => ${igGalleryData},
     _type == 'imageText' => ${imageTextData},
     _type == 'hero' => ${heroData},
+    _type == 'partners' => ${partnersData},
     _type == 'photoGallery' => ${photoGalleryData},
     _type == 'splitImageAndText' => ${splitImageAndTextData},
+    _type == 'teachers' => ${teachersData},
     _type == 'video' => ${videoData},
 }`;
+
+export const partnersQuery = defineQuery(`{
+    'partners': *[_type == 'partners'][0] ${partnersData},
+    
+}`);
+
+export const teachersQuery = defineQuery(`{
+    'teachers': *[_type == 'teachers'][0] ${teachersData},
+}`);
+
+export const communityQuery = defineQuery(`{
+    'community': *[_type == 'community'][0] ${communityData},
+}`);
 
 export const siteSettingsQuery = defineQuery(`
     *[_type == 'siteSettings'][0] {

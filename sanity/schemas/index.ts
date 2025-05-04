@@ -11,27 +11,49 @@ import {
   imageText,
   hero,
   photoGallery,
+  partners,
   splitImageAndText,
+  teachers,
   video,
+  community,
 } from "./modules";
 
 /* Object imports */
-import { imageAlt, linkList, seo } from "./objects";
+import {
+  communityEvent,
+  danceClass,
+  danceStudio,
+  imageAlt,
+  linkList,
+  seo,
+  teacher,
+} from "./objects";
 
 const documents = [header, homepage, footer, page, siteSettings];
 
 const modules = [
   centeredText,
   classesSlideshow,
+  community,
   igGallery,
   imageText,
   hero,
   photoGallery,
+  partners,
   splitImageAndText,
+  teachers,
   video,
 ];
 
-const objects = [imageAlt, linkList, seo];
+const objects = [
+  communityEvent,
+  danceClass,
+  danceStudio,
+  imageAlt,
+  linkList,
+  seo,
+  teacher,
+];
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [...documents, ...objects, ...modules],

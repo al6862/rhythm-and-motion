@@ -9,9 +9,12 @@ const documentsHiddenFromContentList = [
   "page",
   "centeredText",
   "classesSlideshow",
+  "danceClass",
+  "danceStudio",
   "imageText",
   "hero",
   "photoGallery",
+  "partners",
   "splitImageAndText",
   "video",
 ];
@@ -110,6 +113,13 @@ export const structure: StructureResolver = (S) =>
                   ]),
                 ),
               S.listItem()
+                .title("Partners")
+                .child(
+                  S.documentTypeList("partners").defaultOrdering([
+                    { field: "_createdAt", direction: "asc" },
+                  ]),
+                ),
+              S.listItem()
                 .title("Photo Gallery")
                 .child(
                   S.documentTypeList("photoGallery").defaultOrdering([
@@ -132,7 +142,13 @@ export const structure: StructureResolver = (S) =>
                 ),
             ]),
         ),
-
+      S.listItem()
+        .title("Dance Studios")
+        .child(
+          S.documentTypeList("danceStudio").defaultOrdering([
+            { field: "_createdAt", direction: "asc" },
+          ]),
+        ),
       S.listItem()
         .title("Site Settings")
         .child(

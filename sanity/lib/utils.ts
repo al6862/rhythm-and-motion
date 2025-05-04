@@ -14,3 +14,17 @@ export function resolveHref(
       return undefined;
   }
 }
+
+const dayMap = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+
+export const getDayName = (dayOfWeek: number) => {
+  return dayMap[dayOfWeek % 7];
+};

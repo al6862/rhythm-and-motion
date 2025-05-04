@@ -1,4 +1,4 @@
-import {StarIcon} from '@sanity/icons';
+import { StarIcon } from "@sanity/icons";
 import { defineField, defineType, defineArrayMember } from "sanity";
 
 export const hero = defineType({

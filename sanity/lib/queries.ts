@@ -146,6 +146,30 @@ const partnersData = `{
     }
 }`;
 
+const teacherData = `{
+    ...,
+    name,
+    slug,
+    pronouns,
+    image ${imageData},
+    blurb,
+    studio {
+        ...,
+        ${linkTypeData},
+    },
+    ${linkTypeData}    
+}`;
+
+const teachersData = `{
+    _id,
+    _type,
+    title,
+    header,
+    'bgColor': bgColor.hex,    
+    image ${imageData},
+    "teachers": teachers[] | order(name asc) ${teacherData},
+}`;
+
 const contentData = `{
     ...,
     _type == 'centeredText' => ${centeredTextData},
@@ -155,12 +179,17 @@ const contentData = `{
     _type == 'partners' => ${partnersData},
     _type == 'photoGallery' => ${photoGalleryData},
     _type == 'splitImageAndText' => ${splitImageAndTextData},
+    _type == 'teachers' => ${teachersData},
     _type == 'video' => ${videoData},
 }`;
 
 export const partnersQuery = defineQuery(`{
     'partners': *[_type == 'partners'][0] ${partnersData},
     
+}`);
+
+export const teachersQuery = defineQuery(`{
+    'teachers': *[_type == 'teachers'][0] ${teachersData},
 }`);
 
 export const siteSettingsQuery = defineQuery(`

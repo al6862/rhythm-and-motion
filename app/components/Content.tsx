@@ -4,6 +4,7 @@ import ImageText from "./ImageText";
 import Hero from "./Hero";
 import PhotoGallery from "./PhotoGallery";
 import SplitImageAndText from "./SplitImageAndText";
+import Teachers from "./Teachers";
 import Video from "./Video";
 import Partners from "./Partners";
 
@@ -29,6 +30,8 @@ export default function Content({ data }: Props) {
             return <PhotoGallery key={c._id} content={c} />;
           case "splitImageAndText":
             return <SplitImageAndText key={c._id} content={c} />;
+          case "teachers":
+            return <Teachers key={c._id} content={c} />;
           case "video":
             return <Video key={c._id} content={c} />;
           default:

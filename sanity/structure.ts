@@ -9,6 +9,8 @@ const documentsHiddenFromContentList = [
   "page",
   "centeredText",
   "classesSlideshow",
+  "community",
+  "communityEvent",
   "danceClass",
   "danceStudio",
   "imageText",
@@ -101,6 +103,13 @@ export const structure: StructureResolver = (S) =>
                   ]),
                 ),
               S.listItem()
+                .title("Community")
+                .child(
+                  S.documentTypeList("community").defaultOrdering([
+                    { field: "_createdAt", direction: "asc" },
+                  ]),
+                ),
+              S.listItem()
                 .title("Image Text Block")
                 .child(
                   S.documentTypeList("imageText").defaultOrdering([
@@ -155,6 +164,13 @@ export const structure: StructureResolver = (S) =>
         .title("Dance Studios")
         .child(
           S.documentTypeList("danceStudio").defaultOrdering([
+            { field: "_createdAt", direction: "asc" },
+          ]),
+        ),
+      S.listItem()
+        .title("Community Events")
+        .child(
+          S.documentTypeList("communityEvent").defaultOrdering([
             { field: "_createdAt", direction: "asc" },
           ]),
         ),

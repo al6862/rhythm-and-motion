@@ -1,5 +1,6 @@
 export * from "./centeredText";
 export * from "./classesSlideshow";
+export * from "./community";
 export * from "./hero";
 export * from "./imageText";
 export * from "./partners";

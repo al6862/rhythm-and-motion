@@ -296,6 +296,35 @@ export type ImageText = {
   >;
 };
 
+export type Community = {
+  _id: string;
+  _type: "community";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  header?: string;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    caption?: string;
+    _type: "imageAlt";
+  };
+  events?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "communityEvent";
+  }>;
+};
+
 export type ClassesSlideshow = {
   _id: string;
   _type: "classesSlideshow";
@@ -553,6 +582,76 @@ export type DanceStudio = {
   partnerLink?: Link;
 };
 
+export type DanceClass = {
+  _type: "danceClass";
+  classType?: Link;
+  instructor?: Link;
+  mode?: "Livestream" | "In-person" | "Livestream & In-person";
+  dayOfWeek?: number;
+  startTime?: string;
+};
+
+export type CommunityEvent = {
+  _id: string;
+  _type: "communityEvent";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    caption?: string;
+    _type: "imageAlt";
+  };
+  content?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  location?: string;
+  address?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  startDate?: string;
+  endDate?: string;
+};
+
 export type ImageAlt = {
   _type: "imageAlt";
   asset?: {
@@ -564,15 +663,6 @@ export type ImageAlt = {
   hotspot?: SanityImageHotspot;
   crop?: SanityImageCrop;
   caption?: string;
-};
-
-export type DanceClass = {
-  _type: "danceClass";
-  classType?: Link;
-  instructor?: Link;
-  mode?: "Livestream" | "In-person" | "Livestream & In-person";
-  dayOfWeek?: number;
-  startTime?: string;
 };
 
 export type SiteSettings = {
@@ -739,6 +829,12 @@ export type Homepage = {
         _ref: string;
         _type: "reference";
         _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "community";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "imageText";
       }
     | {
@@ -801,6 +897,12 @@ export type Page = {
         _type: "reference";
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "classesSlideshow";
+      }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "community";
       }
     | {
         _ref: string;
@@ -940,14 +1042,16 @@ export type AllSanitySchemaTypes =
   | PhotoGallery
   | Hero
   | ImageText
+  | Community
   | ClassesSlideshow
   | SanityFileAsset
   | CenteredText
   | Teacher
   | LinkList
   | DanceStudio
-  | ImageAlt
   | DanceClass
+  | CommunityEvent
+  | ImageAlt
   | SiteSettings
   | Footer
   | Header
@@ -1275,6 +1379,73 @@ export type TeachersQueryResult = {
     }> | null;
   } | null;
 };
+// Variable: communityQuery
+// Query: {    'community': *[_type == 'community'][0] {    _id,    _type,    title,    header,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    events[] -> {    _id,    _type,    title,    slug,    location,    address,    startDate,    endDate,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    content[] {        ...,          _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },},},}
+export type CommunityQueryResult = {
+  community: {
+    _id: string;
+    _type: "community";
+    title: string | null;
+    header: string | null;
+    image: {
+      caption: string | null;
+      assetId: string | null;
+      assetPath: string | null;
+      aspectRatio: number | null;
+    } | null;
+    events: Array<{
+      _id: string;
+      _type: "communityEvent";
+      title: string | null;
+      slug: Slug | null;
+      location: string | null;
+      address: Array<{
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "normal";
+        listItem?: "bullet" | "number";
+        markDefs?: Array<{
+          href?: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }> | null;
+      startDate: string | null;
+      endDate: string | null;
+      image: {
+        caption: string | null;
+        assetId: string | null;
+        assetPath: string | null;
+        aspectRatio: number | null;
+      } | null;
+      content: Array<{
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "h1" | "h2" | "h3" | "h4" | "normal";
+        listItem?: "bullet" | "number";
+        markDefs?: Array<{
+          href?: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }> | null;
+    }> | null;
+  } | null;
+};
 // Variable: siteSettingsQuery
 // Query: *[_type == 'siteSettings'][0] {        SEO {    ...,    'openGraphImage': openGraphImage.asset->url,},    }
 export type SiteSettingsQueryResult = {
@@ -1416,7 +1587,7 @@ export type FooterQueryResult = {
   } | null;
 };
 // Variable: homepageQuery
-// Query: {    'homepage': *[_type == 'homepage'][0] {        ...,        content[]->{    ...,    _type == 'centeredText' => {    _id,    _type,    marginY,    'bgColor': bgColor.hex,    'textColor': textColor.hex,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    content[] {      ...,        _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },},    _type == 'classesSlideshow' => {    _id,    classes[] {    ...,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    'bgColor': bgColor.hex,    'video': video.asset->url,    },      _type == "link" => {    ...,    internalLink->{_type,slug,title}  }},    _type == 'imageText' => {    _id,    ...,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    'bgColor': bgColor.hex,    content[] {      ...,        _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },},    _type == 'hero' => {    _id,    title,    header,    content,    featuredImages[] {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    secondaryImages[] {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},},    _type == 'partners' => {    _id,    _type,    title,    header,    'bgColor': bgColor.hex,        image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    studios[] -> {    _id,    header {        studioTitle,        studioSubTitle,    },    studioAddress,    location,    slug,    studioDescription[] {        ...,          _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },    'bgColor': bgColor.hex,        image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    danceClasses[] {    _id,    _type,    classType {        ...,          _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },    instructor {        ...,          _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },    mode,    dayOfWeek,    startTime,},    partnerSite {        ...,          _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },    partnerLink {        ...,          _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    }},    link {        ...,          _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    }},    _type == 'photoGallery' => {    _id,    _type,    'bgColor': bgColor.hex,    photos[] {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,}},    _type == 'splitImageAndText' => {    _id,    layout,    'bgColor': bgColor.hex,        'textColor': textColor.hex,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    header,    content[] {      ...,        _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },},    _type == 'teachers' => {    _id,    _type,    title,    header,    'bgColor': bgColor.hex,        image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    "teachers": teachers[] | order(name asc) {    ...,    name,    slug,    pronouns,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    blurb,    studio {        ...,          _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },      _type == "link" => {    ...,    internalLink->{_type,slug,title}  }    },},    _type == 'video' => {    _id,    'video': video.asset->url,    hasBorder,    'borderColor': borderColor.hex,},},        SEO {    ...,    'openGraphImage': openGraphImage.asset->url,},    }}
+// Query: {    'homepage': *[_type == 'homepage'][0] {        ...,        content[]->{    ...,    _type == 'centeredText' => {    _id,    _type,    marginY,    'bgColor': bgColor.hex,    'textColor': textColor.hex,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    content[] {      ...,        _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },},    _type == 'classesSlideshow' => {    _id,    classes[] {    ...,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    'bgColor': bgColor.hex,    'video': video.asset->url,    },      _type == "link" => {    ...,    internalLink->{_type,slug,title}  }},    _type == 'community' => {    _id,    _type,    title,    header,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    events[] -> {    _id,    _type,    title,    slug,    location,    address,    startDate,    endDate,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    content[] {        ...,          _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },},},    _type == 'imageText' => {    _id,    ...,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    'bgColor': bgColor.hex,    content[] {      ...,        _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },},    _type == 'hero' => {    _id,    title,    header,    content,    featuredImages[] {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    secondaryImages[] {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},},    _type == 'partners' => {    _id,    _type,    title,    header,    'bgColor': bgColor.hex,        image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    studios[] -> {    _id,    header {        studioTitle,        studioSubTitle,    },    studioAddress,    location,    slug,    studioDescription[] {        ...,          _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },    'bgColor': bgColor.hex,        image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    danceClasses[] {    _id,    _type,    classType {        ...,          _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },    instructor {        ...,          _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },    mode,    dayOfWeek,    startTime,},    partnerSite {        ...,          _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },    partnerLink {        ...,          _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    }},    link {        ...,          _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    }},    _type == 'photoGallery' => {    _id,    _type,    'bgColor': bgColor.hex,    photos[] {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,}},    _type == 'splitImageAndText' => {    _id,    layout,    'bgColor': bgColor.hex,        'textColor': textColor.hex,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    header,    content[] {      ...,        _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },},    _type == 'teachers' => {    _id,    _type,    title,    header,    'bgColor': bgColor.hex,        image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    "teachers": teachers[] | order(name asc) {    ...,    name,    slug,    pronouns,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    blurb,    studio {        ...,          _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },      _type == "link" => {    ...,    internalLink->{_type,slug,title}  }    },},    _type == 'video' => {    _id,    'video': video.asset->url,    hasBorder,    'borderColor': borderColor.hex,},},        SEO {    ...,    'openGraphImage': openGraphImage.asset->url,},    }}
 export type HomepageQueryResult = {
   homepage: {
     _id: string;
@@ -1530,6 +1701,72 @@ export type HomepageQueryResult = {
             _key: string;
           }> | null;
           link?: Link;
+        }
+      | {
+          _id: string;
+          _type: "community";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          title: string | null;
+          header: string | null;
+          image: {
+            caption: string | null;
+            assetId: string | null;
+            assetPath: string | null;
+            aspectRatio: number | null;
+          } | null;
+          events: Array<{
+            _id: string;
+            _type: "communityEvent";
+            title: string | null;
+            slug: Slug | null;
+            location: string | null;
+            address: Array<{
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "normal";
+              listItem?: "bullet" | "number";
+              markDefs?: Array<{
+                href?: string;
+                _type: "link";
+                _key: string;
+              }>;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }> | null;
+            startDate: string | null;
+            endDate: string | null;
+            image: {
+              caption: string | null;
+              assetId: string | null;
+              assetPath: string | null;
+              aspectRatio: number | null;
+            } | null;
+            content: Array<{
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h1" | "h2" | "h3" | "h4" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs?: Array<{
+                href?: string;
+                _type: "link";
+                _key: string;
+              }>;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }> | null;
+          }> | null;
         }
       | {
           _id: string;
@@ -2037,7 +2274,7 @@ export type HomepageQueryResult = {
   } | null;
 };
 // Variable: pageQuery
-// Query: {    'page': *[_type == 'page' && $slug == slug.current][0] {        ...,        title,        content[]->{    ...,    _type == 'centeredText' => {    _id,    _type,    marginY,    'bgColor': bgColor.hex,    'textColor': textColor.hex,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    content[] {      ...,        _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },},    _type == 'classesSlideshow' => {    _id,    classes[] {    ...,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    'bgColor': bgColor.hex,    'video': video.asset->url,    },      _type == "link" => {    ...,    internalLink->{_type,slug,title}  }},    _type == 'imageText' => {    _id,    ...,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    'bgColor': bgColor.hex,    content[] {      ...,        _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },},    _type == 'hero' => {    _id,    title,    header,    content,    featuredImages[] {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    secondaryImages[] {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},},    _type == 'partners' => {    _id,    _type,    title,    header,    'bgColor': bgColor.hex,        image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    studios[] -> {    _id,    header {        studioTitle,        studioSubTitle,    },    studioAddress,    location,    slug,    studioDescription[] {        ...,          _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },    'bgColor': bgColor.hex,        image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    danceClasses[] {    _id,    _type,    classType {        ...,          _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },    instructor {        ...,          _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },    mode,    dayOfWeek,    startTime,},    partnerSite {        ...,          _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },    partnerLink {        ...,          _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    }},    link {        ...,          _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    }},    _type == 'photoGallery' => {    _id,    _type,    'bgColor': bgColor.hex,    photos[] {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,}},    _type == 'splitImageAndText' => {    _id,    layout,    'bgColor': bgColor.hex,        'textColor': textColor.hex,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    header,    content[] {      ...,        _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },},    _type == 'teachers' => {    _id,    _type,    title,    header,    'bgColor': bgColor.hex,        image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    "teachers": teachers[] | order(name asc) {    ...,    name,    slug,    pronouns,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    blurb,    studio {        ...,          _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },      _type == "link" => {    ...,    internalLink->{_type,slug,title}  }    },},    _type == 'video' => {    _id,    'video': video.asset->url,    hasBorder,    'borderColor': borderColor.hex,},},        SEO {    ...,    'openGraphImage': openGraphImage.asset->url,},    }}
+// Query: {    'page': *[_type == 'page' && $slug == slug.current][0] {        ...,        title,        content[]->{    ...,    _type == 'centeredText' => {    _id,    _type,    marginY,    'bgColor': bgColor.hex,    'textColor': textColor.hex,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    content[] {      ...,        _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },},    _type == 'classesSlideshow' => {    _id,    classes[] {    ...,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    'bgColor': bgColor.hex,    'video': video.asset->url,    },      _type == "link" => {    ...,    internalLink->{_type,slug,title}  }},    _type == 'community' => {    _id,    _type,    title,    header,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    events[] -> {    _id,    _type,    title,    slug,    location,    address,    startDate,    endDate,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    content[] {        ...,          _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },},},    _type == 'imageText' => {    _id,    ...,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    'bgColor': bgColor.hex,    content[] {      ...,        _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },},    _type == 'hero' => {    _id,    title,    header,    content,    featuredImages[] {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    secondaryImages[] {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},},    _type == 'partners' => {    _id,    _type,    title,    header,    'bgColor': bgColor.hex,        image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    studios[] -> {    _id,    header {        studioTitle,        studioSubTitle,    },    studioAddress,    location,    slug,    studioDescription[] {        ...,          _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },    'bgColor': bgColor.hex,        image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    danceClasses[] {    _id,    _type,    classType {        ...,          _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },    instructor {        ...,          _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },    mode,    dayOfWeek,    startTime,},    partnerSite {        ...,          _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },    partnerLink {        ...,          _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    }},    link {        ...,          _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    }},    _type == 'photoGallery' => {    _id,    _type,    'bgColor': bgColor.hex,    photos[] {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,}},    _type == 'splitImageAndText' => {    _id,    layout,    'bgColor': bgColor.hex,        'textColor': textColor.hex,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    header,    content[] {      ...,        _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },},    _type == 'teachers' => {    _id,    _type,    title,    header,    'bgColor': bgColor.hex,        image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    "teachers": teachers[] | order(name asc) {    ...,    name,    slug,    pronouns,    image {    caption,    'assetId': asset->_id,    'assetPath': asset->path,    'aspectRatio': asset->metadata.dimensions.aspectRatio,},    blurb,    studio {        ...,          _type == "link" => {    ...,    internalLink->{_type,slug,title}  },    },      _type == "link" => {    ...,    internalLink->{_type,slug,title}  }    },},    _type == 'video' => {    _id,    'video': video.asset->url,    hasBorder,    'borderColor': borderColor.hex,},},        SEO {    ...,    'openGraphImage': openGraphImage.asset->url,},    }}
 export type PageQueryResult = {
   page: {
     _id: string;
@@ -2153,6 +2390,72 @@ export type PageQueryResult = {
             _key: string;
           }> | null;
           link?: Link;
+        }
+      | {
+          _id: string;
+          _type: "community";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          title: string | null;
+          header: string | null;
+          image: {
+            caption: string | null;
+            assetId: string | null;
+            assetPath: string | null;
+            aspectRatio: number | null;
+          } | null;
+          events: Array<{
+            _id: string;
+            _type: "communityEvent";
+            title: string | null;
+            slug: Slug | null;
+            location: string | null;
+            address: Array<{
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "normal";
+              listItem?: "bullet" | "number";
+              markDefs?: Array<{
+                href?: string;
+                _type: "link";
+                _key: string;
+              }>;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }> | null;
+            startDate: string | null;
+            endDate: string | null;
+            image: {
+              caption: string | null;
+              assetId: string | null;
+              assetPath: string | null;
+              aspectRatio: number | null;
+            } | null;
+            content: Array<{
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: "span";
+                _key: string;
+              }>;
+              style?: "h1" | "h2" | "h3" | "h4" | "normal";
+              listItem?: "bullet" | "number";
+              markDefs?: Array<{
+                href?: string;
+                _type: "link";
+                _key: string;
+              }>;
+              level?: number;
+              _type: "block";
+              _key: string;
+            }> | null;
+          }> | null;
         }
       | {
           _id: string;
@@ -2667,10 +2970,11 @@ declare module "@sanity/client" {
     "{\n    _id,\n    _type,\n    'bgColor': bgColor.hex,\n    photos[] {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n}\n}": PhotoGalleryDataResult;
     "{\n    'partners': *[_type == 'partners'][0] {\n    _id,\n    _type,\n    title,\n    header,\n    'bgColor': bgColor.hex,    \n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    studios[] -> {\n    _id,\n    header {\n        studioTitle,\n        studioSubTitle,\n    },\n    studioAddress,\n    location,\n    slug,\n    studioDescription[] {\n        ...,\n        \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n    'bgColor': bgColor.hex,    \n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    danceClasses[] {\n    _id,\n    _type,\n    classType {\n        ...,\n        \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n    instructor {\n        ...,\n        \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n    mode,\n    dayOfWeek,\n    startTime,\n},\n    partnerSite {\n        ...,\n        \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n    partnerLink {\n        ...,\n        \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    }\n},\n    link {\n        ...,\n        \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    }\n},\n    \n}": PartnersQueryResult;
     "{\n    'teachers': *[_type == 'teachers'][0] {\n    _id,\n    _type,\n    title,\n    header,\n    'bgColor': bgColor.hex,    \n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    \"teachers\": teachers[] | order(name asc) {\n    ...,\n    name,\n    slug,\n    pronouns,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    blurb,\n    studio {\n        ...,\n        \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n    \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n    \n},\n},\n}": TeachersQueryResult;
+    "{\n    'community': *[_type == 'community'][0] {\n    _id,\n    _type,\n    title,\n    header,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    events[] -> {\n    _id,\n    _type,\n    title,\n    slug,\n    location,\n    address,\n    startDate,\n    endDate,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    content[] {\n        ...,\n        \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n},\n}": CommunityQueryResult;
     "\n    *[_type == 'siteSettings'][0] {\n        SEO {\n    ...,\n    'openGraphImage': openGraphImage.asset->url,\n},\n    }\n": SiteSettingsQueryResult;
     "{\n    'header': *[_type == 'header'][0] {\n        navList[] {\n            ...,\n            \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n        },\n        mobileNavList[] {\n            ...,\n            \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n        }\n    }\n}": HeaderQueryResult;
     '{\n    \'footer\': *[_type == \'footer\'][0] {\n        linkLists[] {\n            links [] {\n                ...,\n                \n  _type == "link" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n            },\n        },   \n        newsletterContent[] {\n            ...,\n            \n  _type == "link" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n        },\n        footerContent[] {\n            ...,\n            \n  _type == "link" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n        },\n    }\n}': FooterQueryResult;
-    "{\n    'homepage': *[_type == 'homepage'][0] {\n        ...,\n        content[]->{\n    ...,\n    _type == 'centeredText' => {\n    _id,\n    _type,\n    marginY,\n    'bgColor': bgColor.hex,\n    'textColor': textColor.hex,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    content[] {\n      ...,\n      \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n    _type == 'classesSlideshow' => {\n    _id,\n    classes[] {\n    ...,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    'bgColor': bgColor.hex,\n    'video': video.asset->url,\n    },\n    \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n\n},\n    _type == 'imageText' => {\n    _id,\n    ...,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    'bgColor': bgColor.hex,\n    content[] {\n      ...,\n      \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n    _type == 'hero' => {\n    _id,\n    title,\n    header,\n    content,\n    featuredImages[] {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    secondaryImages[] {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n},\n    _type == 'partners' => {\n    _id,\n    _type,\n    title,\n    header,\n    'bgColor': bgColor.hex,    \n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    studios[] -> {\n    _id,\n    header {\n        studioTitle,\n        studioSubTitle,\n    },\n    studioAddress,\n    location,\n    slug,\n    studioDescription[] {\n        ...,\n        \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n    'bgColor': bgColor.hex,    \n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    danceClasses[] {\n    _id,\n    _type,\n    classType {\n        ...,\n        \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n    instructor {\n        ...,\n        \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n    mode,\n    dayOfWeek,\n    startTime,\n},\n    partnerSite {\n        ...,\n        \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n    partnerLink {\n        ...,\n        \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    }\n},\n    link {\n        ...,\n        \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    }\n},\n    _type == 'photoGallery' => {\n    _id,\n    _type,\n    'bgColor': bgColor.hex,\n    photos[] {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n}\n},\n    _type == 'splitImageAndText' => {\n    _id,\n    layout,\n    'bgColor': bgColor.hex,    \n    'textColor': textColor.hex,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    header,\n    content[] {\n      ...,\n      \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n    _type == 'teachers' => {\n    _id,\n    _type,\n    title,\n    header,\n    'bgColor': bgColor.hex,    \n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    \"teachers\": teachers[] | order(name asc) {\n    ...,\n    name,\n    slug,\n    pronouns,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    blurb,\n    studio {\n        ...,\n        \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n    \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n    \n},\n},\n    _type == 'video' => {\n    _id,\n    'video': video.asset->url,\n    hasBorder,\n    'borderColor': borderColor.hex,\n},\n},\n        SEO {\n    ...,\n    'openGraphImage': openGraphImage.asset->url,\n},\n    }\n}": HomepageQueryResult;
-    "{\n    'page': *[_type == 'page' && $slug == slug.current][0] {\n        ...,\n        title,\n        content[]->{\n    ...,\n    _type == 'centeredText' => {\n    _id,\n    _type,\n    marginY,\n    'bgColor': bgColor.hex,\n    'textColor': textColor.hex,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    content[] {\n      ...,\n      \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n    _type == 'classesSlideshow' => {\n    _id,\n    classes[] {\n    ...,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    'bgColor': bgColor.hex,\n    'video': video.asset->url,\n    },\n    \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n\n},\n    _type == 'imageText' => {\n    _id,\n    ...,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    'bgColor': bgColor.hex,\n    content[] {\n      ...,\n      \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n    _type == 'hero' => {\n    _id,\n    title,\n    header,\n    content,\n    featuredImages[] {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    secondaryImages[] {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n},\n    _type == 'partners' => {\n    _id,\n    _type,\n    title,\n    header,\n    'bgColor': bgColor.hex,    \n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    studios[] -> {\n    _id,\n    header {\n        studioTitle,\n        studioSubTitle,\n    },\n    studioAddress,\n    location,\n    slug,\n    studioDescription[] {\n        ...,\n        \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n    'bgColor': bgColor.hex,    \n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    danceClasses[] {\n    _id,\n    _type,\n    classType {\n        ...,\n        \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n    instructor {\n        ...,\n        \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n    mode,\n    dayOfWeek,\n    startTime,\n},\n    partnerSite {\n        ...,\n        \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n    partnerLink {\n        ...,\n        \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    }\n},\n    link {\n        ...,\n        \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    }\n},\n    _type == 'photoGallery' => {\n    _id,\n    _type,\n    'bgColor': bgColor.hex,\n    photos[] {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n}\n},\n    _type == 'splitImageAndText' => {\n    _id,\n    layout,\n    'bgColor': bgColor.hex,    \n    'textColor': textColor.hex,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    header,\n    content[] {\n      ...,\n      \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n    _type == 'teachers' => {\n    _id,\n    _type,\n    title,\n    header,\n    'bgColor': bgColor.hex,    \n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    \"teachers\": teachers[] | order(name asc) {\n    ...,\n    name,\n    slug,\n    pronouns,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    blurb,\n    studio {\n        ...,\n        \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n    \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n    \n},\n},\n    _type == 'video' => {\n    _id,\n    'video': video.asset->url,\n    hasBorder,\n    'borderColor': borderColor.hex,\n},\n},\n        SEO {\n    ...,\n    'openGraphImage': openGraphImage.asset->url,\n},\n    }\n}": PageQueryResult;
+    "{\n    'homepage': *[_type == 'homepage'][0] {\n        ...,\n        content[]->{\n    ...,\n    _type == 'centeredText' => {\n    _id,\n    _type,\n    marginY,\n    'bgColor': bgColor.hex,\n    'textColor': textColor.hex,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    content[] {\n      ...,\n      \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n    _type == 'classesSlideshow' => {\n    _id,\n    classes[] {\n    ...,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    'bgColor': bgColor.hex,\n    'video': video.asset->url,\n    },\n    \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n\n},\n    _type == 'community' => {\n    _id,\n    _type,\n    title,\n    header,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    events[] -> {\n    _id,\n    _type,\n    title,\n    slug,\n    location,\n    address,\n    startDate,\n    endDate,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    content[] {\n        ...,\n        \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n},\n    _type == 'imageText' => {\n    _id,\n    ...,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    'bgColor': bgColor.hex,\n    content[] {\n      ...,\n      \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n    _type == 'hero' => {\n    _id,\n    title,\n    header,\n    content,\n    featuredImages[] {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    secondaryImages[] {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n},\n    _type == 'partners' => {\n    _id,\n    _type,\n    title,\n    header,\n    'bgColor': bgColor.hex,    \n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    studios[] -> {\n    _id,\n    header {\n        studioTitle,\n        studioSubTitle,\n    },\n    studioAddress,\n    location,\n    slug,\n    studioDescription[] {\n        ...,\n        \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n    'bgColor': bgColor.hex,    \n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    danceClasses[] {\n    _id,\n    _type,\n    classType {\n        ...,\n        \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n    instructor {\n        ...,\n        \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n    mode,\n    dayOfWeek,\n    startTime,\n},\n    partnerSite {\n        ...,\n        \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n    partnerLink {\n        ...,\n        \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    }\n},\n    link {\n        ...,\n        \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    }\n},\n    _type == 'photoGallery' => {\n    _id,\n    _type,\n    'bgColor': bgColor.hex,\n    photos[] {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n}\n},\n    _type == 'splitImageAndText' => {\n    _id,\n    layout,\n    'bgColor': bgColor.hex,    \n    'textColor': textColor.hex,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    header,\n    content[] {\n      ...,\n      \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n    _type == 'teachers' => {\n    _id,\n    _type,\n    title,\n    header,\n    'bgColor': bgColor.hex,    \n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    \"teachers\": teachers[] | order(name asc) {\n    ...,\n    name,\n    slug,\n    pronouns,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    blurb,\n    studio {\n        ...,\n        \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n    \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n    \n},\n},\n    _type == 'video' => {\n    _id,\n    'video': video.asset->url,\n    hasBorder,\n    'borderColor': borderColor.hex,\n},\n},\n        SEO {\n    ...,\n    'openGraphImage': openGraphImage.asset->url,\n},\n    }\n}": HomepageQueryResult;
+    "{\n    'page': *[_type == 'page' && $slug == slug.current][0] {\n        ...,\n        title,\n        content[]->{\n    ...,\n    _type == 'centeredText' => {\n    _id,\n    _type,\n    marginY,\n    'bgColor': bgColor.hex,\n    'textColor': textColor.hex,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    content[] {\n      ...,\n      \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n    _type == 'classesSlideshow' => {\n    _id,\n    classes[] {\n    ...,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    'bgColor': bgColor.hex,\n    'video': video.asset->url,\n    },\n    \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n\n},\n    _type == 'community' => {\n    _id,\n    _type,\n    title,\n    header,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    events[] -> {\n    _id,\n    _type,\n    title,\n    slug,\n    location,\n    address,\n    startDate,\n    endDate,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    content[] {\n        ...,\n        \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n},\n    _type == 'imageText' => {\n    _id,\n    ...,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    'bgColor': bgColor.hex,\n    content[] {\n      ...,\n      \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n    _type == 'hero' => {\n    _id,\n    title,\n    header,\n    content,\n    featuredImages[] {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    secondaryImages[] {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n},\n    _type == 'partners' => {\n    _id,\n    _type,\n    title,\n    header,\n    'bgColor': bgColor.hex,    \n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    studios[] -> {\n    _id,\n    header {\n        studioTitle,\n        studioSubTitle,\n    },\n    studioAddress,\n    location,\n    slug,\n    studioDescription[] {\n        ...,\n        \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n    'bgColor': bgColor.hex,    \n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    danceClasses[] {\n    _id,\n    _type,\n    classType {\n        ...,\n        \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n    instructor {\n        ...,\n        \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n    mode,\n    dayOfWeek,\n    startTime,\n},\n    partnerSite {\n        ...,\n        \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n    partnerLink {\n        ...,\n        \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    }\n},\n    link {\n        ...,\n        \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    }\n},\n    _type == 'photoGallery' => {\n    _id,\n    _type,\n    'bgColor': bgColor.hex,\n    photos[] {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n}\n},\n    _type == 'splitImageAndText' => {\n    _id,\n    layout,\n    'bgColor': bgColor.hex,    \n    'textColor': textColor.hex,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    header,\n    content[] {\n      ...,\n      \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n},\n    _type == 'teachers' => {\n    _id,\n    _type,\n    title,\n    header,\n    'bgColor': bgColor.hex,    \n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    \"teachers\": teachers[] | order(name asc) {\n    ...,\n    name,\n    slug,\n    pronouns,\n    image {\n    caption,\n    'assetId': asset->_id,\n    'assetPath': asset->path,\n    'aspectRatio': asset->metadata.dimensions.aspectRatio,\n},\n    blurb,\n    studio {\n        ...,\n        \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n,\n    },\n    \n  _type == \"link\" => {\n    ...,\n    internalLink->{_type,slug,title}\n  }\n    \n},\n},\n    _type == 'video' => {\n    _id,\n    'video': video.asset->url,\n    hasBorder,\n    'borderColor': borderColor.hex,\n},\n},\n        SEO {\n    ...,\n    'openGraphImage': openGraphImage.asset->url,\n},\n    }\n}": PageQueryResult;
   }
 }

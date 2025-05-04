@@ -14,10 +14,12 @@ import {
   splitImageAndText,
   teachers,
   video,
+  community,
 } from "./modules";
 
 /* Object imports */
 import {
+  communityEvent,
   danceClass,
   danceStudio,
   imageAlt,
@@ -31,6 +33,7 @@ const documents = [header, homepage, footer, page, siteSettings];
 const modules = [
   centeredText,
   classesSlideshow,
+  community,
   imageText,
   hero,
   photoGallery,
@@ -40,7 +43,15 @@ const modules = [
   video,
 ];
 
-const objects = [danceClass, danceStudio, imageAlt, linkList, seo, teacher];
+const objects = [
+  communityEvent,
+  danceClass,
+  danceStudio,
+  imageAlt,
+  linkList,
+  seo,
+  teacher,
+];
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [...documents, ...objects, ...modules],

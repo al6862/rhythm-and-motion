@@ -170,10 +170,36 @@ const teachersData = `{
     "teachers": teachers[] | order(name asc) ${teacherData},
 }`;
 
+const communityEventData = `{
+    _id,
+    _type,
+    title,
+    slug,
+    location,
+    address,
+    startDate,
+    endDate,
+    image ${imageData},
+    content[] {
+        ...,
+        ${linkTypeData},
+    },
+}`;
+
+const communityData = `{
+    _id,
+    _type,
+    title,
+    header,
+    image ${imageData},
+    events[] -> ${communityEventData},
+}`;
+
 const contentData = `{
     ...,
     _type == 'centeredText' => ${centeredTextData},
     _type == 'classesSlideshow' => ${classesSlideshowData},
+    _type == 'community' => ${communityData},
     _type == 'imageText' => ${imageTextData},
     _type == 'hero' => ${heroData},
     _type == 'partners' => ${partnersData},
@@ -190,6 +216,10 @@ export const partnersQuery = defineQuery(`{
 
 export const teachersQuery = defineQuery(`{
     'teachers': *[_type == 'teachers'][0] ${teachersData},
+}`);
+
+export const communityQuery = defineQuery(`{
+    'community': *[_type == 'community'][0] ${communityData},
 }`);
 
 export const siteSettingsQuery = defineQuery(`

@@ -29,6 +29,8 @@ export default function Content({ data }: Props) {
             return <Hero key={c._id} content={c} />;
           case "partners":
             return <Partners key={c._id} content={c} />;
+          case "partners":
+            return <Partners key={c._id} content={c} />;
           case "photoGallery":
             return <PhotoGallery key={c._id} content={c} />;
           case "splitImageAndText":

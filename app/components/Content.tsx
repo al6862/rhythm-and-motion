@@ -1,5 +1,6 @@
 import CenteredText from "./CenteredText";
 import ClassesSlideshow from "./ClassesSlideshow";
+import IGGallery from "./IGGallery";
 import ImageText from "./ImageText";
 import Hero from "./Hero";
 import PhotoGallery from "./PhotoGallery";
@@ -23,6 +24,8 @@ export default function Content({ data }: Props) {
             return <ClassesSlideshow key={c._id} content={c} />;
           case "community":
             return <Community key={c._id} content={c} />;
+          case "igGallery":
+            return <IGGallery key={c._id} content={c} />;
           case "imageText":
             return <ImageText key={c._id} content={c} />;
           case "hero":

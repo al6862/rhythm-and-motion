@@ -24,6 +24,7 @@ export const homepage = defineType({
             { type: "centeredText" },
             { type: "classesSlideshow" },
             { type: "community" },
+            { type: "igGallery" },
             { type: "imageText" },
             { type: "partners" },
             { type: "photoGallery" },

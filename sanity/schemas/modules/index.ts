@@ -2,6 +2,7 @@ export * from "./centeredText";
 export * from "./classesSlideshow";
 export * from "./community";
 export * from "./hero";
+export * from "./igGallery";
 export * from "./imageText";
 export * from "./partners";
 export * from "./photoGallery";

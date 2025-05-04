@@ -6,7 +6,7 @@ import { PortableTextBlock } from "@portabletext/types";
 import { useState, useEffect } from "react";
 import { Link } from "./Link";
 import { LinkValue } from "sanity-plugin-link-field";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 const formatTimeToLocal = (time24: string | null): string => {
   if (!time24) return "";
   const [hours, minutes] = time24.split(":").map(Number);
@@ -31,6 +31,7 @@ type DanceStudio = NonNullable<
 
 export default function Partners({ content }: PartnersProps) {
   const router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
   const [hoveredStudioId, setHoveredStudioId] = useState<string | null>(null);
   const [activeStudio, setActiveStudio] = useState<DanceStudio | null>(null);
@@ -70,7 +71,7 @@ export default function Partners({ content }: PartnersProps) {
     if (studio.slug?.current) {
       const urlSearchParams = new URLSearchParams(searchParams.toString());
       urlSearchParams.set("studio", studio.slug.current);
-      router.push(`partners?${urlSearchParams.toString()}`);
+      router.push(`${pathname}?${urlSearchParams.toString()}`);
     }
   };
 
@@ -78,7 +79,7 @@ export default function Partners({ content }: PartnersProps) {
     <div className="flex w-screen flex-col md:relative md:flex-row">
       <div
         className="sticky top-0 h-screen w-screen cursor-pointer md:h-screen"
-        onClick={() => router.push("/partners")}
+        onClick={() => router.push(`${pathname}`)}
       >
         <div className="md:relative md:size-full">
           {studios?.map((studio) => (

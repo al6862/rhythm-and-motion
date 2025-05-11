@@ -8,4 +8,5 @@ export * from "./partners";
 export * from "./photoGallery";
 export * from "./splitImageAndText";
 export * from "./teachers";
+export * from "./timeline";
 export * from "./video";

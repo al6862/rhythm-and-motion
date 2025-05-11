@@ -201,6 +201,25 @@ const communityData = `{
     events[] -> ${communityEventData},
 }`;
 
+const timelineData = `{
+    _id,
+    header,
+    events[] {
+        title,
+        description[] {
+            ...,
+            ${linkTypeData},
+        },
+        content[] {
+            ...,
+            ${linkTypeData},
+        },
+        coverImage ${imageData},
+        secondaryImage ${imageData},
+    },
+    ${linkTypeData},
+}`;
+
 const contentData = `{
     ...,
     _type == 'centeredText' => ${centeredTextData},
@@ -213,6 +232,7 @@ const contentData = `{
     _type == 'photoGallery' => ${photoGalleryData},
     _type == 'splitImageAndText' => ${splitImageAndTextData},
     _type == 'teachers' => ${teachersData},
+    _type == 'timeline' => ${timelineData},
     _type == 'video' => ${videoData},
 }`;
 

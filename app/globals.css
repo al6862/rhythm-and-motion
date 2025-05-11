@@ -92,3 +92,7 @@ body,
     scrollbar-width: none;
   }
 }
+
+.overlayContent > * {
+  @apply flex-1 max-h-[32rem] max-w-[30.6rem] overflow-y-scroll no-scrollbar;
+}

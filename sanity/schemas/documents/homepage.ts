@@ -30,6 +30,7 @@ export const homepage = defineType({
             { type: "photoGallery" },
             { type: "splitImageAndText" },
             { type: "teachers" },
+            { type: "timeline" },
             { type: "video" },
           ],
         },

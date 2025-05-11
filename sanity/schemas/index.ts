@@ -7,6 +7,7 @@ import { header, homepage, footer, page, siteSettings } from "./documents";
 import {
   centeredText,
   classesSlideshow,
+  community,
   igGallery,
   imageText,
   hero,
@@ -14,8 +15,8 @@ import {
   partners,
   splitImageAndText,
   teachers,
+  timeline,
   video,
-  community,
 } from "./modules";
 
 /* Object imports */
@@ -27,6 +28,7 @@ import {
   linkList,
   seo,
   teacher,
+  timelineEvent,
 } from "./objects";
 
 const documents = [header, homepage, footer, page, siteSettings];
@@ -42,6 +44,7 @@ const modules = [
   partners,
   splitImageAndText,
   teachers,
+  timeline,
   video,
 ];
 
@@ -53,6 +56,7 @@ const objects = [
   linkList,
   seo,
   teacher,
+  timelineEvent,
 ];
 
 export const schema: { types: SchemaTypeDefinition[] } = {

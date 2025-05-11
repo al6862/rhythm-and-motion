@@ -1,14 +1,15 @@
 import CenteredText from "./CenteredText";
 import ClassesSlideshow from "./ClassesSlideshow";
+import Community from "./Community";
 import IGGallery from "./IGGallery";
 import ImageText from "./ImageText";
 import Hero from "./Hero";
+import Partners from "./Partners";
 import PhotoGallery from "./PhotoGallery";
 import SplitImageAndText from "./SplitImageAndText";
 import Teachers from "./Teachers";
+import Timeline from "./Timeline";
 import Video from "./Video";
-import Partners from "./Partners";
-import Community from "./Community";
 
 type Props = {
   data: any[] | null | undefined;
@@ -38,6 +39,8 @@ export default function Content({ data }: Props) {
             return <SplitImageAndText key={c._id} content={c} />;
           case "teachers":
             return <Teachers key={c._id} content={c} />;
+          case "timeline":
+            return <Timeline key={c._id} content={c} />;
           case "video":
             return <Video key={c._id} content={c} />;
           default:

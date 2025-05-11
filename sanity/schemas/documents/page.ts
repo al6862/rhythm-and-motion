@@ -50,6 +50,7 @@ export const page = defineType({
             { type: "photoGallery" },
             { type: "splitImageAndText" },
             { type: "teachers" },
+            { type: "timeline" },
             { type: "video" },
           ],
         },

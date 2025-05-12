@@ -37,9 +37,11 @@ export function Header({ data }: Props) {
       if (menuIsOpen) {
         gsap.to(".menu-drawer", { autoAlpha: 1 });
         gsap.to(".menu-text", { autoAlpha: 0 });
+        document.body.classList.add("overflow-hidden");
       } else {
         gsap.to(".menu-drawer", { autoAlpha: 0 });
         gsap.to(".menu-text", { autoAlpha: 1 });
+        document.body.classList.remove("overflow-hidden");
       }
     },
     { dependencies: [menuIsOpen], scope: container },

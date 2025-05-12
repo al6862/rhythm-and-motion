@@ -36,6 +36,13 @@ export function CustomPortableText({ value }: { value: PortableTextBlock[] }) {
           </a>
         );
       },
+      "dashed-border": ({ children }) => {
+        return (
+          <div className="mt-24 border-t border-dashed pt-24">
+            {children}
+          </div>
+        );
+      },
     },
     types: {
       link: ({ value }) => {

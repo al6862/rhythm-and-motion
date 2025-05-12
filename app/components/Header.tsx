@@ -110,13 +110,32 @@ export function Header({ data }: Props) {
             </div>
           </div>
           <div className="flex max-h-[18.4rem] flex-col flex-wrap gap-[0.8rem]">
-            {mobileNavList?.map((link) => (
+            {/* {mobileNavList?.map((link) => (
               <span key={link._key} className={`menu text-white`}>
                 <Link link={link as LinkValue} onClick={handleMenuClick}>
                   {link.text}
                 </Link>
               </span>
-            ))}
+            ))} */}
+          </div>
+          <div className="flex justify-between gap-[1.6rem]">
+            {mobileNavList?.map((linkList, i) => {
+              return (
+                <div
+                  key={i}
+                  className="flex-1 flex flex-col gap-[0.8rem] menu text-white"
+                >
+                  {linkList?.links &&
+                    linkList?.links.map((link: LinkValue) => {
+                      return (
+                        <Link key={link._key} link={link as LinkValue}>
+                          {link.text}
+                        </Link>
+                      );
+                    })}
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

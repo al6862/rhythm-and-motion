@@ -1,4 +1,4 @@
-import { defineArrayMember, defineField, defineType } from "sanity";
+import { defineField, defineType } from "sanity";
 
 export const header = defineType({
   name: "header",
@@ -23,14 +23,8 @@ export const header = defineType({
       name: "mobileNavList",
       title: "Additional Mobile Link List",
       type: "array",
-      of: [
-        {
-          type: "link",
-          options: {
-            enableText: true,
-          },
-        },
-      ],
+      of: [{ type: "linkList" }],
+      validation: (Rule) => Rule.max(2),
     }),
   ],
 

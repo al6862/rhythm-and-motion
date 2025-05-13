@@ -269,10 +269,12 @@ export const headerQuery = defineQuery(`{
             ...,
             ${linkTypeData},
         },
-        mobileNavList[] {
-            ...,
-            ${linkTypeData},
-        }
+        mobileNavLists[] {
+            links [] {
+                ...,
+                ${linkTypeData},
+            },
+        },   
     }
 }`);
 

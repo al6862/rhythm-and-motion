@@ -8,17 +8,14 @@ import { usePathname } from "next/navigation";
 import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { HeaderQueryResult } from "@/sanity.types";
 
-type Props = {
-  data: {
-    navList: any[] | null;
-    mobileNavList: any[] | null;
-  } | null;
-};
+type HeaderProps = HeaderQueryResult["header"];
+type LinkProps = NonNullable<NonNullable<HeaderProps>["navList"]>[0];
 
-export function Header({ data }: Props) {
+export function Header({ data }: { data: HeaderProps }) {
   const navList = data?.navList;
-  const mobileNavList = data?.mobileNavList;
+  const mobileNavLists = data?.mobileNavLists;
   const pathname = usePathname();
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const container = useRef<HTMLDivElement>(null);
@@ -37,22 +34,27 @@ export function Header({ data }: Props) {
       if (menuIsOpen) {
         gsap.to(".menu-drawer", { autoAlpha: 1 });
         gsap.to(".menu-text", { autoAlpha: 0 });
+        document.body.classList.add("overflow-hidden");
       } else {
         gsap.to(".menu-drawer", { autoAlpha: 0 });
         gsap.to(".menu-text", { autoAlpha: 1 });
+        document.body.classList.remove("overflow-hidden");
       }
     },
     { dependencies: [menuIsOpen], scope: container },
   );
 
-  useEffect(() => {
-    if (!document.querySelector(".hero")) {
-      gsap.to(".header", { autoAlpha: 1 });
-    }
-  }, []);
+  useGSAP(
+    () => {
+      if (!document.querySelector(".hero")) {
+        gsap.to(".header", { autoAlpha: 1 });
+      }
+    },
+    { dependencies: [pathname] },
+  );
 
   return (
-    <nav className="header invisible fixed top-0 z-10 flex w-full justify-between text-white">
+    <nav className="header invisible fixed top-0 z-30 flex w-full justify-between text-white">
       <NextLink href={`/`}>
         <div className="ml-[1.6rem] mt-[1.6rem] w-80">
           <LogoPrimary />
@@ -66,7 +68,7 @@ export function Header({ data }: Props) {
             linkColor =
               link.internalLink?.slug?.current != pathname.split("/")[1] &&
               pathname != "/"
-                ? "text-black"
+                ? "text-white"
                 : "text-white";
           }
 
@@ -109,14 +111,26 @@ export function Header({ data }: Props) {
               ))}
             </div>
           </div>
-          <div className="flex max-h-[18.4rem] flex-col flex-wrap gap-[0.8rem]">
-            {mobileNavList?.map((link) => (
-              <span key={link._key} className={`menu text-white`}>
-                <Link link={link as LinkValue} onClick={handleMenuClick}>
-                  {link.text}
-                </Link>
-              </span>
-            ))}
+          <div className="flex justify-between gap-[1.6rem]">
+            {mobileNavLists?.map((linkList, i) => {
+              return (
+                <div
+                  key={i}
+                  className="menu flex flex-1 flex-col gap-[0.8rem] text-white"
+                >
+                  {linkList?.links &&
+                    linkList?.links.map((link: LinkProps) => {
+                      if ("text" in link) {
+                        return (
+                          <Link key={link._key} link={link as LinkValue}>
+                            {link.text}
+                          </Link>
+                        );
+                      }
+                    })}
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

@@ -47,7 +47,10 @@ const classesSlideshowData = `{
     'bgColor': bgColor.hex,
     'video': video.asset->url,
     },
-    ${linkTypeData}
+    link {
+        ...,
+        ${linkTypeData},
+    }
 }`;
 
 const igGalleryData = defineQuery(`{
@@ -235,6 +238,11 @@ const contentData = `{
     _type == 'timeline' => ${timelineData},
     _type == 'video' => ${videoData},
 }`;
+
+export const classesSlideshowQuery = defineQuery(`{
+    'classesSlideshow': *[_type == 'classesSlideshow'][0] ${classesSlideshowData},
+    
+}`);
 
 export const partnersQuery = defineQuery(`{
     'partners': *[_type == 'partners'][0] ${partnersData},

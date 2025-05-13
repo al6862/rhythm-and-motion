@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { type PortableTextBlock } from "next-sanity";
 import type { ImageData } from "../types";
-import CustomPortableText from "../(website)/portable-text";
+import { CustomPortableText } from "./CustomPortableText";
 
 type ImageTextProps = {
   content: {

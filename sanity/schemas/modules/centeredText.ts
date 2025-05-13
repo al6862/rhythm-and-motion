@@ -1,4 +1,4 @@
-import { BlockContentIcon, LinkIcon, SquareIcon } from "@sanity/icons";
+import { BlockContentIcon, SquareIcon } from "@sanity/icons";
 import { defineField, defineType, defineArrayMember } from "sanity";
 
 export const centeredText = defineType({
@@ -46,6 +46,20 @@ export const centeredText = defineType({
             { title: "Heading L", value: "h3" },
             { title: "Medium", value: "h4" },
           ],
+          marks: {
+            decorators: [
+              { title: "Strong", value: "strong" },
+              { title: "Emphasis", value: "em" },
+              { title: "Code", value: "code" },
+              { title: "Underline", value: "underline" },
+              { title: "Strike", value: "strike-through" },
+              {
+                title: "Dashed Top Border",
+                value: "dashed-border",
+                icon: () => "-",
+              },
+            ],
+          },
         }),
         defineField({
           name: "link",

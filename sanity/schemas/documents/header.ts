@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { LinkIcon } from "@sanity/icons";
 
 export const header = defineType({
   name: "header",
@@ -12,6 +13,7 @@ export const header = defineType({
       of: [
         {
           type: "link",
+          icon: LinkIcon,
           options: {
             enableText: true,
           },
@@ -20,8 +22,8 @@ export const header = defineType({
     }),
 
     defineField({
-      name: "mobileNavList",
-      title: "Additional Mobile Link List",
+      name: "mobileNavLists",
+      title: "Additional Mobile Link Lists",
       type: "array",
       of: [{ type: "linkList" }],
       validation: (Rule) => Rule.max(2),

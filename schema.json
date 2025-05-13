@@ -5908,7 +5908,7 @@
         },
         "optional": true
       },
-      "mobileNavList": {
+      "mobileNavLists": {
         "type": "objectAttribute",
         "value": {
           "type": "array",
@@ -5924,7 +5924,7 @@
             },
             "rest": {
               "type": "inline",
-              "name": "link"
+              "name": "linkList"
             }
           }
         },

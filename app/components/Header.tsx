@@ -10,8 +10,8 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { HeaderQueryResult } from "@/sanity.types";
 
-type HeaderProps = NonNullable<HeaderQueryResult["header"]>;
-type LinkProps = NonNullable<HeaderProps["navList"]>[0]
+type HeaderProps = HeaderQueryResult["header"];
+type LinkProps = NonNullable<NonNullable<HeaderProps>["navList"]>[0];
 
 export function Header({ data }: { data: HeaderProps }) {
   const navList = data?.navList;
@@ -45,7 +45,7 @@ export function Header({ data }: { data: HeaderProps }) {
   );
 
   useGSAP(
-    () => { 
+    () => {
       if (!document.querySelector(".hero")) {
         gsap.to(".header", { autoAlpha: 1 });
       }

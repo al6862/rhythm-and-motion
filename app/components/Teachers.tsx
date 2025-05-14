@@ -100,7 +100,7 @@ export default function Teachers({ content }: TeachersProps) {
                       {teacher.image?.assetPath && (
                         <div
                           onClick={() => router.push(`${pathname}`)}
-                          className="z-10 hidden size-[275px] overflow-hidden drop-shadow-md md:absolute md:right-[-100px] md:top-[-300px] md:block xl:right-[-200px]"
+                          className="z-10 hidden overflow-hidden drop-shadow-md md:absolute md:right-[-50px] md:top-[-300px] md:block md:size-[25rem] md:h-[175px] lg:right-[-100px] lg:h-[275px] xl:right-[-350px] xl:w-[37.5rem]"
                         >
                           <Image
                             src={teacher.image.assetPath}
@@ -180,7 +180,7 @@ export default function Teachers({ content }: TeachersProps) {
                       >
                         {teacher.pronouns}
                       </p>
-                      <h1 className="inset-0 mx-[100px] max-w-[200px] text-center transition-all duration-500">
+                      <h1 className="inset-0 mx-auto max-w-[200px] text-center transition-all duration-500">
                         {teacher.name}
                       </h1>
 
@@ -211,7 +211,7 @@ export default function Teachers({ content }: TeachersProps) {
         >
           <div>
             <h1
-              className={`text-center text-black md:hidden ${activeTeacher ? "hidden" : "block"}`}
+              className={`mb-[40px] mt-[80px] text-center text-black md:hidden ${activeTeacher ? "hidden" : "block"}`}
             >
               {header}
             </h1>

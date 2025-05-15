@@ -172,16 +172,7 @@ export default function Community({ content }: CommunityProps) {
               />
             </div>
           ))}
-          {activeCommunityEvent?.image?.assetPath && (
-            <div className="z-10 hidden overflow-hidden drop-shadow-md md:absolute md:block lg:left-[400px] lg:top-[20px] lg:block lg:h-[200px] lg:w-[300px] xl:left-[500px] xl:block 2xl:left-[800px] 2xl:top-[20px] 2xl:h-[300px] 2xl:w-[375px]">
-              <Image
-                src={activeCommunityEvent.image.assetPath}
-                alt={activeCommunityEvent.image.caption || "missing alt"}
-                fill
-                className="object-cover"
-              />
-            </div>
-          )}
+
           {image?.assetPath && (
             <div
               className={`inset-0 hidden transition-opacity duration-500 md:absolute md:block ${!activeCommunityEvent && hoveredCommunityEvent ? "opacity-0" : "opacity-100"}`}
@@ -194,9 +185,11 @@ export default function Community({ content }: CommunityProps) {
                   className="object-cover"
                 />
               </div>
-              <div className="inset-0 hidden items-center justify-center text-white md:absolute md:flex">
-                <div className="mr-[33.33%] w-[66.67%] max-w-[2/3] text-center">
-                  <h1>{header}</h1>
+              <div className="relative h-full w-2/3">
+                <div className="inset-0 hidden items-center justify-center text-white md:absolute md:flex">
+                  <div className="text-center">
+                    <h1>{header}</h1>
+                  </div>
                 </div>
               </div>
             </div>
@@ -229,27 +222,42 @@ export default function Community({ content }: CommunityProps) {
                       className={`object-cover transition-all duration-500`}
                     />
                   </div>
-                  <div className="inset-0 hidden items-center justify-center text-white transition-all duration-500 md:absolute md:flex">
-                    <div className="relative mr-[33.33%] flex w-[66.67%] flex-col items-center">
-                      <p
-                        className={`absolute left-80 top-[-50px] transition-opacity duration-500 ${activeCommunityEvent?._id === event._id ? "opacity-100" : "opacity-0"}`}
-                      >
-                        {event.startDate &&
-                          event.endDate &&
-                          formatEventDate(event.startDate, event.endDate)}
-                      </p>
-                      <h1 className="text-center md:max-w-[600px]">
-                        {event.title}
-                      </h1>
-                      <span
-                        className={`bottom-[-50px] right-80 text-right transition-opacity duration-500 md:absolute ${activeCommunityEvent?._id === event._id ? "opacity-100" : "opacity-0"}`}
-                      >
-                        <CustomPortableText
-                          value={
-                            event.address as unknown as PortableTextBlock[]
-                          }
-                        />
-                      </span>
+                  <div className="relative h-full w-2/3">
+                    <div className="inset-0 hidden items-center justify-center text-white transition-all duration-500 md:absolute md:flex">
+                      <div className="relative flex h-full w-full flex-col items-center justify-center">
+                        {activeCommunityEvent?.image?.assetPath && (
+                          <div className="absolute right-0 top-[10%] z-10 mr-[5%] hidden overflow-hidden drop-shadow-md md:block lg:h-[200px] lg:w-[300px] 2xl:top-[3%] 2xl:h-[300px] 2xl:w-[375px]">
+                            <Image
+                              src={activeCommunityEvent.image.assetPath}
+                              alt={
+                                activeCommunityEvent.image.caption ||
+                                "missing alt"
+                              }
+                              fill
+                              className="object-cover"
+                            />
+                          </div>
+                        )}
+                        <p
+                          className={`mr-[60%] transition-opacity duration-500 ${activeCommunityEvent?._id === event._id ? "opacity-100" : "opacity-0"}`}
+                        >
+                          {event.startDate &&
+                            event.endDate &&
+                            formatEventDate(event.startDate, event.endDate)}
+                        </p>
+                        <h1 className="max-w-[600px] py-[20px] text-center">
+                          {event.title}
+                        </h1>
+                        <span
+                          className={`ml-[45%] text-right transition-opacity duration-500 ${activeCommunityEvent?._id === event._id ? "opacity-100" : "opacity-0"}`}
+                        >
+                          <CustomPortableText
+                            value={
+                              event.address as unknown as PortableTextBlock[]
+                            }
+                          />
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -259,7 +267,7 @@ export default function Community({ content }: CommunityProps) {
       </div>
 
       <div
-        className={`z-5 no-scrollbar absolute h-screen w-full overflow-y-scroll transition-all md:right-0 md:top-0 md:h-full md:w-1/3 md:min-w-[493px] md:pb-[16px] md:pl-[16px] md:pr-[30px] md:pt-[134px] ${activeCommunityEvent ? "bg-black bg-opacity-[0.5] backdrop-blur-md backdrop-contrast-100 backdrop-saturate-[300%]" : "bg-blue"}`}
+        className={`z-5 no-scrollbar absolute h-screen w-full overflow-y-scroll transition-all md:right-0 md:top-0 md:h-full md:w-1/3 md:pb-[16px] md:pl-[16px] md:pr-[30px] md:pt-[134px] ${activeCommunityEvent ? "bg-black bg-opacity-[0.5] backdrop-blur-md backdrop-contrast-100 backdrop-saturate-[300%]" : "bg-blue"}`}
       >
         <div
           className={`pt-[100px] transition-all duration-500 ease-in-out md:pt-0 ${!activeCommunityEvent ? "opacity-0" : "opacity-100"}`}

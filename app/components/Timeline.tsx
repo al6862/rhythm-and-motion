@@ -46,9 +46,13 @@ const Event = ({
   useGSAP(
     () => {
       if (overlayIsHidden) {
-        gsap.to(overlayRef.current, { autoAlpha: 0 });
+        gsap.timeline()
+          .to(textRef.current, { y: 0, x: 0, ease: "elastic.out(1,0.5)", duration: 2 })
+          .to(overlayRef.current, { autoAlpha: 0 }, "<");
       } else {
-        gsap.to(overlayRef.current, { autoAlpha: 1 });
+        gsap.timeline()
+          .to(textRef.current, { y: 100, x: 100, ease: "elastic.out(1,0.5) ", duration: 2 })
+          .to(overlayRef.current, { autoAlpha: 1 }, "<");
       }
     },
     { dependencies: [overlayIsHidden] },
@@ -348,7 +352,7 @@ export default function Timeline({ content }: { content: TimelineProps }) {
               );
             })}
         </div>
-        <div className="absolute bottom-0 right-0 mb-[16.7rem] mr-[40.4rem] h-[50vh] w-[35.4rem]">
+        <div className="absolute bottom-0 right-0 mb-[16.7rem] mr-[28.7rem] 2xl:mr-[40.4rem] h-[50vh] w-[35.4rem]">
           <Figure />
         </div>
         {link && (

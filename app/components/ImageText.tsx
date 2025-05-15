@@ -17,7 +17,14 @@ export default function ImageText({ content }: ImageTextProps) {
 
   return (
     <div className="flex flex-col gap-[80px] md:w-full md:flex-row md:gap-0">
-      <div className={`relative md:sticky md:top-0 md:h-screen md:w-screen` + (image? ` max-md:mt-[17rem] max-md:aspect-[393/314.4]` : ` max-md:mt-[9rem]`)}>
+      <div
+        className={
+          `relative md:sticky md:top-0 md:h-screen md:w-screen` +
+          (image
+            ? ` max-md:mt-[17rem] max-md:aspect-[393/314.4]`
+            : ` max-md:mt-[9rem]`)
+        }
+      >
         {image ? (
           <>
             <Image

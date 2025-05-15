@@ -195,7 +195,7 @@ export default function Community({ content }: CommunityProps) {
                 />
               </div>
               <div className="inset-0 hidden items-center justify-center text-white md:absolute md:flex">
-                <div className="mr-[33.33%] w-[66.67%] text-center">
+                <div className="mr-[33.33%] w-[66.67%] max-w-[2/3] text-center">
                   <h1>{header}</h1>
                 </div>
               </div>
@@ -259,7 +259,7 @@ export default function Community({ content }: CommunityProps) {
       </div>
 
       <div
-        className={`z-5 no-scrollbar absolute h-screen overflow-y-scroll transition-all md:right-0 md:top-0 md:h-full md:w-1/3 md:min-w-[493px] md:pb-[16px] md:pl-[16px] md:pr-[30px] md:pt-[134px] ${activeCommunityEvent ? "bg-black bg-opacity-[0.5] backdrop-blur-md backdrop-contrast-100 backdrop-saturate-[300%]" : "bg-blue"}`}
+        className={`z-5 no-scrollbar absolute h-screen w-full overflow-y-scroll transition-all md:right-0 md:top-0 md:h-full md:w-1/3 md:min-w-[493px] md:pb-[16px] md:pl-[16px] md:pr-[30px] md:pt-[134px] ${activeCommunityEvent ? "bg-black bg-opacity-[0.5] backdrop-blur-md backdrop-contrast-100 backdrop-saturate-[300%]" : "bg-blue"}`}
       >
         <div
           className={`pt-[100px] transition-all duration-500 ease-in-out md:pt-0 ${!activeCommunityEvent ? "opacity-0" : "opacity-100"}`}

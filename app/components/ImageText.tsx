@@ -16,8 +16,8 @@ export default function ImageText({ content }: ImageTextProps) {
   const { bgColor, image, content: textContent, header } = content;
 
   return (
-    <div className="flex flex-col gap-[80px] md:w-screen md:flex-row md:gap-0">
-      <div className="relative h-[314.4px] md:sticky md:top-0 md:h-screen md:w-screen">
+    <div className="flex flex-col gap-[80px] md:w-full md:flex-row md:gap-0">
+      <div className={`relative md:sticky md:top-0 md:h-screen md:w-screen` + (image? ` max-md:mt-[17rem] max-md:aspect-[393/314.4]` : ` max-md:mt-[9rem]`)}>
         {image ? (
           <>
             <Image
@@ -41,7 +41,7 @@ export default function ImageText({ content }: ImageTextProps) {
       </div>
 
       <h1 className="block text-center md:hidden">{header}</h1>
-      <div className="mx-auto items-center justify-center bg-white md:w-1/3 md:pb-[16px] md:pl-[16px] md:pr-[30px] md:pt-[134px]">
+      <div className="mx-auto items-center justify-center bg-white px-[1.6rem] pb-[1.6rem] md:w-1/3 md:pb-[16px] md:pl-[16px] md:pr-[30px] md:pt-[134px]">
         {textContent && (
           <div className="rte w-full text-left md:max-w-[415px]">
             <CustomPortableText value={textContent} />

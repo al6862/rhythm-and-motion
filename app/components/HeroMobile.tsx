@@ -17,40 +17,39 @@ export default function HeroMobile({ content }: { content: HeroProps }) {
   gsap.registerPlugin(ScrollTrigger);
 
   useGSAP(() => {
-    if (window.innerWidth < 768) {
-      gsap.set(".header", { y: "100vh", autoAlpha: 1 });
+    gsap.set(".headerMobile", { y: "100vh", autoAlpha: 1 });
+    gsap.set(".rhythmAndMotionMobile", { y: "50vh", yPercent: "-50" });
 
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: ".heroTwoColMobile",
-            start: "top top",
-            end: "bottom top",
-            pin: ".bluePanel",
-            scrub: 1,
-          },
-        })
-        .to(".rhythmAndMotionMobile", { y: 0 }, "<")
-        .to(".figureMobile", { autoAlpha: 0 }, "<");
+    gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: ".heroTwoColMobile",
+          start: "top top",
+          end: "bottom top",
+          pin: ".bluePanel",
+          scrub: 1,
+        },
+      })
+      .to(".rhythmAndMotionMobile", { y: 0, yPercent: "0" }, "<")
+      .to(".figureMobile", { autoAlpha: 0 }, "<");
 
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: ".bluePanel",
-            start: "top bottom",
-            end: "bottom bottom",
-            scrub: true,
-          },
-        })
-        .to(".header", { y: 0, ease: "none" }, "<")
-        .set(".heroTwoColMobile", { autoAlpha: 0 });
-    }
+    gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: ".bluePanel",
+          start: "top bottom",
+          end: "bottom bottom",
+          scrub: true,
+        },
+      })
+      .to(".headerMobile", { y: 0, ease: "none" }, "<")
+      .set(".heroTwoColMobile", { autoAlpha: 0 });
   });
 
   return (
     <div>
       <div className="heroTwoColMobile relative -z-10 h-screen">
-        <div className="rhythmAndMotionMobile fixed top-0 z-10 flex w-full translate-y-[calc(50vh-50%)] gap-[4.7%]">
+        <div className="rhythmAndMotionMobile fixed top-0 z-10 flex w-full gap-[4.7%]">
           <div className="flex-1 p-[1.6rem]">
             <Rhythm />
           </div>

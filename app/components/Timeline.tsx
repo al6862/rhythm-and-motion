@@ -48,7 +48,7 @@ const Event = ({
 
   useGSAP(() => {
     gsap.set(overlayRef.current, { autoAlpha: 0 });
-  })
+  });
 
   useGSAP(
     () => {

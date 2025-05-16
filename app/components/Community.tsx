@@ -224,7 +224,7 @@ export default function Community({ content }: CommunityProps) {
                   </div>
                   <div className="relative h-full w-2/3">
                     <div className="inset-0 hidden items-center justify-center text-white transition-all duration-500 md:absolute md:flex">
-                      <div className="relative flex h-full w-full flex-col items-center justify-center">
+                      <div className="relative flex size-full flex-col items-center justify-center">
                         {activeCommunityEvent?.image?.assetPath && (
                           <div className="absolute right-0 top-[10%] z-10 mr-[5%] hidden overflow-hidden drop-shadow-md md:block lg:h-[200px] lg:w-[300px] 2xl:top-[3%] 2xl:h-[300px] 2xl:w-[375px]">
                             <Image

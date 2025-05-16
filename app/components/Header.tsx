@@ -13,7 +13,7 @@ import { HeaderQueryResult } from "@/sanity.types";
 type HeaderProps = HeaderQueryResult["header"];
 type LinkProps = NonNullable<NonNullable<HeaderProps>["navList"]>[0];
 
-export function Header({ data }: { data: HeaderProps }) {
+export function Header({ data, color }: { data: HeaderProps; color: string }) {
   const navList = data?.navList;
   const mobileNavLists = data?.mobileNavLists;
   const pathname = usePathname();
@@ -64,14 +64,25 @@ export function Header({ data }: { data: HeaderProps }) {
         </NextLink>
         <div className="flex gap-12 p-[1.6rem]">
           {navList?.map((link) => {
-            let linkColor = "text-white";
+            let linkColor;
+            if (color == "light") {
+              linkColor = "text-white";
 
-            if (link && isInternalLink(link as LinkValue)) {
-              linkColor =
-                link.internalLink?.slug?.current != pathname.split("/")[1] &&
-                pathname != "/"
-                  ? "text-black"
-                  : "text-white";
+              if (link && isInternalLink(link as LinkValue)) {
+                linkColor =
+                  link.internalLink?.slug?.current != pathname.split("/")[1]
+                    ? "text-white"
+                    : "text-black";
+              }
+            } else {
+              linkColor = "text-black";
+
+              if (link && isInternalLink(link as LinkValue)) {
+                linkColor =
+                  link.internalLink?.slug?.current != pathname.split("/")[1]
+                    ? "text-black"
+                    : "text-white";
+              }
             }
 
             return (
@@ -82,7 +93,9 @@ export function Header({ data }: { data: HeaderProps }) {
           })}
         </div>
       </div>
-      <div className="headerMobile invisible fixed top-0 z-30 flex w-full justify-between text-white md:hidden">
+      <div
+        className={`headerMobile invisible fixed top-0 z-30 flex w-full justify-between ${color == "light" ? `text-white` : color == "dark" ? `text-black` : `text-white`} md:hidden`}
+      >
         <NextLink href={`/`}>
           <div className="ml-[1.6rem] mt-[1.6rem] w-80">
             <LogoPrimary />

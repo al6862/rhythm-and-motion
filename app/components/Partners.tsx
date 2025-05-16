@@ -76,9 +76,9 @@ export default function Partners({ content }: PartnersProps) {
   };
 
   return (
-    <div className="flex w-screen flex-col md:relative md:flex-row">
+    <div className="flex w-full flex-col md:relative md:flex-row">
       <div
-        className="sticky top-0 h-screen w-screen cursor-pointer md:h-screen"
+        className="sticky top-0 flex h-screen w-full cursor-pointer md:h-screen"
         onClick={() => router.push(`${pathname}`)}
       >
         <div className="md:relative md:size-full">
@@ -97,16 +97,6 @@ export default function Partners({ content }: PartnersProps) {
               />
             </div>
           ))}
-          {activeStudio?.image?.assetPath && (
-            <div className="z-10 hidden overflow-hidden drop-shadow-md md:absolute md:block xl:right-[150px] xl:top-[150px] xl:block xl:h-[200px] xl:w-[300px] 2xl:right-[200px] 2xl:top-[100px] 2xl:h-[300px] 2xl:w-[375px]">
-              <Image
-                src={activeStudio.image.assetPath}
-                alt={activeStudio.image.caption || "missing alt"}
-                fill
-                className="object-cover"
-              />
-            </div>
-          )}
           {image?.assetPath && (
             <div
               className={`inset-0 hidden transition-opacity duration-500 md:absolute md:block ${!activeStudio && hoveredStudio ? "opacity-0" : "opacity-100"}`}
@@ -119,9 +109,10 @@ export default function Partners({ content }: PartnersProps) {
                   className="object-cover"
                 />
               </div>
-              <div className="inset-0 hidden items-center justify-center text-white md:absolute md:flex">
-                <div className="ml-[33.33%] w-[66.67%] text-center">
-                  <h1>{header}</h1>
+              <div className="relative flex size-full flex-row items-center">
+                <div className="w-1/3"></div>
+                <div className="w-2/3 text-white">
+                  <h1 className="text-center">{header}</h1>
                 </div>
               </div>
             </div>
@@ -154,25 +145,39 @@ export default function Partners({ content }: PartnersProps) {
                       className={`object-cover transition-all duration-500`}
                     />
                   </div>
-                  <div className="inset-0 hidden items-center justify-center text-white transition-all duration-500 md:absolute md:flex">
-                    <div className="relative ml-[33.33%] flex w-[66.67%] flex-col items-center">
-                      <p
-                        className={`absolute left-80 top-[-50px] transition-opacity duration-500 ${activeStudio?._id === studio._id ? "opacity-100" : "opacity-0"}`}
-                      >
-                        {studio.header?.studioSubTitle}
-                      </p>
-                      <h1 className="text-center">
-                        {studio.header?.studioTitle}
-                      </h1>
-                      <span
-                        className={`bottom-[-50px] right-80 text-right transition-opacity duration-500 md:absolute ${activeStudio?._id === studio._id ? "opacity-100" : "opacity-0"}`}
-                      >
-                        <CustomPortableText
-                          value={
-                            studio.studioAddress as unknown as PortableTextBlock[]
-                          }
-                        />
-                      </span>
+                  <div className="relative flex size-full flex-row">
+                    <div className="h-full w-1/3"></div>
+                    <div className="inset-0 hidden w-2/3 items-center justify-center text-white transition-all duration-500 md:flex">
+                      <div className="relative flex size-full flex-col items-center justify-center">
+                        {activeStudio?.image?.assetPath && (
+                          <div className="absolute right-0 top-[10%] z-10 mr-[5%] hidden overflow-hidden drop-shadow-md md:block lg:h-[200px] lg:w-[300px] 2xl:top-[3%] 2xl:h-[300px] 2xl:w-[375px]">
+                            <Image
+                              src={activeStudio.image.assetPath}
+                              alt={activeStudio.image.caption || "missing alt"}
+                              fill
+                              className="object-cover"
+                            />
+                          </div>
+                        )}
+
+                        <p
+                          className={`mr-[60%] transition-opacity duration-500 ${activeStudio?._id === studio._id ? "opacity-100" : "opacity-0"}`}
+                        >
+                          {studio.header?.studioSubTitle}
+                        </p>
+                        <h1 className="max-w-[600px] py-[20px] text-center">
+                          {studio.header?.studioTitle}
+                        </h1>
+                        <span
+                          className={`ml-[45%] text-right transition-opacity duration-500 ${activeStudio?._id === studio._id ? "opacity-100" : "opacity-0"}`}
+                        >
+                          <CustomPortableText
+                            value={
+                              studio.studioAddress as unknown as PortableTextBlock[]
+                            }
+                          />
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -182,7 +187,7 @@ export default function Partners({ content }: PartnersProps) {
       </div>
 
       <div
-        className={`z-5 no-scrollbar absolute h-screen overflow-y-scroll transition-all md:md:left-0 md:top-0 md:h-full md:w-1/3 md:min-w-[493px] md:pb-[16px] md:pl-[16px] md:pr-[30px] md:pt-[134px] ${activeStudio ? "bg-black bg-opacity-[0.5] backdrop-blur-md backdrop-contrast-100 backdrop-saturate-[300%]" : "bg-orange-red"}`}
+        className={`z-5 no-scrollbar absolute h-screen w-full overflow-y-scroll transition-all md:md:left-0 md:top-0 md:h-full md:w-1/3 md:pb-[16px] md:pl-[16px] md:pr-[30px] md:pt-[134px] ${activeStudio ? "bg-black bg-opacity-[0.5] backdrop-blur-md backdrop-contrast-100 backdrop-saturate-[300%]" : "bg-orange-red"}`}
       >
         <div
           className={`flex flex-col gap-12 px-8 py-[100px] transition-all duration-500 ease-in-out md:py-0 ${activeStudio ? "pointer-events-none h-0 overflow-hidden opacity-0" : "opacity-100"}`}
@@ -192,9 +197,9 @@ export default function Partners({ content }: PartnersProps) {
             Object.entries(studiosByLocation).map(([location, studios]) => {
               return (
                 <div key={location}>
-                  <div className="flex gap-4">
+                  <div className="flex flex-wrap gap-4">
                     <h2 className="text-white">{location}</h2>
-                    <div className="flex size-[31px] items-center justify-center rounded-xl bg-white font-bold text-orange-red">
+                    <div className="flex size-[31px] shrink-0 items-center justify-center rounded-xl bg-white font-bold text-orange-red">
                       <p>{studios.length}</p>
                     </div>
                   </div>
@@ -230,7 +235,7 @@ export default function Partners({ content }: PartnersProps) {
                               />
                             </svg>
                           </div>
-                          <div className="my-4 flex w-full flex-row items-center justify-between">
+                          <div className="my-4 flex w-full flex-row flex-wrap items-center justify-between">
                             <div>
                               <p className="font-bold">
                                 {studio.header?.studioTitle}
@@ -242,7 +247,7 @@ export default function Partners({ content }: PartnersProps) {
                               />
                             </div>
                             {studio?.danceClasses?.length && (
-                              <div className="mr-4 flex size-[31px] items-center justify-center rounded-xl bg-white font-bold text-orange-red group-hover:bg-orange-red group-hover:text-white">
+                              <div className="mr-4 flex size-[31px] shrink-0 items-center justify-center rounded-xl bg-white font-bold text-orange-red group-hover:bg-orange-red group-hover:text-white">
                                 <p>{studio?.danceClasses.length}</p>
                               </div>
                             )}
@@ -290,7 +295,7 @@ export default function Partners({ content }: PartnersProps) {
                   <div className="inset-0 top-[150px] items-center justify-center text-white transition-all duration-500">
                     <div className="relative flex-col items-center">
                       <p
-                        className={`absolute left-10 top-[-30px] transition-all duration-500 ${activeStudio?._id === studio._id ? "opacity-100" : "opacity-0"}`}
+                        className={`absolute left-10 top-[-50px] transition-all duration-500 ${activeStudio?._id === studio._id ? "opacity-100" : "opacity-0"}`}
                       >
                         {studio.header?.studioSubTitle}
                       </p>
@@ -298,7 +303,7 @@ export default function Partners({ content }: PartnersProps) {
                         {studio.header?.studioTitle}
                       </h1>
                       <span
-                        className={`absolute bottom-[-30px] right-10 text-right transition-all duration-500 ${activeStudio?._id === studio._id ? "opacity-100" : "opacity-0"}`}
+                        className={`absolute bottom-[-50px] right-10 text-right transition-all duration-500 ${activeStudio?._id === studio._id ? "opacity-100" : "opacity-0"}`}
                       >
                         <CustomPortableText
                           value={
@@ -348,11 +353,11 @@ export default function Partners({ content }: PartnersProps) {
                         ];
                         return (
                           <div key={day} className="mb-8">
-                            <div className="flex gap-4">
+                            <div className="flex flex-wrap gap-4">
                               <h2 className="text-white">
                                 {dayNames[parseInt(day)]}
                               </h2>
-                              <div className="flex size-[31px] items-center justify-center rounded-xl bg-white font-bold text-black">
+                              <div className="flex size-[31px] shrink-0 items-center justify-center rounded-xl bg-white font-bold text-black">
                                 <p>{classes.length}</p>
                               </div>
                             </div>

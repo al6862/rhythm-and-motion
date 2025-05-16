@@ -1141,6 +1141,7 @@ export type Page = {
         [internalGroqTypeReferenceTo]?: "video";
       }
   >;
+  headerColor?: "dark" | "light";
   SEO?: Seo;
 };
 
@@ -3523,6 +3524,7 @@ export type PageQueryResult = {
           borderColor: string | null;
         }
     > | null;
+    headerColor?: "dark" | "light";
     SEO: {
       _type: "seo";
       metaTitle?: string;

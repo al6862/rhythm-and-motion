@@ -7001,6 +7001,23 @@
         },
         "optional": true
       },
+      "headerColor": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "union",
+          "of": [
+            {
+              "type": "string",
+              "value": "dark"
+            },
+            {
+              "type": "string",
+              "value": "light"
+            }
+          ]
+        },
+        "optional": true
+      },
       "SEO": {
         "type": "objectAttribute",
         "value": {

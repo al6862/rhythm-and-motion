@@ -36,9 +36,13 @@ const Event = ({
     eventContent;
   const overlayRef = useRef(null);
   const eventRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
   const textRef = useRef<HTMLHeadingElement>(null);
+  const textContainerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
+  const overlayContentRef = useRef<HTMLDivElement>(null);
   const [overlayIsHidden, setOverlayIsHidden] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
   const handleClick = () => {
     setOverlayIsHidden(!overlayIsHidden);
   };
@@ -47,12 +51,18 @@ const Event = ({
     () => {
       if (overlayIsHidden) {
         gsap.timeline()
-          .to(textRef.current, { y: 0, x: 0, ease: "elastic.out(1,0.5)", duration: 2 })
-          .to(overlayRef.current, { autoAlpha: 0 }, "<");
+          .to(overlayContentRef.current, { y: -100, x: -100, ease: "elastic.out(1,0.5) ", duration: 2 })
+          .to(overlayRef.current, { autoAlpha: 0 }, "<")
+          .to(imageRef.current, { y: 0, x: 0, ease: "elastic.out(1,0.5)", duration: 2 }, "<")
+          .to(titleRef.current, { y: 0, x: 0, ease: "elastic.out(1,0.5)", duration: 2 }, "<")
+          .to(textContainerRef.current, { y: 0, x: 0, ease: "elastic.out(1,0.5)", duration: 2 }, "<");
       } else {
         gsap.timeline()
-          .to(textRef.current, { y: 100, x: 100, ease: "elastic.out(1,0.5) ", duration: 2 })
-          .to(overlayRef.current, { autoAlpha: 1 }, "<");
+          .to(textContainerRef.current, { y: 100, x: 100, ease: "elastic.out(1,0.5) ", duration: 2 })
+          .to(overlayRef.current, { autoAlpha: 1 }, "<")
+          .to(imageRef.current, { y: 100, x: 100, ease: "elastic.out(1,0.5)", duration: 2 }, "<")
+          .to(titleRef.current, { y: 100, x: 100, ease: "elastic.out(1,0.5)", duration: 2 }, "<")
+          .to(overlayContentRef.current, { y: 0, x: 0, ease: "elastic.out(1,0.5) ", duration: 2 }, "<");
       }
     },
     { dependencies: [overlayIsHidden] },
@@ -111,15 +121,15 @@ const Event = ({
     <div ref={eventRef} className="shrink-0">
       {title && (
         <div className="pl-[28.7rem] 2xl:pl-[38rem]">
-          <h3 className="relative z-10 pb-[3.7rem] after:absolute after:inset-x-0 after:bottom-0 after:border-l after:border-dashed after:pb-[3.7rem] after:content-['']">
+          <h3 ref={titleRef} className="relative z-10 pb-[3.7rem] after:absolute after:inset-x-0 after:bottom-0 after:border-l after:border-dashed after:pb-[3.7rem] after:content-['']">
             {title}
           </h3>
         </div>
       )}
       <div className="border-t border-dashed pl-[28.7rem] 2xl:pl-[38rem]">
-        <div className="relative flex h-[50vh] gap-20 pt-[3.7rem] after:absolute after:inset-x-0 after:top-0 after:border-l after:border-dashed after:pb-[3.7rem] after:content-['']">
+        <div ref={textContainerRef} className="z-10 relative flex h-[50vh] gap-20 pt-[3.7rem] after:absolute after:inset-x-0 after:top-0 after:border-l after:border-dashed after:pb-[3.7rem] after:content-['']">
           {description && (
-            <div ref={textRef} className="z-10 max-w-[30.6rem] text-white">
+            <div ref={textRef} className="max-w-[30.6rem] text-white">
               <CustomPortableText value={description as PortableTextBlock[]} />
             </div>
           )}
@@ -197,7 +207,7 @@ const Event = ({
             />
           )}
           <div className="absolute left-[19rem] top-1/2 flex gap-16 xl:left-[38rem]">
-            <div className="overlayContent flex gap-16 pr-[1.6rem]">
+            <div ref={overlayContentRef} className="overlayContent flex gap-16 pr-[1.6rem] -translate-y-[100px] -translate-x-[100px]">
               {description && (
                 <CustomPortableText
                   value={description as PortableTextBlock[]}

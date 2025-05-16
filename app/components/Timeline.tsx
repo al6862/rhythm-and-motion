@@ -46,10 +46,12 @@ const Event = ({
     setOverlayIsHidden(!overlayIsHidden);
   };
 
+  useGSAP(() => {
+    gsap.set(overlayRef.current, { autoAlpha: 0 });
+  })
+
   useGSAP(
     () => {
-      gsap.set(overlayRef.current, { autoAlpha: 0 });
-
       if (window.innerWidth < 1024) {
         if (overlayIsHidden) {
           gsap.timeline().to(overlayRef.current, { autoAlpha: 0 }, "<");
@@ -260,7 +262,7 @@ const Event = ({
           <div className="absolute left-[19rem] top-1/2 flex gap-16 xl:left-[38rem]">
             <div
               ref={overlayContentRef}
-              className="overlayContent flex -translate-x-[100px] -translate-y-[100px] gap-16 pr-[1.6rem]"
+              className="overlayContent flex translate-x-[-100px] translate-y-[-100px] gap-16 pr-[1.6rem]"
             >
               {description && (
                 <CustomPortableText

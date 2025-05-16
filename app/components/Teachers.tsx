@@ -45,8 +45,8 @@ export default function Teachers({ content }: TeachersProps) {
   };
 
   return (
-    <div className="flex w-screen flex-col md:relative md:flex-row">
-      <div className="hidden w-screen md:sticky md:top-0 md:block md:h-screen">
+    <div className="flex w-full flex-col md:relative md:flex-row">
+      <div className="hidden w-full md:sticky md:top-0 md:block md:h-screen">
         <div className="md:relative md:size-full">
           {image?.assetPath ? (
             <div
@@ -207,11 +207,11 @@ export default function Teachers({ content }: TeachersProps) {
           ))}
         </div>
         <div
-          className={`flex flex-col gap-12 px-8 py-[20px] transition-all duration-500 ease-in-out md:mt-[80px] md:py-0`}
+          className={`flex flex-col gap-12 px-8 pb-8 transition-all duration-500 ease-in-out md:mt-[80px] md:py-0`}
         >
           <div>
             <h1
-              className={`mb-[40px] mt-[80px] text-center text-black md:hidden ${activeTeacher ? "hidden" : "block"}`}
+              className={`mb-[40px] mt-[17rem] text-center text-black md:hidden ${activeTeacher ? "hidden" : "block"}`}
             >
               {header}
             </h1>

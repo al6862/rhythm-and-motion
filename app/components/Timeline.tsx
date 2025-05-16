@@ -34,7 +34,7 @@ const Event = ({
 }) => {
   const { title, description, content, coverImage, secondaryImage } =
     eventContent;
-  const overlayRef = useRef(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
   const eventRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const textRef = useRef<HTMLHeadingElement>(null);
@@ -48,6 +48,8 @@ const Event = ({
 
   useGSAP(
     () => {
+      gsap.set(overlayRef.current, { autoAlpha: 0 });
+
       if (window.innerWidth < 1024) {
         if (overlayIsHidden) {
           gsap.timeline().to(overlayRef.current, { autoAlpha: 0 }, "<");

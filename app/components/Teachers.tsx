@@ -45,8 +45,8 @@ export default function Teachers({ content }: TeachersProps) {
   };
 
   return (
-    <div className="flex w-screen flex-col md:relative md:flex-row">
-      <div className="hidden w-screen md:sticky md:top-0 md:block md:h-screen">
+    <div className="flex w-full flex-col md:relative md:flex-row">
+      <div className="hidden w-full md:sticky md:top-0 md:block md:h-screen">
         <div className="md:relative md:size-full">
           {image?.assetPath ? (
             <div
@@ -100,7 +100,7 @@ export default function Teachers({ content }: TeachersProps) {
                       {teacher.image?.assetPath && (
                         <div
                           onClick={() => router.push(`${pathname}`)}
-                          className="z-10 hidden size-[275px] overflow-hidden drop-shadow-md md:absolute md:right-[-100px] md:top-[-300px] md:block xl:right-[-200px]"
+                          className="z-10 hidden overflow-hidden drop-shadow-md md:absolute md:right-[-50px] md:top-[-300px] md:block md:size-[25rem] md:h-[175px] lg:right-[-100px] lg:h-[275px] xl:right-[-350px] xl:w-[37.5rem]"
                         >
                           <Image
                             src={teacher.image.assetPath}
@@ -180,7 +180,7 @@ export default function Teachers({ content }: TeachersProps) {
                       >
                         {teacher.pronouns}
                       </p>
-                      <h1 className="inset-0 mx-[100px] max-w-[200px] text-center transition-all duration-500">
+                      <h1 className="inset-0 mx-auto max-w-[200px] text-center transition-all duration-500">
                         {teacher.name}
                       </h1>
 
@@ -207,11 +207,11 @@ export default function Teachers({ content }: TeachersProps) {
           ))}
         </div>
         <div
-          className={`flex flex-col gap-12 px-8 py-[20px] transition-all duration-500 ease-in-out md:mt-[80px] md:py-0`}
+          className={`flex flex-col gap-12 px-8 pb-8 transition-all duration-500 ease-in-out md:mt-[80px] md:py-0`}
         >
           <div>
             <h1
-              className={`text-center text-black md:hidden ${activeTeacher ? "hidden" : "block"}`}
+              className={`mb-[40px] mt-[17rem] text-center text-black md:hidden ${activeTeacher ? "hidden" : "block"}`}
             >
               {header}
             </h1>

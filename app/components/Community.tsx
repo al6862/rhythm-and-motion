@@ -149,9 +149,9 @@ export default function Community({ content }: CommunityProps) {
   };
 
   return (
-    <div className="flex w-screen flex-col md:relative md:flex-row">
+    <div className="flex w-full flex-col md:relative md:flex-row">
       <div
-        className="sticky top-0 h-screen w-screen cursor-pointer md:h-screen"
+        className="sticky top-0 h-screen w-full cursor-pointer md:h-screen"
         onClick={() => router.push(`${pathname}`)}
       >
         <div className="md:relative md:size-full">

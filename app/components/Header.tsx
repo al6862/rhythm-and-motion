@@ -86,7 +86,10 @@ export function Header({ data, color }: { data: HeaderProps; color: string }) {
             }
 
             return (
-              <span key={link._key} className={`${linkColor} menu transition-colors`}>
+              <span
+                key={link._key}
+                className={`${linkColor} menu transition-colors`}
+              >
                 <Link link={link as LinkValue}>{link.text}</Link>
               </span>
             );

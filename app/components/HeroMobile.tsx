@@ -384,7 +384,7 @@ export default function HeroMobile({ content }: { content: HeroProps }) {
         </div>
       </div>
       <div className="bluePanel relative h-screen bg-blue">
-        <div className="scrollbar-width-none flex gap-8 overflow-x-hidden px-[1.6rem] pt-[5.2rem]">
+        <div className="flex gap-8 overflow-x-hidden px-[1.6rem] pt-[5.2rem]">
           {secondaryImages[0] && (
             <Image
               src={secondaryImages[0].assetPath}

@@ -1,9 +1,9 @@
 import { CustomPortableText } from "./CustomPortableText";
 import { type PortableTextBlock } from "next-sanity";
 import type { FooterQueryResult } from "@/sanity.types";
-import LogoStamp from "./LogoStamp";
 import type { LinkValue } from "sanity-plugin-link-field";
 import { Link } from "./Link";
+import SpinningLogo from "./SpinningLogo";
 
 export function Footer({ data }: { data: FooterQueryResult }) {
   const { footer } = data;
@@ -15,7 +15,7 @@ export function Footer({ data }: { data: FooterQueryResult }) {
         <div className="flex max-lg:flex-col max-lg:gap-24">
           <div className="w-1/2">
             <div className="size-40">
-              <LogoStamp />
+              <SpinningLogo />
             </div>
           </div>
           <div className="flex w-1/2 gap-24 max-lg:flex-col lg:gap-[1.6rem]">

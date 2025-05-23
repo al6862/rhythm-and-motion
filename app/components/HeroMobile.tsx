@@ -10,6 +10,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { HeroProps } from "./Hero";
+import { useEffect } from "react";
 
 /*
 This helper function makes a group of elements animate along the x-axis in a seamless, responsive loop.
@@ -301,40 +302,62 @@ const horizontalLoop = (items: any, config: any) => {
 };
 /* eslint-enable */
 
-export default function HeroMobile({ content }: { content: HeroProps }) {
+export default function HeroMobile({
+  content,
+  seenHero,
+}: {
+  content: HeroProps;
+  seenHero: boolean;
+}) {
   const { featuredImages, secondaryImages } = content;
+
+  useEffect(() => {
+    if (!seenHero) {
+      document.cookie = "seenHero=true;max-age=2592000;";
+    }
+  }, [seenHero]);
 
   gsap.registerPlugin(ScrollTrigger);
 
+  useGSAP(
+    () => {
+      if (!seenHero) {
+        gsap.set(".headerMobile", { y: "100vh", autoAlpha: 1 });
+        gsap.set(".rhythmAndMotionMobile", { y: "50vh", yPercent: "-50" });
+        gsap.to(".rhythmAndMotionMobile", { autoAlpha: 1 });
+
+        gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: ".heroTwoColMobile",
+              start: "top top",
+              end: "bottom top",
+              pin: ".bluePanel",
+              scrub: 1,
+            },
+          })
+          .to(".rhythmAndMotionMobile", { y: 0, yPercent: "0" }, "<")
+          .to(".figureMobile", { autoAlpha: 0 }, "<");
+
+        gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: ".bluePanel",
+              start: "top bottom",
+              end: "bottom bottom",
+              scrub: true,
+            },
+          })
+          .to(".headerMobile", { y: 0, ease: "none" }, "<")
+          .set(".heroTwoColMobile", { autoAlpha: 0 });
+      } else {
+        gsap.set(".headerMobile", { autoAlpha: 1 });
+      }
+    },
+    { dependencies: [seenHero], revertOnUpdate: true },
+  );
+
   useGSAP(() => {
-    gsap.set(".headerMobile", { y: "100vh", autoAlpha: 1 });
-    gsap.set(".rhythmAndMotionMobile", { y: "50vh", yPercent: "-50" });
-
-    gsap
-      .timeline({
-        scrollTrigger: {
-          trigger: ".heroTwoColMobile",
-          start: "top top",
-          end: "bottom top",
-          pin: ".bluePanel",
-          scrub: 1,
-        },
-      })
-      .to(".rhythmAndMotionMobile", { y: 0, yPercent: "0" }, "<")
-      .to(".figureMobile", { autoAlpha: 0 }, "<");
-
-    gsap
-      .timeline({
-        scrollTrigger: {
-          trigger: ".bluePanel",
-          start: "top bottom",
-          end: "bottom bottom",
-          scrub: true,
-        },
-      })
-      .to(".headerMobile", { y: 0, ease: "none" }, "<")
-      .set(".heroTwoColMobile", { autoAlpha: 0 });
-
     const secondaryImages = gsap.utils.toArray(".secondaryImage");
     horizontalLoop(secondaryImages, {
       speed: 0.5,
@@ -345,44 +368,46 @@ export default function HeroMobile({ content }: { content: HeroProps }) {
 
   return (
     <div>
-      <div className="heroTwoColMobile relative -z-10 h-screen">
-        <div className="rhythmAndMotionMobile fixed top-0 z-10 flex w-full gap-[4.7%]">
-          <div className="flex-1 p-[1.6rem]">
-            <Rhythm />
+      {!seenHero && (
+        <div className="heroTwoColMobile relative -z-10 h-screen">
+          <div className="rhythmAndMotionMobile invisible fixed top-0 z-10 flex w-full gap-[4.7%]">
+            <div className="flex-1 p-[1.6rem]">
+              <Rhythm />
+            </div>
+            <div className="w-[4.3%] py-[1.6rem]">
+              <Ampersand />
+            </div>
+            <div className="flex-1 p-[1.6rem]">
+              <Motion />
+            </div>
           </div>
-          <div className="w-[4.3%] py-[1.6rem]">
-            <Ampersand />
+          <div className="figureMobile fixed bottom-[55vh] left-1/2 z-10 w-[26.9vw] -translate-x-1/2">
+            <Figure />
           </div>
-          <div className="flex-1 p-[1.6rem]">
-            <Motion />
+          <div className="fixed top-0 flex size-full flex-col">
+            <div className="relative flex-1">
+              <Image
+                src={featuredImages[0].assetPath}
+                alt={featuredImages[0].caption || "missing alt"}
+                fill
+                sizes="(max-width: 768px) 200vw, 100vw"
+                priority
+                className="object-cover"
+              />
+            </div>
+            <div className="relative flex-1">
+              <Image
+                src={featuredImages[1].assetPath}
+                alt={featuredImages[1].caption || "missing alt"}
+                fill
+                sizes="(max-width: 768px) 200vw, 100vw"
+                priority
+                className="object-cover"
+              />
+            </div>
           </div>
         </div>
-        <div className="figureMobile fixed bottom-[55vh] left-1/2 z-10 w-[26.9vw] -translate-x-1/2">
-          <Figure />
-        </div>
-        <div className="fixed top-0 flex size-full flex-col">
-          <div className="relative flex-1">
-            <Image
-              src={featuredImages[0].assetPath}
-              alt={featuredImages[0].caption || "missing alt"}
-              fill
-              sizes="(max-width: 768px) 200vw, 100vw"
-              priority
-              className="object-cover"
-            />
-          </div>
-          <div className="relative flex-1">
-            <Image
-              src={featuredImages[1].assetPath}
-              alt={featuredImages[1].caption || "missing alt"}
-              fill
-              sizes="(max-width: 768px) 200vw, 100vw"
-              priority
-              className="object-cover"
-            />
-          </div>
-        </div>
-      </div>
+      )}
       <div className="bluePanel relative h-screen bg-blue">
         <div className="flex gap-8 overflow-x-hidden px-[1.6rem] pt-[5.2rem]">
           {secondaryImages[0] && (

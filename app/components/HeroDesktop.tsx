@@ -23,6 +23,9 @@ export default function HeroDesktop({ content }: { content: HeroProps }) {
     if (rhythmEle.current) {
       gsap.set(".leftImage", {
         y: rhythmEle.current.offsetHeight,
+      });
+
+      gsap.to(".leftImage", {
         autoAlpha: 1,
       });
     }
@@ -30,8 +33,8 @@ export default function HeroDesktop({ content }: { content: HeroProps }) {
     if (motionEle.current) {
       gsap.set(".rightImage", {
         y: -1 * motionEle.current.offsetHeight,
-        autoAlpha: 1,
       });
+      gsap.to(".rightImage", { autoAlpha: 1 });
     }
 
     gsap.set(".headerDesktop", { y: "100vh", autoAlpha: 1 });
@@ -200,7 +203,7 @@ export default function HeroDesktop({ content }: { content: HeroProps }) {
               alt={secondaryImages[0].caption || "missing alt"}
               height={1000}
               width={1000}
-              className="secondaryImage-0 w-[20vw] opacity-85"
+              className="secondaryImage-0 w-[20vw]"
             />
           )}
         </div>
@@ -211,7 +214,7 @@ export default function HeroDesktop({ content }: { content: HeroProps }) {
               alt={secondaryImages[1].caption || "missing alt"}
               height={1000}
               width={1000}
-              className="secondaryImage-1 w-[20vw] opacity-85"
+              className="secondaryImage-1 w-[20vw]"
             />
           )}
         </div>
@@ -222,7 +225,7 @@ export default function HeroDesktop({ content }: { content: HeroProps }) {
               alt={secondaryImages[2].caption || "missing alt"}
               height={1000}
               width={1000}
-              className="secondaryImage-2 w-[20vw] opacity-85"
+              className="secondaryImage-2 w-[20vw]"
             />
           )}
         </div>
@@ -233,7 +236,7 @@ export default function HeroDesktop({ content }: { content: HeroProps }) {
               alt={secondaryImages[3].caption || "missing alt"}
               height={1000}
               width={1000}
-              className="secondaryImage-3 w-[20vw] opacity-85"
+              className="secondaryImage-3 w-[20vw]"
             />
           )}
         </div>
@@ -244,7 +247,7 @@ export default function HeroDesktop({ content }: { content: HeroProps }) {
               alt={secondaryImages[4].caption || "missing alt"}
               height={1000}
               width={1000}
-              className="secondaryImage-4 w-[20vw] opacity-85"
+              className="secondaryImage-4 w-[20vw]"
             />
           )}
         </div>
@@ -255,7 +258,7 @@ export default function HeroDesktop({ content }: { content: HeroProps }) {
               alt={secondaryImages[5].caption || "missing alt"}
               height={1000}
               width={1000}
-              className="secondaryImage-5 w-[20vw] opacity-85"
+              className="secondaryImage-5 w-[20vw]"
             />
           )}
         </div>

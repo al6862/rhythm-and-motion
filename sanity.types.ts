@@ -1056,6 +1056,7 @@ export type Homepage = {
         [internalGroqTypeReferenceTo]?: "video";
       }
   >;
+  headerColor?: "dark" | "light" | "lightOnMobile";
   SEO?: Seo;
 };
 
@@ -1141,7 +1142,7 @@ export type Page = {
         [internalGroqTypeReferenceTo]?: "video";
       }
   >;
-  headerColor?: "dark" | "light";
+  headerColor?: "dark" | "light" | "lightOnMobile";
   SEO?: Seo;
 };
 
@@ -2687,6 +2688,7 @@ export type HomepageQueryResult = {
           borderColor: string | null;
         }
     > | null;
+    headerColor?: "dark" | "light" | "lightOnMobile";
     SEO: {
       _type: "seo";
       metaTitle?: string;
@@ -3524,7 +3526,7 @@ export type PageQueryResult = {
           borderColor: string | null;
         }
     > | null;
-    headerColor?: "dark" | "light";
+    headerColor?: "dark" | "light" | "lightOnMobile";
     SEO: {
       _type: "seo";
       metaTitle?: string;

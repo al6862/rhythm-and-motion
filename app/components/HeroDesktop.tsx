@@ -79,7 +79,7 @@ export default function HeroDesktop({
           .to(".headerDesktop", { y: 0 }, "<")
           .to(".rhythmAndMotion", { autoAlpha: 0 }, "<50%");
       } else {
-        gsap.set(".headerDesktop", { autoAlpha: 1 });
+        gsap.to(".headerDesktop", { autoAlpha: 1 });
       }
     },
     { dependencies: [seenHero], revertOnUpdate: true },

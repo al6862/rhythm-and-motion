@@ -351,7 +351,7 @@ export default function HeroMobile({
           .to(".headerMobile", { y: 0, ease: "none" }, "<")
           .set(".heroTwoColMobile", { autoAlpha: 0 });
       } else {
-        gsap.set(".headerMobile", { autoAlpha: 1 });
+        gsap.to(".headerMobile", { autoAlpha: 1 });
       }
     },
     { dependencies: [seenHero], revertOnUpdate: true },

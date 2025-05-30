@@ -27,7 +27,7 @@ export default function ImageText({ content }: ImageTextProps) {
       >
         {image ? (
           <>
-            <div className="size-full relative md:after:content-[''] md:after:absolute md:after:inset-0 md:after:bg-black/25">
+            <div className="relative size-full md:after:absolute md:after:inset-0 md:after:bg-black/25 md:after:content-['']">
               <Image
                 src={image.assetPath}
                 alt={image.caption || "missing alt"}
@@ -41,10 +41,10 @@ export default function ImageText({ content }: ImageTextProps) {
           </>
         ) : (
           <div
-            className="absolute px-[1.6rem] inset-0 hidden items-center justify-center md:flex"
+            className="absolute inset-0 hidden items-center justify-center px-[1.6rem] md:flex"
             style={{ backgroundColor: bgColor }}
           >
-            <h1 className="text-white text-center">{header}</h1>
+            <h1 className="text-center text-white">{header}</h1>
           </div>
         )}
       </div>

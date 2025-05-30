@@ -403,7 +403,6 @@ export default function Timeline({ content }: { content: TimelineProps }) {
         pin: true,
         end: () => `+=${timelineRef.current?.offsetWidth} bottom`,
         scrub: 1,
-        markers: true,
       },
     });
   });

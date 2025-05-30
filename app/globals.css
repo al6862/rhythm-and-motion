@@ -60,7 +60,7 @@ body,
 }
 
 .button::before {
-  @apply absolute left-0 top-0 h-full w-full rounded-[0.7rem] bg-white opacity-20 content-[""] pointer-events-none;
+  @apply absolute left-0 top-0 h-full w-full rounded-[0.7rem] bg-white opacity-20 content-[""];
 }
 
 .button:hover {

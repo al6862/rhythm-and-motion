@@ -395,18 +395,18 @@ export default function Timeline({ content }: { content: TimelineProps }) {
 
   useGSAP(() => {
     gsap.to(timelineRef.current, {
-        xPercent: -100,
-        x: () => window.innerWidth,
-        ease: "none",
-        scrollTrigger: {
-          trigger: timelineRef.current,
-          pin: true,
-          end: () => `+=${timelineRef.current?.offsetWidth} bottom`,
-          scrub: 1,
-          markers: true,
-        }
+      xPercent: -100,
+      x: () => window.innerWidth,
+      ease: "none",
+      scrollTrigger: {
+        trigger: timelineRef.current,
+        pin: true,
+        end: () => `+=${timelineRef.current?.offsetWidth} bottom`,
+        scrub: 1,
+        markers: true,
+      },
     });
-  })
+  });
 
   return (
     <div className="no-scrollbar overflow-x-scroll bg-brown text-white">

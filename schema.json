@@ -6617,6 +6617,27 @@
         },
         "optional": true
       },
+      "headerColor": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "union",
+          "of": [
+            {
+              "type": "string",
+              "value": "dark"
+            },
+            {
+              "type": "string",
+              "value": "light"
+            },
+            {
+              "type": "string",
+              "value": "lightOnMobile"
+            }
+          ]
+        },
+        "optional": true
+      },
       "SEO": {
         "type": "objectAttribute",
         "value": {
@@ -7013,6 +7034,10 @@
             {
               "type": "string",
               "value": "light"
+            },
+            {
+              "type": "string",
+              "value": "lightOnMobile"
             }
           ]
         },

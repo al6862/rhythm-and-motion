@@ -193,7 +193,7 @@ const Event = ({
               alt={coverImage.caption || "missing alt"}
               width={800}
               height={1000}
-              className="z-10 w-[40rem] cursor-pointer object-contain max-lg:translate-y-[-7.4rem]"
+              className="z-10 w-[40rem] cursor-pointer object-contain max-lg:translate-y-[-7.4rem] lg:pb-32"
               onClick={handleClick}
             />
           )}

@@ -27,12 +27,14 @@ export default function ImageText({ content }: ImageTextProps) {
       >
         {image ? (
           <>
-            <Image
-              src={image.assetPath}
-              alt={image.caption || "missing alt"}
-              fill
-              className="object-cover grayscale-[20%]"
-            />
+            <div className="size-full relative after:content-[''] after:absolute after:inset-0 after:bg-black/25">
+              <Image
+                src={image.assetPath}
+                alt={image.caption || "missing alt"}
+                fill
+                className="object-cover grayscale-[20%]"
+              />
+            </div>
             <h1 className="absolute inset-0 z-10 hidden items-center justify-center text-white md:flex">
               {header}
             </h1>

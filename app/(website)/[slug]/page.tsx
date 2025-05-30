@@ -17,27 +17,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       stega: false,
     })) || {};
 
-  const { SEO } = data.page;
-
-  const title = SEO?.metaTitle;
-  const description = SEO?.metaDescription || "";
+  const title = data.page.title;
 
   return {
-    metadataBase: new URL("https://www.rhythmandmotion.com/"),
     title,
-    description,
     openGraph: {
-      title: SEO?.openGraphTitle,
-      description: SEO?.openGraphDescription,
-      url: "https://www.rhythmandmotion.com/",
-      siteName: title,
-      images: [
-        {
-          url: SEO?.openGraphImage || "",
-          width: 800,
-          height: 600,
-        },
-      ],
+      title,
     },
   };
 }

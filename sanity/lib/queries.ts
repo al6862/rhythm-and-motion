@@ -301,7 +301,6 @@ export const homepageQuery = defineQuery(`{
     'homepage': *[_type == 'homepage'][0] {
         ...,
         content[]->${contentData},
-        SEO ${seoData},
     }
 }`);
 
@@ -310,6 +309,5 @@ export const pageQuery = defineQuery(`{
         ...,
         title,
         content[]->${contentData},
-        SEO ${seoData},
     }
 }`);

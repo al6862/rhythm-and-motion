@@ -27,7 +27,7 @@ export default function ImageText({ content }: ImageTextProps) {
       >
         {image ? (
           <>
-            <div className="size-full relative after:content-[''] after:absolute after:inset-0 after:bg-black/25">
+            <div className="size-full relative md:after:content-[''] md:after:absolute md:after:inset-0 md:after:bg-black/25">
               <Image
                 src={image.assetPath}
                 alt={image.caption || "missing alt"}
@@ -50,7 +50,7 @@ export default function ImageText({ content }: ImageTextProps) {
       </div>
 
       <h1 className="block text-center md:hidden">{header}</h1>
-      <div className="mx-auto items-center justify-center bg-white px-[1.6rem] pb-[1.6rem] md:w-1/3 md:pb-[16px] md:pl-[16px] md:pr-[30px] md:pt-[134px]">
+      <div className="mx-auto items-center justify-center bg-white px-[3.2rem] pb-[1.6rem] md:w-1/3 md:pb-[16px] md:pl-[16px] md:pr-[30px] md:pt-[134px]">
         {textContent && (
           <div className="rte w-full text-left md:max-w-[415px]">
             <CustomPortableText value={textContent} />

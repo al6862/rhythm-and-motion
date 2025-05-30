@@ -27,28 +27,30 @@ export default function ImageText({ content }: ImageTextProps) {
       >
         {image ? (
           <>
-            <Image
-              src={image.assetPath}
-              alt={image.caption || "missing alt"}
-              fill
-              className="object-cover grayscale-[20%]"
-            />
+            <div className="relative size-full md:after:absolute md:after:inset-0 md:after:bg-black/25 md:after:content-['']">
+              <Image
+                src={image.assetPath}
+                alt={image.caption || "missing alt"}
+                fill
+                className="object-cover grayscale-[20%]"
+              />
+            </div>
             <h1 className="absolute inset-0 z-10 hidden items-center justify-center text-white md:flex">
               {header}
             </h1>
           </>
         ) : (
           <div
-            className="absolute inset-0 hidden items-center justify-center md:flex"
+            className="absolute inset-0 hidden items-center justify-center px-[1.6rem] md:flex"
             style={{ backgroundColor: bgColor }}
           >
-            <h1 className="text-white">{header}</h1>
+            <h1 className="text-center text-white">{header}</h1>
           </div>
         )}
       </div>
 
       <h1 className="block text-center md:hidden">{header}</h1>
-      <div className="mx-auto items-center justify-center bg-white px-[1.6rem] pb-[1.6rem] md:w-1/3 md:pb-[16px] md:pl-[16px] md:pr-[30px] md:pt-[134px]">
+      <div className="mx-auto items-center justify-center bg-white px-[3.2rem] pb-[1.6rem] md:w-1/3 md:min-w-[49.3rem] md:pb-[1.6rem] md:pl-[3.2rem] md:pr-[4.6rem] md:pt-[13.4rem]">
         {textContent && (
           <div className="rte w-full text-left md:max-w-[415px]">
             <CustomPortableText value={textContent} />

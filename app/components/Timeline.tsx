@@ -9,6 +9,7 @@ import Image from "next/image";
 import LogoHistory from "./LogoHistory";
 import Figure from "./Figure";
 import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { useState, useRef, useEffect } from "react";
 
@@ -316,6 +317,7 @@ export default function Timeline({ content }: { content: TimelineProps }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [onStart, setOnStart] = useState(true);
   const [onText, setOnText] = useState(false);
+  const timelineRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
   const handlePrevClick = () => {
@@ -389,9 +391,26 @@ export default function Timeline({ content }: { content: TimelineProps }) {
     }
   }, [activeIndex, onStart, lastIndex]);
 
+  gsap.registerPlugin(ScrollTrigger);
+
+  useGSAP(() => {
+    gsap.to(timelineRef.current, {
+        xPercent: -100,
+        x: () => window.innerWidth,
+        ease: "none",
+        scrollTrigger: {
+          trigger: timelineRef.current,
+          pin: true,
+          end: () => `+=${timelineRef.current?.offsetWidth} bottom`,
+          scrub: 1,
+          markers: true,
+        }
+    });
+  })
+
   return (
     <div className="no-scrollbar overflow-x-scroll bg-brown text-white">
-      <div className="relative flex h-screen w-max items-end">
+      <div ref={timelineRef} className="relative flex h-screen w-max items-end">
         <div
           ref={logoRef}
           className="absolute left-[2.2rem] flex h-[50vh] w-[22.5rem] items-end pb-16 lg:top-0 2xl:left-12 2xl:w-[30rem]"

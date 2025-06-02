@@ -9,5 +9,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   });
   const { homepage, pages } = data;
 
-  return ([homepage, ...pages] as MetadataRoute.Sitemap);
+  return [homepage, ...pages] as MetadataRoute.Sitemap;
 }

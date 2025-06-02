@@ -311,3 +311,15 @@ export const pageQuery = defineQuery(`{
         content[]->${contentData},
     }
 }`);
+
+export const siteUrlsQuery = defineQuery(`{
+  "homepage": *[_type == "homepage"][0] {
+    "lastModified": _updatedAt,
+    "url": $baseUrl + '',
+    "priority": 1,
+  },
+  "pages": *[_type == "page"] {
+    "lastModified": _updatedAt,
+    "url": $baseUrl + "/" + slug.current
+  },
+}`);

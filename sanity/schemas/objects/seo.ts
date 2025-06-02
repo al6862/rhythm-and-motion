@@ -46,26 +46,5 @@ export const seo = defineType({
         },
       ],
     }),
-
-    /* Search */
-    defineField({
-      name: "includeInSitemap",
-      type: "boolean",
-      title: "Include page in sitemap",
-      description: "For search engines. Will be added to /sitemap.xml",
-      initialValue: true,
-    }),
-    defineField({
-      name: "disallowRobots",
-      type: "boolean",
-      title: "Disallow in robots.txt",
-      description: "Hide this route for search engines",
-    }),
-    defineField({
-      name: "initSeo",
-      type: "boolean",
-      title: "Inits the SEO object",
-      hidden: true,
-    }),
   ],
 });

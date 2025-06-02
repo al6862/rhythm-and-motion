@@ -301,7 +301,6 @@ export const homepageQuery = defineQuery(`{
     'homepage': *[_type == 'homepage'][0] {
         ...,
         content[]->${contentData},
-        SEO ${seoData},
     }
 }`);
 
@@ -310,6 +309,17 @@ export const pageQuery = defineQuery(`{
         ...,
         title,
         content[]->${contentData},
-        SEO ${seoData},
     }
+}`);
+
+export const siteUrlsQuery = defineQuery(`{
+  "homepage": *[_type == "homepage"][0] {
+    "lastModified": _updatedAt,
+    "url": $baseUrl + '',
+    "priority": 1,
+  },
+  "pages": *[_type == "page"] {
+    "lastModified": _updatedAt,
+    "url": $baseUrl + "/" + slug.current
+  },
 }`);

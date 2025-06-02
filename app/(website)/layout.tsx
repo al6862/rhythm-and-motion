@@ -140,6 +140,7 @@ export async function generateMetadata(): Promise<Metadata> {
     })) || {};
 
   const title = SEO?.metaTitle || "Rhythm & Motion";
+  const openGraphTitle = SEO?.openGraphTitle || "Rhythm & Motion";
   const description = SEO?.metaDescription || "";
 
   return {
@@ -150,7 +151,10 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     description,
     openGraph: {
-      title: SEO?.openGraphTitle,
+      title: {
+        template: `%s | ${openGraphTitle}`,
+        default: openGraphTitle,
+      },
       description: SEO?.openGraphDescription,
       url: "https://www.rhythmandmotion.com/",
       siteName: title,

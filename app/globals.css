@@ -56,7 +56,7 @@ body,
 }
 
 .button {
-  @apply relative cursor-pointer rounded-[0.7rem] p-[2.1rem] font-folio text-[2rem] font-medium leading-none tracking-normal text-white transition-all;
+  @apply relative cursor-pointer rounded-[0.7rem] px-[2.1rem] pt-[2.1rem] pb-[1.9rem] font-folio text-[2rem] font-medium leading-none tracking-normal text-white transition-all;
 }
 
 .button::before {

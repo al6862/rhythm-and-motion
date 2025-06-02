@@ -426,9 +426,9 @@ export default function Timeline({ content }: { content: TimelineProps }) {
             ref={buttonRef}
             className="absolute bottom-0 right-0 z-10 pb-12 pr-12"
           >
-            <span className="button">
-              <Link link={link as LinkValue}>{link.text}</Link>
-            </span>
+            <Link link={link as LinkValue}>
+              <button className="button">{link.text}</button>
+            </Link>
           </div>
         )}
       </div>

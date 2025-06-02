@@ -6,15 +6,10 @@ export const page = defineType({
   title: "Page",
   type: "document",
   icon,
-  groups: [
-    { name: "main", title: "Main" },
-    { name: "seo", title: "SEO" },
-  ],
   fields: [
     defineField({
       name: "title",
       title: "Title",
-      group: "main",
       type: "string",
       validation: (Rule) => Rule.required(),
     }),
@@ -22,7 +17,6 @@ export const page = defineType({
     defineField({
       name: "slug",
       title: "Slug",
-      group: "main",
       type: "slug",
       options: {
         source: "title",
@@ -34,7 +28,6 @@ export const page = defineType({
     defineField({
       name: "content",
       title: "Content",
-      group: "main",
       type: "array",
       of: [
         {
@@ -74,12 +67,6 @@ export const page = defineType({
         ],
         layout: "radio",
       },
-    }),
-
-    defineField({
-      name: "SEO",
-      type: "seo",
-      group: "seo",
     }),
   ],
 

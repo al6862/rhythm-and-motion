@@ -75,18 +75,21 @@ export function Header({ data, color }: { data: HeaderProps; color: string }) {
                     : "text-black";
               }
             } else {
-              linkColor = "text-black";
+              linkColor = "text-black hover:text-white";
 
               if (link && isInternalLink(link as LinkValue)) {
                 linkColor =
                   link.internalLink?.slug?.current != pathname.split("/")[1]
-                    ? "text-black"
+                    ? "text-black hover:text-white"
                     : "text-white";
               }
             }
 
             return (
-              <span key={link._key} className={`${linkColor} menu`}>
+              <span
+                key={link._key}
+                className={`${linkColor} menu transition-colors`}
+              >
                 <Link link={link as LinkValue}>{link.text}</Link>
               </span>
             );

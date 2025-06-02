@@ -28,6 +28,18 @@ export function CustomPortableText({ value }: { value: PortableTextBlock[] }) {
         return <p className={"caption"}>{children}</p>;
       },
     },
+    list: {
+      bullet: ({ children }) => (
+        <ul className="my-[1lh] list-inside list-disc pl-[0.8em]">
+          {children}
+        </ul>
+      ),
+      number: ({ children }) => (
+        <ol className="my-[1lh] list-inside list-decimal pl-[0.8em]">
+          {children}
+        </ol>
+      ),
+    },
     marks: {
       link: ({ children, value }) => {
         return (
@@ -46,9 +58,9 @@ export function CustomPortableText({ value }: { value: PortableTextBlock[] }) {
       link: ({ value }) => {
         return (
           <div className="mt-[5.5rem]">
-            <span className="button">
-              <Link link={value}>{value.text}</Link>
-            </span>
+            <Link link={value}>
+              <button className="button">{value.text}</button>
+            </Link>
           </div>
         );
       },

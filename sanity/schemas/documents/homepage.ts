@@ -6,15 +6,10 @@ export const homepage = defineType({
   title: "Homepage",
   type: "document",
   icon,
-  groups: [
-    { name: "main", title: "Main" },
-    { name: "seo", title: "SEO" },
-  ],
   fields: [
     defineField({
       name: "content",
       title: "Content",
-      group: "main",
       type: "array",
       of: [
         {
@@ -54,12 +49,6 @@ export const homepage = defineType({
         ],
         layout: "radio",
       },
-    }),
-
-    defineField({
-      name: "SEO",
-      type: "seo",
-      group: "seo",
     }),
   ],
 

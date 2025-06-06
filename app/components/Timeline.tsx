@@ -23,15 +23,9 @@ type EventContentProps = NonNullable<TimelineProps["events"]>[0];
 const Event = ({
   eventContent,
   index,
-  activeIndex,
-  onText,
-  onStart,
 }: {
   eventContent: EventContentProps;
   index: number;
-  activeIndex: number;
-  onText: boolean;
-  onStart: boolean;
 }) => {
   const { title, description, content, coverImage, secondaryImage } =
     eventContent;
@@ -123,47 +117,6 @@ const Event = ({
       document.body.classList.add("overflow-hidden");
     }
   }, [overlayIsHidden]);
-
-  useEffect(() => {
-    if (window.innerWidth < 1024) {
-      if (textRef.current && onText && activeIndex == index) {
-        const { scrollX, scrollY } = window;
-        textRef.current.scrollIntoView({
-          inline: "center",
-          behavior: "smooth",
-        });
-        window.scrollTo({
-          top: scrollY,
-          left: scrollX,
-          behavior: "instant",
-        });
-      } else if (imageRef.current && !onText && activeIndex == index) {
-        const { scrollX, scrollY } = window;
-        imageRef.current.scrollIntoView({
-          inline: "center",
-          behavior: "smooth",
-        });
-        window.scrollTo({
-          top: scrollY,
-          left: scrollX,
-          behavior: "instant",
-        });
-      }
-    } else {
-      if (eventRef.current && activeIndex == index) {
-        const { scrollX, scrollY } = window;
-        eventRef.current.scrollIntoView({
-          inline: "start",
-          behavior: "smooth",
-        });
-        window.scrollTo({
-          top: scrollY,
-          left: scrollX,
-          behavior: "instant",
-        });
-      }
-    }
-  }, [index, activeIndex, onText, onStart]);
 
   return (
     <div ref={eventRef} className="shrink-0">
@@ -309,87 +262,9 @@ const Event = ({
 
 export default function Timeline({ content }: { content: TimelineProps }) {
   const { header, events, link } = content;
-  let lastIndex = 0;
-  if (events) {
-    lastIndex = events.length - 1;
-  }
-
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [onStart, setOnStart] = useState(true);
-  const [onText, setOnText] = useState(false);
   const timelineRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
-  const handlePrevClick = () => {
-    if (window.innerWidth < 1024) {
-      if (events && activeIndex > -1) {
-        if (activeIndex == 0 && onText) {
-          setOnStart(true);
-        } else {
-          if (onText) {
-            setActiveIndex(activeIndex - 1);
-          }
-          setOnText(!onText);
-        }
-      }
-    } else {
-      if (events && activeIndex > 0) {
-        setActiveIndex(activeIndex - 1);
-      }
-    }
-  };
-  const handleNextClick = () => {
-    if (window.innerWidth < 1024) {
-      if (events && activeIndex < events.length) {
-        if (onStart) {
-          setActiveIndex(0);
-          setOnText(true);
-          setOnStart(false);
-        } else {
-          if (!onText) {
-            setActiveIndex(activeIndex + 1);
-          }
-          setOnText(!onText);
-        }
-      }
-    } else {
-      if (events && activeIndex < events.length) {
-        setActiveIndex(activeIndex + 1);
-      }
-    }
-  };
-
-  useEffect(() => {
-    if (window.innerWidth < 1024) {
-      if (buttonRef.current && activeIndex == lastIndex + 1) {
-        const { scrollX, scrollY } = window;
-        buttonRef.current.scrollIntoView({ inline: "end", behavior: "smooth" });
-        window.scrollTo({
-          top: scrollY,
-          left: scrollX,
-          behavior: "instant",
-        });
-      } else if (logoRef.current && onStart) {
-        const { scrollX, scrollY } = window;
-        logoRef.current.scrollIntoView({ inline: "end", behavior: "smooth" });
-        window.scrollTo({
-          top: scrollY,
-          left: scrollX,
-          behavior: "instant",
-        });
-      }
-    } else {
-      if (buttonRef.current && activeIndex == lastIndex + 1) {
-        const { scrollX, scrollY } = window;
-        buttonRef.current.scrollIntoView({ inline: "end", behavior: "smooth" });
-        window.scrollTo({
-          top: scrollY,
-          left: scrollX,
-          behavior: "instant",
-        });
-      }
-    }
-  }, [activeIndex, onStart, lastIndex]);
 
   gsap.registerPlugin(ScrollTrigger);
 
@@ -429,9 +304,6 @@ export default function Timeline({ content }: { content: TimelineProps }) {
                   eventContent={event}
                   key={i}
                   index={i}
-                  activeIndex={activeIndex}
-                  onText={onText}
-                  onStart={onStart}
                 />
               );
             })}
@@ -450,14 +322,6 @@ export default function Timeline({ content }: { content: TimelineProps }) {
           </div>
         )}
       </div>
-      <div
-        onClick={handlePrevClick}
-        className="absolute left-0 top-0 h-screen w-1/2"
-      ></div>
-      <div
-        onClick={handleNextClick}
-        className="absolute right-0 top-0 h-screen w-1/2"
-      ></div>
     </div>
   );
 }

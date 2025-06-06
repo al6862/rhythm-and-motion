@@ -198,8 +198,6 @@ const EventOverlay = ({
 export default function Timeline({ content }: { content: TimelineProps }) {
   const { header, events, link } = content;
   const timelineRef = useRef<HTMLDivElement>(null);
-  const buttonRef = useRef<HTMLDivElement>(null);
-  const logoRef = useRef<HTMLDivElement>(null);
   const [overlayIsHidden, setOverlayIsHidden] = useState<boolean>(true);
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
@@ -302,7 +300,6 @@ export default function Timeline({ content }: { content: TimelineProps }) {
         })}
       <div ref={timelineRef} className="relative flex h-screen w-max items-end">
         <div
-          ref={logoRef}
           className="absolute left-[2.2rem] flex h-[50vh] w-[22.5rem] items-end pb-16 lg:top-0 2xl:left-12 2xl:w-[30rem]"
         >
           <LogoHistory />
@@ -332,7 +329,6 @@ export default function Timeline({ content }: { content: TimelineProps }) {
         </div>
         {link && (
           <div
-            ref={buttonRef}
             className="absolute bottom-0 right-0 z-10 pb-12 pr-12"
           >
             <Link link={link as LinkValue}>

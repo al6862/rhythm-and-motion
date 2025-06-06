@@ -324,7 +324,7 @@ export default function Community({ content }: CommunityProps) {
                   </div>
                 </div>
               </span>
-              <div className="px-8 py-[100px] text-white md:py-0">
+              <div className="px-8 pb-[16px] pt-[100px] text-white md:py-0">
                 {activeCommunityEvent.content && (
                   <div className="mb-6">
                     <CustomPortableText

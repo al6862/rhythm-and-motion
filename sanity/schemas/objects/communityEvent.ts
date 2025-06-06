@@ -54,13 +54,12 @@ export const communityEvent = defineType({
     defineField({
       name: "address",
       title: "Address",
-      type: "array",
-      of: [
-        defineArrayMember({
-          type: "block",
-          styles: [{ title: "Normal", value: "normal" }],
-        }),
-      ],
+      description:
+        "Use the character '|' to determine the linebreaks. Link value should be a google maps link.",
+      type: "link",
+      options: {
+        enableText: true,
+      },
     }),
     defineField({
       name: "startDate",

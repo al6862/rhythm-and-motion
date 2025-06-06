@@ -5,7 +5,8 @@ import type { CommunityQueryResult } from "@/sanity.types";
 import { PortableTextBlock } from "@portabletext/types";
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
-
+import { Link } from "./Link";
+import { LinkValue } from "sanity-plugin-link-field";
 type CommunityProps = {
   content: CommunityQueryResult["community"];
 };
@@ -150,10 +151,7 @@ export default function Community({ content }: CommunityProps) {
 
   return (
     <div className="flex w-full flex-col md:relative md:flex-row">
-      <div
-        className="sticky top-0 h-screen w-full cursor-pointer md:h-screen"
-        onClick={() => router.push(`${pathname}`)}
-      >
+      <div className="sticky top-0 h-screen w-full cursor-pointer md:h-screen">
         <div className="md:relative md:size-full">
           {events?.map((event) => (
             <div
@@ -161,7 +159,7 @@ export default function Community({ content }: CommunityProps) {
               className={`absolute inset-0 transition-all duration-500 after:absolute after:inset-0 after:bg-black after:bg-opacity-[25%] ${
                 activeCommunityEvent?._id === event._id
                   ? "opacity-100"
-                  : "opacity-0"
+                  : "pointer-events-none opacity-0"
               }`}
             >
               <Image
@@ -175,7 +173,7 @@ export default function Community({ content }: CommunityProps) {
 
           {image?.assetPath && (
             <div
-              className={`inset-0 hidden transition-opacity duration-500 md:absolute md:block ${!activeCommunityEvent && hoveredCommunityEvent ? "opacity-0" : "opacity-100"}`}
+              className={`inset-0 hidden transition-opacity duration-500 md:absolute md:block ${!activeCommunityEvent && hoveredCommunityEvent ? "pointer-events-none opacity-0" : "z-[200] opacity-100"}`}
             >
               <div className="after:absolute after:inset-0 after:bg-black after:bg-opacity-[25%]">
                 <Image
@@ -204,8 +202,8 @@ export default function Community({ content }: CommunityProps) {
                     hoveredCommunityEventId === event._id
                       ? "opacity-100"
                       : activeCommunityEvent?._id === event._id
-                        ? "opacity-100"
-                        : "opacity-0"
+                        ? "z-[200] opacity-100"
+                        : "pointer-events-none opacity-0"
                   }`}
                 >
                   <div
@@ -239,7 +237,7 @@ export default function Community({ content }: CommunityProps) {
                           </div>
                         )}
                         <p
-                          className={`mr-[60%] transition-opacity duration-500 ${activeCommunityEvent?._id === event._id ? "opacity-100" : "opacity-0"}`}
+                          className={`mr-[60%] transition-opacity duration-500 ${activeCommunityEvent?._id === event._id ? "z-[200] opacity-100" : "pointer-events-none opacity-0"}`}
                         >
                           {event.startDate &&
                             event.endDate &&
@@ -249,13 +247,16 @@ export default function Community({ content }: CommunityProps) {
                           {event.title}
                         </h1>
                         <span
-                          className={`ml-[45%] text-right transition-opacity duration-500 ${activeCommunityEvent?._id === event._id ? "opacity-100" : "opacity-0"}`}
+                          className={`ml-[45%] text-right transition-opacity duration-500 ${activeCommunityEvent?._id === event._id ? "z-[200] opacity-100" : "pointer-events-none opacity-0"}`}
                         >
-                          <CustomPortableText
-                            value={
-                              event.address as unknown as PortableTextBlock[]
-                            }
-                          />
+                          <Link
+                            link={event.address as LinkValue}
+                            className="z-[200] underline"
+                          >
+                            {event.address?.text?.split("|")[0]}
+                            <br />
+                            {event.address?.text?.split("|")[1]}
+                          </Link>
                         </span>
                       </div>
                     </div>
@@ -314,11 +315,14 @@ export default function Community({ content }: CommunityProps) {
                       <span
                         className={`absolute bottom-[-50px] right-10 text-right transition-all duration-500 ${activeCommunityEvent?._id === activeCommunityEvent._id ? "opacity-100" : "opacity-0"}`}
                       >
-                        <CustomPortableText
-                          value={
-                            activeCommunityEvent.address as unknown as PortableTextBlock[]
-                          }
-                        />
+                        <Link
+                          link={activeCommunityEvent.address as LinkValue}
+                          className="z-[200] underline"
+                        >
+                          {activeCommunityEvent.address?.text?.split("|")[0]}
+                          <br />
+                          {activeCommunityEvent.address?.text?.split("|")[1]}
+                        </Link>
                       </span>
                     </div>
                   </div>
@@ -345,7 +349,7 @@ export default function Community({ content }: CommunityProps) {
           )}
         </div>
         <div
-          className={`flex flex-col gap-12 px-8 py-[100px] transition-all duration-500 ease-in-out md:py-0 ${activeCommunityEvent ? "overflow-hidden pt-0" : "opacity-100"}`}
+          className={`flex flex-col gap-12 px-8 py-[100px] transition-all duration-500 ease-in-out md:py-0 ${activeCommunityEvent ? "pointer-events-none overflow-hidden pt-0" : "z-[200]opacity-100"}`}
         >
           <h1
             className={`text-center text-white md:hidden ${

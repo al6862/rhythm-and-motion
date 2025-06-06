@@ -100,7 +100,7 @@ export default function Teachers({ content }: TeachersProps) {
                       {teacher.image?.assetPath && (
                         <div
                           onClick={() => router.push(`${pathname}`)}
-                          className="z-10 hidden overflow-hidden drop-shadow-md md:absolute md:right-[-50px] md:top-[-300px] md:block md:size-[25rem] md:h-[175px] lg:right-[-100px] lg:h-[275px] xl:right-[-350px] xl:w-[37.5rem]"
+                          className="z-10 hidden overflow-hidden md:absolute md:right-[-50px] md:top-[-300px] md:block md:size-[25rem] md:h-[175px] lg:right-[-100px] lg:h-[275px] xl:right-[-350px] xl:w-[37.5rem]"
                         >
                           <Image
                             src={teacher.image.assetPath}

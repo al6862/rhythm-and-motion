@@ -150,7 +150,7 @@ export default function Partners({ content }: PartnersProps) {
                     <div className="inset-0 hidden w-2/3 items-center justify-center text-white transition-all duration-500 md:flex">
                       <div className="relative flex size-full flex-col items-center justify-center">
                         {activeStudio?.image?.assetPath && (
-                          <div className="absolute right-0 top-[10%] z-10 mr-[5%] hidden overflow-hidden drop-shadow-md md:block lg:h-[200px] lg:w-[300px] 2xl:top-[3%] 2xl:h-[300px] 2xl:w-[375px]">
+                          <div className="absolute right-0 top-[10%] z-10 mr-[5%] hidden overflow-hidden md:block lg:h-[200px] lg:w-[300px] 2xl:top-[6%] 2xl:h-[300px] 2xl:w-[375px]">
                             <Image
                               src={activeStudio.image.assetPath}
                               alt={activeStudio.image.caption || "missing alt"}

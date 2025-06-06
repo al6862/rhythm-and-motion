@@ -20,13 +20,7 @@ type TimelineProps = Extract<
 
 type EventContentProps = NonNullable<TimelineProps["events"]>[0];
 
-const Event = ({
-  eventContent,
-  index,
-}: {
-  eventContent: EventContentProps;
-  index: number;
-}) => {
+const Event = ({ eventContent }: { eventContent: EventContentProps }) => {
   const { title, description, content, coverImage, secondaryImage } =
     eventContent;
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -299,13 +293,7 @@ export default function Timeline({ content }: { content: TimelineProps }) {
         <div className="flex items-end after:h-[calc(50vh+1px)] after:border-t after:border-dashed after:pr-[67.6rem] after:content-['']">
           {events &&
             events.map((event, i) => {
-              return (
-                <Event
-                  eventContent={event}
-                  key={i}
-                  index={i}
-                />
-              );
+              return <Event eventContent={event} key={i} />;
             })}
         </div>
         <div className="absolute bottom-0 right-0 mb-[16.7rem] mr-[28.7rem] h-[50vh] w-[35.4rem] 2xl:mr-[40.4rem]">

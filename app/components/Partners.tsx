@@ -317,13 +317,7 @@ export default function Partners({ content }: PartnersProps) {
                   </div>
                 </div>
               </span>
-              <div className="px-8 py-[100px] text-white md:py-0">
-                <button
-                  onClick={() => setActiveStudio(null)}
-                  className="mb-8 flex w-fit items-center gap-2 underline"
-                >
-                  ← Back
-                </button>
+              <div className="px-8 pb-[16px] pt-[100px] text-white md:py-0">
                 {studio.studioDescription && (
                   <div className="mb-6">
                     <CustomPortableText

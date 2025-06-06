@@ -324,13 +324,7 @@ export default function Community({ content }: CommunityProps) {
                   </div>
                 </div>
               </span>
-              <div className="px-8 py-[100px] text-white md:py-0">
-                <button
-                  onClick={() => setActiveCommunityEvent(null)}
-                  className="mb-8 flex w-fit items-center gap-2 underline"
-                >
-                  ← Back
-                </button>
+              <div className="px-8 pb-[16px] pt-[100px] text-white md:py-0">
                 {activeCommunityEvent.content && (
                   <div className="mb-6">
                     <CustomPortableText
@@ -345,7 +339,7 @@ export default function Community({ content }: CommunityProps) {
           )}
         </div>
         <div
-          className={`flex flex-col gap-12 px-8 transition-all duration-500 ease-in-out md:py-0 ${activeCommunityEvent ? "overflow-hidden pt-0" : "opacity-100"}`}
+          className={`flex flex-col gap-12 px-8 transition-all duration-500 ease-in-out md:py-0 ${activeCommunityEvent ? "hidden overflow-hidden pt-0" : "opacity-100"}`}
         >
           <h1
             className={`py-[80px] text-center text-white md:hidden ${

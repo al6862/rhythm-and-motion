@@ -188,7 +188,10 @@ const communityEventData = `{
     title,
     slug,
     location,
-    address,
+    address {
+        ...,
+        ${linkTypeData},
+    },
     startDate,
     endDate,
     image ${imageData},

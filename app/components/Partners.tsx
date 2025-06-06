@@ -192,7 +192,9 @@ export default function Partners({ content }: PartnersProps) {
         <div
           className={`flex flex-col gap-12 px-8 py-[100px] transition-all duration-500 ease-in-out md:py-0 ${activeStudio ? "pointer-events-none h-0 overflow-hidden opacity-0" : "opacity-100"}`}
         >
-          <h1 className="text-center text-white md:hidden">{header}</h1>
+          <h1 className="py-[80px] text-center text-white md:hidden">
+            {header}
+          </h1>
           {studiosByLocation &&
             Object.entries(studiosByLocation).map(([location, studios]) => {
               return (

@@ -209,12 +209,12 @@ export default function Teachers({ content }: TeachersProps) {
         <div
           className={`flex flex-col gap-12 px-8 pb-8 transition-all duration-500 ease-in-out md:mt-[80px] md:py-0`}
         >
+          <h1
+            className={`mt-[17rem] py-5 text-center text-black md:hidden ${activeTeacher ? "hidden" : "block"}`}
+          >
+            {header}
+          </h1>
           <div>
-            <h1
-              className={`mb-[40px] mt-[17rem] text-center text-black md:hidden ${activeTeacher ? "hidden" : "block"}`}
-            >
-              {header}
-            </h1>
             <div className="flex flex-row items-start">
               <h2 className="text-left text-black">A-Z</h2>
               {teachers?.length && (

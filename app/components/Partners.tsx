@@ -291,7 +291,7 @@ export default function Partners({ content }: PartnersProps) {
                   />
                 </div>
 
-                <div className="relative mt-[80px] w-full">
+                <div className="relative mt-[120px] w-full">
                   <div className="inset-0 top-[150px] items-center justify-center text-white transition-all duration-500">
                     <div className="relative flex-col items-center">
                       <p
@@ -299,7 +299,7 @@ export default function Partners({ content }: PartnersProps) {
                       >
                         {studio.header?.studioSubTitle}
                       </p>
-                      <h1 className="inset-0 mx-[100px] text-center transition-all duration-500">
+                      <h1 className="inset-0 mx-[10px] text-center transition-all duration-500">
                         {studio.header?.studioTitle}
                       </h1>
                       <span

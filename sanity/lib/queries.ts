@@ -121,7 +121,10 @@ const danceStudioData = `{
         studioTitle,
         studioSubTitle,
     },
-    studioAddress,
+    studioAddress {
+        ...,
+        ${linkTypeData},
+    },
     location,
     slug,
     studioDescription[] {

@@ -77,10 +77,7 @@ export default function Partners({ content }: PartnersProps) {
 
   return (
     <div className="flex w-full flex-col md:relative md:flex-row">
-      <div
-        className="sticky top-0 flex h-screen w-full cursor-pointer md:h-screen"
-        onClick={() => router.push(`${pathname}`)}
-      >
+      <div className="sticky top-0 flex h-screen w-full md:h-screen">
         <div className="md:relative md:size-full">
           {studios?.map((studio) => (
             <div
@@ -127,7 +124,7 @@ export default function Partners({ content }: PartnersProps) {
                     hoveredStudioId === studio._id
                       ? "opacity-100"
                       : activeStudio?._id === studio._id
-                        ? "opacity-100"
+                        ? "z-[200] opacity-100"
                         : "opacity-0"
                   }`}
                 >
@@ -150,7 +147,7 @@ export default function Partners({ content }: PartnersProps) {
                     <div className="inset-0 hidden w-2/3 items-center justify-center text-white transition-all duration-500 md:flex">
                       <div className="relative flex size-full flex-col items-center justify-center">
                         {activeStudio?.image?.assetPath && (
-                          <div className="absolute right-0 top-[10%] z-10 mr-[5%] hidden overflow-hidden md:block lg:h-[200px] lg:w-[300px] 2xl:top-[6%] 2xl:h-[300px] 2xl:w-[375px]">
+                          <div className="absolute right-0 top-[10%] z-10 mr-[5%] hidden overflow-hidden drop-shadow-md md:block lg:h-[200px] lg:w-[300px] 2xl:top-[3%] 2xl:h-[300px] 2xl:w-[375px]">
                             <Image
                               src={activeStudio.image.assetPath}
                               alt={activeStudio.image.caption || "missing alt"}
@@ -161,7 +158,7 @@ export default function Partners({ content }: PartnersProps) {
                         )}
 
                         <p
-                          className={`mr-[60%] transition-opacity duration-500 ${activeStudio?._id === studio._id ? "opacity-100" : "opacity-0"}`}
+                          className={`mr-[60%] transition-opacity duration-500 ${activeStudio?._id === studio._id ? "z-[200] opacity-100" : "pointer-events-none opacity-0"}`}
                         >
                           {studio.header?.studioSubTitle}
                         </p>
@@ -169,13 +166,16 @@ export default function Partners({ content }: PartnersProps) {
                           {studio.header?.studioTitle}
                         </h1>
                         <span
-                          className={`ml-[45%] text-right transition-opacity duration-500 ${activeStudio?._id === studio._id ? "opacity-100" : "opacity-0"}`}
+                          className={`ml-[45%] text-right transition-opacity duration-500 ${activeStudio?._id === studio._id ? "z-[200] opacity-100" : "pointer-events-none opacity-0"}`}
                         >
-                          <CustomPortableText
-                            value={
-                              studio.studioAddress as unknown as PortableTextBlock[]
-                            }
-                          />
+                          <Link
+                            link={studio.studioAddress as LinkValue}
+                            className="underline"
+                          >
+                            {studio.studioAddress?.text?.split("|")[0]}
+                            <br />
+                            {studio.studioAddress?.text?.split("|")[1]}
+                          </Link>
                         </span>
                       </div>
                     </div>
@@ -240,11 +240,9 @@ export default function Partners({ content }: PartnersProps) {
                               <p className="font-bold">
                                 {studio.header?.studioTitle}
                               </p>
-                              <CustomPortableText
-                                value={
-                                  studio.studioAddress as unknown as PortableTextBlock[]
-                                }
-                              />
+                              <p>
+                                {studio.studioAddress?.text?.replace("|", "")}
+                              </p>
                             </div>
                             {studio?.danceClasses?.length && (
                               <div className="mr-4 flex size-[31px] shrink-0 items-center justify-center rounded-xl bg-white font-bold text-orange-red group-hover:bg-orange-red group-hover:text-white">
@@ -266,7 +264,7 @@ export default function Partners({ content }: PartnersProps) {
         </div>
 
         <div
-          className={`transition-all duration-500 ease-in-out ${!activeStudio ? "opacity-0" : "opacity-100"}`}
+          className={`transition-all duration-500 ease-in-out ${!activeStudio ? "pointer-events-none opacity-0" : "z-[200] opacity-100"}`}
         >
           {studios?.map((studio) => (
             <div
@@ -278,8 +276,8 @@ export default function Partners({ content }: PartnersProps) {
                   key={studio._id}
                   className={`transition-all duration-500 ${
                     activeStudio?._id === studio._id
-                      ? "opacity-100"
-                      : "hidden opacity-0"
+                      ? "z-[200] opacity-100"
+                      : "pointer-events-none hidden opacity-0"
                   }`}
                 >
                   <Image
@@ -295,7 +293,7 @@ export default function Partners({ content }: PartnersProps) {
                   <div className="inset-0 top-[150px] items-center justify-center text-white transition-all duration-500">
                     <div className="relative flex-col items-center">
                       <p
-                        className={`absolute left-10 top-[-50px] transition-all duration-500 ${activeStudio?._id === studio._id ? "opacity-100" : "opacity-0"}`}
+                        className={`absolute left-10 top-[-50px] transition-all duration-500 ${activeStudio?._id === studio._id ? "z-[200] opacity-100" : "pointer-events-none opacity-0"}`}
                       >
                         {studio.header?.studioSubTitle}
                       </p>
@@ -303,13 +301,16 @@ export default function Partners({ content }: PartnersProps) {
                         {studio.header?.studioTitle}
                       </h1>
                       <span
-                        className={`absolute bottom-[-50px] right-10 text-right transition-all duration-500 ${activeStudio?._id === studio._id ? "opacity-100" : "opacity-0"}`}
+                        className={`absolute bottom-[-50px] right-10 text-right transition-all duration-500 ${activeStudio?._id === studio._id ? "z-[200] opacity-100" : "pointer-events-none opacity-0"}`}
                       >
-                        <CustomPortableText
-                          value={
-                            studio.studioAddress as unknown as PortableTextBlock[]
-                          }
-                        />
+                        <Link
+                          link={studio.studioAddress as LinkValue}
+                          className="z-[200] underline"
+                        >
+                          {studio.studioAddress?.text?.split("|")[0]}
+                          <br />
+                          {studio.studioAddress?.text?.split("|")[1]}
+                        </Link>
                       </span>
                     </div>
                   </div>

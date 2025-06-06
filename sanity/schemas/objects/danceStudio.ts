@@ -42,13 +42,12 @@ export const danceStudio = defineType({
     defineField({
       name: "studioAddress",
       title: "Full Address of Studio",
-      type: "array",
-      of: [
-        defineArrayMember({
-          type: "block",
-          styles: [{ title: "Normal", value: "normal" }],
-        }),
-      ],
+      description:
+        "Use the character '|' to determine the linebreak for the street address from the city/state/zip code. Link value should be a google maps link.",
+      type: "link",
+      options: {
+        enableText: true,
+      },
     }),
     defineField({
       name: "location",

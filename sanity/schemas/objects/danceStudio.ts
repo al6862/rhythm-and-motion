@@ -42,13 +42,10 @@ export const danceStudio = defineType({
     defineField({
       name: "studioAddress",
       title: "Full Address of Studio",
-      type: "array",
-      of: [
-        defineArrayMember({
-          type: "block",
-          styles: [{ title: "Normal", value: "normal" }],
-        }),
-      ],
+      type: "link",
+      options: {
+        enableText: true,
+      },
     }),
     defineField({
       name: "location",

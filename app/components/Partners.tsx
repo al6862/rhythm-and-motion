@@ -77,10 +77,7 @@ export default function Partners({ content }: PartnersProps) {
 
   return (
     <div className="flex w-full flex-col md:relative md:flex-row">
-      <div
-        className="sticky top-0 flex h-screen w-full cursor-pointer md:h-screen"
-        onClick={() => router.push(`${pathname}`)}
-      >
+      <div className="sticky top-0 flex h-screen w-full md:h-screen">
         <div className="md:relative md:size-full">
           {studios?.map((studio) => (
             <div
@@ -127,7 +124,7 @@ export default function Partners({ content }: PartnersProps) {
                     hoveredStudioId === studio._id
                       ? "opacity-100"
                       : activeStudio?._id === studio._id
-                        ? "opacity-100"
+                        ? "opacity-100 z-[200]"
                         : "opacity-0"
                   }`}
                 >
@@ -171,11 +168,14 @@ export default function Partners({ content }: PartnersProps) {
                         <span
                           className={`ml-[45%] text-right transition-opacity duration-500 ${activeStudio?._id === studio._id ? "opacity-100" : "opacity-0"}`}
                         >
-                          <CustomPortableText
-                            value={
-                              studio.studioAddress as unknown as PortableTextBlock[]
-                            }
-                          />
+                          <Link
+                            link={studio.studioAddress as LinkValue}
+                            className="z-[100] underline"
+                          >
+                            {studio.studioAddress?.text?.split("|")[0]}
+                            <br />
+                            {studio.studioAddress?.text?.split("|")[1]}
+                          </Link>
                         </span>
                       </div>
                     </div>
@@ -240,11 +240,7 @@ export default function Partners({ content }: PartnersProps) {
                               <p className="font-bold">
                                 {studio.header?.studioTitle}
                               </p>
-                              <CustomPortableText
-                                value={
-                                  studio.studioAddress as unknown as PortableTextBlock[]
-                                }
-                              />
+                              <p>{studio.studioAddress?.text}</p>
                             </div>
                             {studio?.danceClasses?.length && (
                               <div className="mr-4 flex size-[31px] shrink-0 items-center justify-center rounded-xl bg-white font-bold text-orange-red group-hover:bg-orange-red group-hover:text-white">
@@ -266,7 +262,7 @@ export default function Partners({ content }: PartnersProps) {
         </div>
 
         <div
-          className={`transition-all duration-500 ease-in-out ${!activeStudio ? "opacity-0" : "opacity-100"}`}
+          className={`transition-all duration-500 ease-in-out ${!activeStudio ? "opacity-0" : "z-[200] opacity-100"}`}
         >
           {studios?.map((studio) => (
             <div
@@ -305,11 +301,14 @@ export default function Partners({ content }: PartnersProps) {
                       <span
                         className={`absolute bottom-[-50px] right-10 text-right transition-all duration-500 ${activeStudio?._id === studio._id ? "opacity-100" : "opacity-0"}`}
                       >
-                        <CustomPortableText
-                          value={
-                            studio.studioAddress as unknown as PortableTextBlock[]
-                          }
-                        />
+                        <Link
+                          link={studio.studioAddress as LinkValue}
+                          className="underline"
+                        >
+                          {studio.studioAddress?.text?.split("|")[0]}
+                          <br />
+                          {studio.studioAddress?.text?.split("|")[1]}
+                        </Link>
                       </span>
                     </div>
                   </div>

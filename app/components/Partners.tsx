@@ -235,7 +235,7 @@ export default function Partners({ content }: PartnersProps) {
                               />
                             </svg>
                           </div>
-                          <div className="my-4 flex w-full flex-row flex-wrap items-center justify-between">
+                          <div className="my-4 flex w-full flex-row flex-wrap items-center justify-between px-[16px]">
                             <div>
                               <p className="font-bold">
                                 {studio.header?.studioTitle}

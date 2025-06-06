@@ -403,7 +403,7 @@ export default function Community({ content }: CommunityProps) {
                                   />
                                 </svg>
                               </div>
-                              <div className="m-4 flex w-full flex-row items-center justify-between">
+                              <div className="my-4 flex w-full flex-row items-center justify-between px-[16px]">
                                 <div>
                                   <p className="font-bold">{event.title}</p>
                                   <p>

@@ -245,7 +245,7 @@ export default function Community({ content }: CommunityProps) {
                             event.endDate &&
                             formatEventDate(event.startDate, event.endDate)}
                         </p>
-                        <h1 className="max-w-[600px] py-[20px] text-center">
+                        <h1 className="max-w-[800px] py-[20px] text-center">
                           {event.title}
                         </h1>
                         <span

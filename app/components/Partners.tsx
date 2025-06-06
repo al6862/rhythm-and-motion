@@ -165,7 +165,7 @@ export default function Partners({ content }: PartnersProps) {
                         >
                           {studio.header?.studioSubTitle}
                         </p>
-                        <h1 className="max-w-[600px] py-[20px] text-center">
+                        <h1 className="max-w-[800px] py-[20px] text-center">
                           {studio.header?.studioTitle}
                         </h1>
                         <span

@@ -85,7 +85,7 @@ export default function Partners({ content }: PartnersProps) {
           {studios?.map((studio) => (
             <div
               key={studio._id}
-              className={`absolute inset-0 transition-all duration-500 after:absolute after:inset-0 after:bg-black after:bg-opacity-[20%] ${
+              className={`absolute inset-0 transition-all duration-500 after:absolute after:inset-0 after:bg-black after:bg-opacity-[25%] ${
                 activeStudio?._id === studio._id ? "opacity-100" : "opacity-0"
               }`}
             >
@@ -101,7 +101,7 @@ export default function Partners({ content }: PartnersProps) {
             <div
               className={`inset-0 hidden transition-opacity duration-500 md:absolute md:block ${!activeStudio && hoveredStudio ? "opacity-0" : "opacity-100"}`}
             >
-              <div className="after:absolute after:inset-0 after:bg-black after:bg-opacity-[20%]">
+              <div className="after:absolute after:inset-0 after:bg-black after:bg-opacity-[25%]">
                 <Image
                   src={image.assetPath}
                   alt={image.caption || "missing alt"}
@@ -132,7 +132,7 @@ export default function Partners({ content }: PartnersProps) {
                   }`}
                 >
                   <div
-                    className={`after:absolute after:inset-0 after:bg-black after:bg-opacity-[20%] ${
+                    className={`after:absolute after:inset-0 after:bg-black after:bg-opacity-[25%] ${
                       activeStudio?._id === studio._id
                         ? "after:backdrop-blur-md"
                         : ""

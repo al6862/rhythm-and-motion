@@ -158,7 +158,7 @@ export default function Community({ content }: CommunityProps) {
           {events?.map((event) => (
             <div
               key={event._id}
-              className={`absolute inset-0 transition-all duration-500 after:absolute after:inset-0 after:bg-black after:bg-opacity-[20%] ${
+              className={`absolute inset-0 transition-all duration-500 after:absolute after:inset-0 after:bg-black after:bg-opacity-[25%] ${
                 activeCommunityEvent?._id === event._id
                   ? "opacity-100"
                   : "opacity-0"
@@ -177,7 +177,7 @@ export default function Community({ content }: CommunityProps) {
             <div
               className={`inset-0 hidden transition-opacity duration-500 md:absolute md:block ${!activeCommunityEvent && hoveredCommunityEvent ? "opacity-0" : "opacity-100"}`}
             >
-              <div className="after:absolute after:inset-0 after:bg-black after:bg-opacity-[20%]">
+              <div className="after:absolute after:inset-0 after:bg-black after:bg-opacity-[25%]">
                 <Image
                   src={image.assetPath}
                   alt={image.caption || "missing alt"}
@@ -209,7 +209,7 @@ export default function Community({ content }: CommunityProps) {
                   }`}
                 >
                   <div
-                    className={`after:absolute after:inset-0 after:bg-black after:bg-opacity-[20%] ${
+                    className={`after:absolute after:inset-0 after:bg-black after:bg-opacity-[25%] ${
                       activeCommunityEvent?._id === event._id
                         ? "after:backdrop-blur-md"
                         : ""

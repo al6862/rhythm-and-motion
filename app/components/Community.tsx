@@ -339,10 +339,10 @@ export default function Community({ content }: CommunityProps) {
           )}
         </div>
         <div
-          className={`flex flex-col gap-12 px-8 py-[100px] transition-all duration-500 ease-in-out md:py-0 ${activeCommunityEvent ? "overflow-hidden pt-0" : "opacity-100"}`}
+          className={`flex flex-col gap-12 px-8 transition-all duration-500 ease-in-out md:py-0 ${activeCommunityEvent ? "overflow-hidden pt-0" : "opacity-100"}`}
         >
           <h1
-            className={`text-center text-white md:hidden ${
+            className={`py-[80px] text-center text-white md:hidden ${
               activeCommunityEvent ? "hidden" : ""
             }`}
           >

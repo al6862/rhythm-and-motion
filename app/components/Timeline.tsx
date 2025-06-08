@@ -299,9 +299,7 @@ export default function Timeline({ content }: { content: TimelineProps }) {
           );
         })}
       <div ref={timelineRef} className="relative flex h-screen w-max items-end">
-        <div
-          className="absolute left-[2.2rem] flex h-[50vh] w-[22.5rem] items-end pb-16 lg:top-0 2xl:left-12 2xl:w-[30rem]"
-        >
+        <div className="absolute left-[2.2rem] flex h-[50vh] w-[22.5rem] items-end pb-16 lg:top-0 2xl:left-12 2xl:w-[30rem]">
           <LogoHistory />
         </div>
         {header && (
@@ -328,9 +326,7 @@ export default function Timeline({ content }: { content: TimelineProps }) {
           <Figure />
         </div>
         {link && (
-          <div
-            className="absolute bottom-0 right-0 z-10 pb-12 pr-12"
-          >
+          <div className="absolute bottom-0 right-0 z-10 pb-12 pr-12">
             <Link link={link as LinkValue}>
               <button className="button">{link.text}</button>
             </Link>

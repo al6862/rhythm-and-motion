@@ -43,7 +43,12 @@ export function CustomPortableText({ value }: { value: PortableTextBlock[] }) {
     marks: {
       link: ({ children, value }) => {
         return (
-          <a href={value?.url} target="_blank" rel="noreferrer noopener">
+          <a
+            className="border-b border-dashed"
+            href={value?.href}
+            target="_blank"
+            rel="noreferrer noopener"
+          >
             {children}
           </a>
         );

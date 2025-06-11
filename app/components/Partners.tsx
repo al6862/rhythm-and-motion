@@ -77,10 +77,7 @@ export default function Partners({ content }: PartnersProps) {
 
   return (
     <div className="flex w-full flex-col md:relative md:flex-row">
-      <div
-        className="sticky top-0 flex h-screen w-full cursor-pointer md:h-screen"
-        onClick={() => router.push(`${pathname}`)}
-      >
+      <div className="sticky top-0 flex h-screen w-full md:h-screen">
         <div className="md:relative md:size-full">
           {studios?.map((studio) => (
             <div
@@ -169,7 +166,7 @@ export default function Partners({ content }: PartnersProps) {
                           {studio.header?.studioTitle}
                         </h1>
                         <span
-                          className={`ml-[45%] text-right transition-opacity duration-500 ${activeStudio?._id === studio._id ? "opacity-100" : "opacity-0"}`}
+                          className={`ml-[45%] text-right transition-opacity duration-500 ${activeStudio?._id === studio._id ? "z-[200] opacity-100" : "pointer-events-none opacity-0"}`}
                         >
                           <CustomPortableText
                             value={

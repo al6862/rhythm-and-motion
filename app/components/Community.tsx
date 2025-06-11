@@ -150,10 +150,7 @@ export default function Community({ content }: CommunityProps) {
 
   return (
     <div className="flex w-full flex-col md:relative md:flex-row">
-      <div
-        className="sticky top-0 h-screen w-full cursor-pointer md:h-screen"
-        onClick={() => router.push(`${pathname}`)}
-      >
+      <div className="sticky top-0 h-screen w-full md:h-screen">
         <div className="md:relative md:size-full">
           {events?.map((event) => (
             <div
@@ -249,7 +246,7 @@ export default function Community({ content }: CommunityProps) {
                           {event.title}
                         </h1>
                         <span
-                          className={`ml-[45%] text-right transition-opacity duration-500 ${activeCommunityEvent?._id === event._id ? "opacity-100" : "opacity-0"}`}
+                          className={`ml-[45%] text-right transition-opacity duration-500 ${activeCommunityEvent?._id === event._id ? "z-[200] opacity-100" : "pointer-events-none opacity-0"}`}
                         >
                           <CustomPortableText
                             value={

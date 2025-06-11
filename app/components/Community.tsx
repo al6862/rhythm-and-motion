@@ -149,9 +149,9 @@ export default function Community({ content }: CommunityProps) {
   };
 
   return (
-    <div className="flex w-full flex-col md:relative md:flex-row">
-      <div className="sticky top-0 h-screen w-full md:h-screen">
-        <div className="md:relative md:size-full">
+    <div className="flex w-full flex-col xl:relative xl:flex-row">
+      <div className="sticky top-0 h-screen w-full xl:h-screen">
+        <div className="xl:relative xl:size-full">
           {events?.map((event) => (
             <div
               key={event._id}
@@ -172,7 +172,7 @@ export default function Community({ content }: CommunityProps) {
 
           {image?.assetPath && (
             <div
-              className={`inset-0 hidden transition-opacity duration-500 md:absolute md:block ${!activeCommunityEvent && hoveredCommunityEvent ? "opacity-0" : "opacity-100"}`}
+              className={`inset-0 hidden transition-opacity duration-500 xl:absolute xl:block ${!activeCommunityEvent && hoveredCommunityEvent ? "opacity-0" : "opacity-100"}`}
             >
               <div className="after:absolute after:inset-0 after:bg-black after:bg-opacity-[25%]">
                 <Image
@@ -183,7 +183,7 @@ export default function Community({ content }: CommunityProps) {
                 />
               </div>
               <div className="relative h-full w-2/3">
-                <div className="inset-0 hidden items-center justify-center text-white md:absolute md:flex">
+                <div className="inset-0 hidden items-center justify-center text-white xl:absolute xl:flex">
                   <div className="text-center">
                     <h1>{header}</h1>
                   </div>
@@ -197,7 +197,7 @@ export default function Community({ content }: CommunityProps) {
               event.image?.assetPath && (
                 <div
                   key={event._id}
-                  className={`inset-0 hidden transition-all duration-500 md:absolute md:block ${
+                  className={`inset-0 hidden transition-all duration-500 xl:absolute xl:block ${
                     hoveredCommunityEventId === event._id
                       ? "opacity-100"
                       : activeCommunityEvent?._id === event._id
@@ -220,10 +220,10 @@ export default function Community({ content }: CommunityProps) {
                     />
                   </div>
                   <div className="relative h-full w-2/3">
-                    <div className="inset-0 hidden items-center justify-center text-white transition-all duration-500 md:absolute md:flex">
+                    <div className="inset-0 hidden items-center justify-center text-white transition-all duration-500 xl:absolute xl:flex">
                       <div className="relative flex size-full flex-col items-center justify-center">
                         {activeCommunityEvent?.image?.assetPath && (
-                          <div className="absolute right-0 top-[10%] z-10 mr-[5%] hidden overflow-hidden md:block lg:h-[200px] lg:w-[300px] 2xl:top-[6%] 2xl:h-[300px] 2xl:w-[375px]">
+                          <div className="absolute right-0 top-[10%] z-10 mr-[5%] hidden overflow-hidden lg:h-[200px] lg:w-[300px] xl:block 2xl:top-[6%] 2xl:h-[300px] 2xl:w-[375px]">
                             <Image
                               src={activeCommunityEvent.image.assetPath}
                               alt={
@@ -264,17 +264,17 @@ export default function Community({ content }: CommunityProps) {
       </div>
 
       <div
-        className={`z-5 no-scrollbar absolute h-screen w-full overflow-y-scroll transition-all md:right-0 md:top-0 md:h-full md:w-1/3 md:pb-[16px] md:pl-[16px] md:pr-[30px] md:pt-[134px] ${activeCommunityEvent ? "bg-black bg-opacity-[0.5] backdrop-blur-md backdrop-contrast-100 backdrop-saturate-[300%]" : "bg-blue"}`}
+        className={`z-5 no-scrollbar absolute h-screen w-full overflow-y-scroll transition-all xl:right-0 xl:top-0 xl:h-full xl:w-1/3 xl:min-w-[493px] xl:pb-[16px] xl:pl-[16px] xl:pr-[30px] xl:pt-[134px] ${activeCommunityEvent ? "bg-black bg-opacity-[0.5] backdrop-blur-md backdrop-contrast-100 backdrop-saturate-[300%]" : "bg-blue"}`}
       >
         <div
-          className={`pt-[100px] transition-all duration-500 ease-in-out md:pt-0 ${!activeCommunityEvent ? "opacity-0" : "opacity-100"}`}
+          className={`pt-[100px] transition-all duration-500 ease-in-out xl:pt-0 ${!activeCommunityEvent ? "opacity-0" : "opacity-100"}`}
         >
           {activeCommunityEvent && (
             <div
               key={activeCommunityEvent._id}
               className={` ${activeCommunityEvent?._id === activeCommunityEvent._id ? "block" : "hidden"}`}
             >
-              <span className="md:hidden">
+              <span className="xl:hidden">
                 <div
                   key={activeCommunityEvent._id}
                   className={`transition-all duration-500 ${
@@ -321,7 +321,7 @@ export default function Community({ content }: CommunityProps) {
                   </div>
                 </div>
               </span>
-              <div className="px-8 pb-[16px] pt-[100px] text-white md:py-0">
+              <div className="px-8 pb-[16px] pt-[100px] text-white xl:py-0">
                 {activeCommunityEvent.content && (
                   <div className="mb-6">
                     <CustomPortableText
@@ -336,10 +336,10 @@ export default function Community({ content }: CommunityProps) {
           )}
         </div>
         <div
-          className={`flex flex-col gap-12 px-8 transition-all duration-500 ease-in-out md:py-0 ${activeCommunityEvent ? "hidden overflow-hidden pt-0" : "opacity-100"}`}
+          className={`flex flex-col gap-12 px-8 transition-all duration-500 ease-in-out xl:py-0 ${activeCommunityEvent ? "hidden overflow-hidden pt-0" : "opacity-100"}`}
         >
           <h1
-            className={`py-[80px] text-center text-white md:hidden ${
+            className={`py-[80px] text-center text-white xl:hidden ${
               activeCommunityEvent ? "hidden" : ""
             }`}
           >

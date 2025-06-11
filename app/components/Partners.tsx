@@ -184,7 +184,7 @@ export default function Partners({ content }: PartnersProps) {
       </div>
 
       <div
-        className={`z-5 no-scrollbar absolute h-screen w-full overflow-y-scroll transition-all md:md:left-0 md:top-0 md:h-full md:w-1/3 md:pb-[16px] md:pl-[16px] md:pr-[30px] md:pt-[134px] ${activeStudio ? "bg-black bg-opacity-[0.5] backdrop-blur-md backdrop-contrast-100 backdrop-saturate-[300%]" : "bg-orange-red"}`}
+        className={`z-5 no-scrollbar absolute h-screen w-full overflow-y-scroll transition-all md:md:left-0 md:top-0 md:h-full md:w-1/3 md:min-w-[493px] md:pb-[16px] md:pl-[16px] md:pr-[30px] md:pt-[134px] ${activeStudio ? "bg-black bg-opacity-[0.5] backdrop-blur-md backdrop-contrast-100 backdrop-saturate-[300%]" : "bg-orange-red"}`}
       >
         <div
           className={`flex flex-col gap-12 px-8 py-[100px] transition-all duration-500 ease-in-out md:py-0 ${activeStudio ? "pointer-events-none h-0 overflow-hidden opacity-0" : "opacity-100"}`}

@@ -200,8 +200,13 @@ const communityData = `{
     _type,
     title,
     header,
+    ctaLink {
+        ...,
+        ${linkTypeData},
+    },
     image ${imageData},
     events[] -> ${communityEventData},
+
 }`;
 
 const timelineData = `{

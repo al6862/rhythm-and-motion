@@ -2538,6 +2538,14 @@
         },
         "optional": true
       },
+      "ctaLink": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "link"
+        },
+        "optional": true
+      },
       "events": {
         "type": "objectAttribute",
         "value": {

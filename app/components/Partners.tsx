@@ -319,7 +319,7 @@ export default function Partners({ content }: PartnersProps) {
               </span>
               <div className="px-8 pb-[16px] pt-[100px] text-white md:py-0">
                 {studio.studioDescription && (
-                  <div className="mb-6">
+                  <div className="pb-16">
                     <CustomPortableText
                       value={
                         studio.studioDescription as unknown as PortableTextBlock[]

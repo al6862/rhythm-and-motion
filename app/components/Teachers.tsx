@@ -196,7 +196,7 @@ export default function Teachers({ content }: TeachersProps) {
               </div>
               <div className="mt-[50px] px-8 md:mt-0 md:py-0">
                 {teacher.blurb && (
-                  <div className="mb-6 md:mx-8">
+                  <div className="pb-16">
                     <CustomPortableText
                       value={teacher.blurb as unknown as PortableTextBlock[]}
                     />

@@ -5,6 +5,8 @@ import type { CommunityQueryResult } from "@/sanity.types";
 import { PortableTextBlock } from "@portabletext/types";
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { Link } from "./Link";
+import { LinkValue } from "sanity-plugin-link-field";
 
 type CommunityProps = {
   content: CommunityQueryResult["community"];
@@ -116,7 +118,7 @@ export default function Community({ content }: CommunityProps) {
   const [activeCommunityEvent, setActiveCommunityEvent] =
     useState<CommunityEvent | null>(null);
   const [sortedEvents, setsortedEvents] = useState<SortedEvents | null>(null);
-  const { header, image, events } = content || {};
+  const { header, image, events, ctaLink } = content || {};
 
   useEffect(() => {
     if (!sortedEvents && events) {
@@ -323,7 +325,7 @@ export default function Community({ content }: CommunityProps) {
               </span>
               <div className="px-8 pb-[16px] pt-[100px] text-white xl:py-0">
                 {activeCommunityEvent.content && (
-                  <div className="mb-6">
+                  <div className="mb-6 pb-16">
                     <CustomPortableText
                       value={
                         activeCommunityEvent.content as unknown as PortableTextBlock[]
@@ -336,7 +338,7 @@ export default function Community({ content }: CommunityProps) {
           )}
         </div>
         <div
-          className={`flex flex-col gap-12 px-8 transition-all duration-500 ease-in-out xl:py-0 ${activeCommunityEvent ? "hidden overflow-hidden pt-0" : "opacity-100"}`}
+          className={`flex flex-col gap-12 px-8 transition-all duration-500 ease-in-out xl:py-0 ${activeCommunityEvent ? "pt-0" : "opacity-100"}`}
         >
           <h1
             className={`py-[80px] text-center text-white xl:hidden ${
@@ -348,12 +350,24 @@ export default function Community({ content }: CommunityProps) {
           {sortedEvents &&
             sortedEvents.map(({ when, datedEvents }) => {
               let topText = when;
+
+              let length = datedEvents.length;
+
+              if (
+                activeCommunityEvent &&
+                sortedEvents
+                  .find((e) => e.when === "Upcoming")
+                  ?.datedEvents.find((e) => e._id === activeCommunityEvent._id)
+              ) {
+                length = length - 1;
+              }
+
               if (activeCommunityEvent) {
                 topText = "More Events";
               }
               if (
                 (activeCommunityEvent && when === "Previous") ||
-                datedEvents.length < 2
+                (activeCommunityEvent && datedEvents.length < 2)
               ) {
                 return;
               } else {
@@ -362,7 +376,7 @@ export default function Community({ content }: CommunityProps) {
                     <div className="flex gap-4">
                       <h2 className="text-white">{topText}</h2>
                       <div className="flex size-[31px] items-center justify-center rounded-xl bg-white font-bold text-black">
-                        <p>{datedEvents.length - 1}</p>
+                        <p>{length}</p>
                       </div>
                     </div>
                     <div className="mt-8 flex flex-col">
@@ -438,6 +452,14 @@ export default function Community({ content }: CommunityProps) {
               }
             })}
         </div>
+
+        {activeCommunityEvent && (
+          <div className="pt-16">
+            <Link link={ctaLink as LinkValue}>
+              <button className="button">{ctaLink?.text}</button>
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

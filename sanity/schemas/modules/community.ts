@@ -24,6 +24,14 @@ export const community = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "ctaLink",
+      title: "CTA Link",
+      type: "link",
+      options: {
+        enableText: true,
+      },
+    }),
+    defineField({
       name: "events",
       title: "Community Events",
       type: "array",

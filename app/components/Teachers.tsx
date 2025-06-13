@@ -195,6 +195,12 @@ export default function Teachers({ content }: TeachersProps) {
                 </div>
               </div>
               <div className="mt-[50px] px-8 md:mt-0 md:py-0">
+                <button
+                  onClick={() => router.push("/our-teachers")}
+                  className="mb-8 flex w-fit items-center gap-2 underline"
+                >
+                  ← Back
+                </button>
                 {teacher.blurb && (
                   <div className="pb-16">
                     <CustomPortableText

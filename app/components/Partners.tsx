@@ -167,7 +167,7 @@ export default function Partners({ content }: PartnersProps) {
       </div>
 
       <div
-        className={`no-scrollbar z-20 col-start-1 row-start-1 grid w-full transition-all md:flex`}
+        className={`no-scrollbar col-start-1 row-start-1 grid w-full transition-all md:flex ${activeStudio ? "" : "md:z-20"}`}
       >
         {activeStudio && (
           <div className="sticky top-0 col-start-1 row-start-1 h-screen after:absolute after:inset-0 after:bg-black after:bg-opacity-[25%] after:backdrop-blur-md xl:hidden">
@@ -214,7 +214,7 @@ export default function Partners({ content }: PartnersProps) {
                             }
                             onClick={() => handleStudioClick(studio)}
                           >
-                            <div className="pointer-events-none  flex w-full flex-row flex-wrap items-center justify-between border-t border-dashed px-[16px] py-4">
+                            <div className="pointer-events-none flex w-full flex-row flex-wrap items-center justify-between border-t border-dashed px-[16px] py-4">
                               <div>
                                 <p className="font-bold">
                                   {studio.header?.studioTitle}

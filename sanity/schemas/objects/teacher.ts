@@ -3,7 +3,7 @@ import { SquareIcon } from "@sanity/icons";
 export const teacher = defineType({
   name: "teacher",
   title: "Teacher",
-  type: "object",
+  type: "document",
   fields: [
     defineField({
       name: "name",

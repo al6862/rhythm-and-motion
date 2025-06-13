@@ -29,19 +29,6 @@ export const teachers = defineType({
       title: "Background Image",
       type: "imageAlt",
     }),
-    defineField({
-      name: "teachers",
-      title: "Teachers",
-      type: "array",
-      of: [
-        defineArrayMember({
-          type: "teacher",
-          name: "teacher",
-          title: "Teacher",
-        }),
-      ],
-      validation: (R) => R.unique(),
-    }),
   ],
 
   preview: {

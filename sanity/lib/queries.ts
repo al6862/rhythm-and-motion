@@ -148,7 +148,7 @@ const partnersData = `{
     header,
     'bgColor': bgColor.hex,    
     image ${imageData},
-    studios[] -> ${danceStudioData},
+    'studios': *[_type == 'danceStudio'] ${danceStudioData},
     link {
         ...,
         ${linkTypeData},

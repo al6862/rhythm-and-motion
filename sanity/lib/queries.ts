@@ -205,8 +205,7 @@ const communityData = `{
         ${linkTypeData},
     },
     image ${imageData},
-    events[] -> ${communityEventData},
-
+    'events': *[_type == 'communityEvent'] ${communityEventData}
 }`;
 
 const timelineData = `{

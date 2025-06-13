@@ -31,13 +31,6 @@ export const partners = defineType({
       type: "imageAlt",
     }),
     defineField({
-      name: "studios",
-      title: "Studios",
-      type: "array",
-      of: [{ type: "reference", to: [{ type: "danceStudio" }] }],
-      validation: (R) => R.unique(),
-    }),
-    defineField({
       name: "link",
       title: "Become Partner Link",
       type: "link",

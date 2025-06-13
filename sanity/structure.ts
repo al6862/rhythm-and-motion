@@ -20,6 +20,7 @@ const documentsHiddenFromContentList = [
   "partners",
   "splitImageAndText",
   "teachers",
+  "teacher",
   "timeline",
   "timelineEvent",
   "video",

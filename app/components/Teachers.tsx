@@ -88,9 +88,9 @@ export default function Teachers({ content }: TeachersProps) {
             (teacher) =>
               teacher.image?.assetPath && (
                 <div
-                  key={teacher._key}
+                  key={teacher._id}
                   className={`relative inset-0 hidden transition-all duration-500 md:absolute md:block ${
-                    activeTeacher?._key === teacher._key
+                    activeTeacher?._id === teacher._id
                       ? "z-10 opacity-100"
                       : "z-0 opacity-0"
                   }`}
@@ -111,7 +111,7 @@ export default function Teachers({ content }: TeachersProps) {
                         </div>
                       )}
                       <p
-                        className={`absolute top-[-50px] transition-opacity duration-500 lg:left-[-100px] xl:left-[-200px] 2xl:left-[-300px] ${activeTeacher?._key === teacher._key ? "opacity-100" : "opacity-0"}`}
+                        className={`absolute top-[-50px] transition-opacity duration-500 lg:left-[-100px] xl:left-[-200px] 2xl:left-[-300px] ${activeTeacher?._id === teacher._id ? "opacity-100" : "opacity-0"}`}
                         onClick={() => router.push(`${pathname}`)}
                       >
                         {teacher.pronouns}
@@ -123,7 +123,7 @@ export default function Teachers({ content }: TeachersProps) {
                         {teacher.name}
                       </h1>
                       <div
-                        className={`bottom-[-50px] text-right transition-opacity duration-500 md:absolute lg:right-[-100px] xl:right-[-200px] 2xl:right-[-400px] ${activeTeacher?._key === teacher._key ? "opacity-100" : "opacity-0"}`}
+                        className={`bottom-[-50px] text-right transition-opacity duration-500 md:absolute lg:right-[-100px] xl:right-[-200px] 2xl:right-[-400px] ${activeTeacher?._id === teacher._id ? "opacity-100" : "opacity-0"}`}
                       >
                         <p>Teacher at</p>
                         <Link
@@ -152,13 +152,13 @@ export default function Teachers({ content }: TeachersProps) {
         >
           {teachers?.map((teacher) => (
             <div
-              key={teacher._key}
-              className={` ${activeTeacher?._key === teacher._key ? "block" : "hidden"}`}
+              key={teacher._id}
+              className={` ${activeTeacher?._id === teacher._id ? "block" : "hidden"}`}
             >
               <div className="md:hidden">
                 <div
                   className={`transition-all duration-500 ${
-                    activeTeacher?._key === teacher._key
+                    activeTeacher?._id === teacher._id
                       ? "opacity-100"
                       : "hidden opacity-0"
                   }`}
@@ -176,7 +176,7 @@ export default function Teachers({ content }: TeachersProps) {
                   <div className="inset-0 top-[150px] items-center justify-center transition-all duration-500">
                     <div className="relative flex-col items-center">
                       <p
-                        className={`absolute left-10 top-[-60px] transition-all duration-500 ${activeTeacher?._key === teacher._key ? "opacity-100" : "opacity-0"}`}
+                        className={`absolute left-10 top-[-60px] transition-all duration-500 ${activeTeacher?._id === teacher._id ? "opacity-100" : "opacity-0"}`}
                       >
                         {teacher.pronouns}
                       </p>
@@ -185,7 +185,7 @@ export default function Teachers({ content }: TeachersProps) {
                       </h1>
 
                       <Link
-                        className={`absolute bottom-[-60px] right-10 text-right underline transition-all duration-500 ${activeTeacher?._key === teacher._key ? "opacity-100" : "opacity-0"}`}
+                        className={`absolute bottom-[-60px] right-10 text-right underline transition-all duration-500 ${activeTeacher?._id === teacher._id ? "opacity-100" : "opacity-0"}`}
                         link={teacher.studio as LinkValue}
                       >
                         {teacher.studio?.text}
@@ -236,9 +236,9 @@ export default function Teachers({ content }: TeachersProps) {
               teachers.map((teacher) => {
                 return (
                   <div
-                    key={teacher._key}
+                    key={teacher._id}
                     style={{ "--hover-bg": bgColor } as React.CSSProperties}
-                    className={`group cursor-pointer text-black transition-all ${activeTeacher?._key === teacher._key ? "pointer-events-none bg-white brightness-50" : activeTeacher ? "hover:bg-white" : `hover:bg-[var(--hover-bg)]`}`}
+                    className={`group cursor-pointer text-black transition-all ${activeTeacher?._id === teacher._id ? "pointer-events-none bg-white brightness-50" : activeTeacher ? "hover:bg-white" : `hover:bg-[var(--hover-bg)]`}`}
                     onClick={() => handleTeacherClick(teacher)}
                   >
                     <div className="flex w-full flex-row items-center justify-between border-t border-dashed py-4">

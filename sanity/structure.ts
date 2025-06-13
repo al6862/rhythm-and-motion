@@ -20,7 +20,6 @@ const documentsHiddenFromContentList = [
   "partners",
   "splitImageAndText",
   "teachers",
-  "teacher",
   "timeline",
   "timelineEvent",
   "video",
@@ -188,6 +187,13 @@ export const structure: StructureResolver = (S) =>
         .title("Community Events")
         .child(
           S.documentTypeList("communityEvent").defaultOrdering([
+            { field: "_createdAt", direction: "asc" },
+          ]),
+        ),
+      S.listItem()
+        .title("Teachers")
+        .child(
+          S.documentTypeList("teacher").defaultOrdering([
             { field: "_createdAt", direction: "asc" },
           ]),
         ),

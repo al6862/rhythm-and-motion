@@ -176,7 +176,7 @@ const teachersData = `{
     header,
     'bgColor': bgColor.hex,    
     image ${imageData},
-    "teachers": teachers[] | order(name asc) ${teacherData},
+    "teachers": *[_type == 'communityEvent']  | order(name asc) ${teacherData},
 }`;
 
 const communityEventData = `{

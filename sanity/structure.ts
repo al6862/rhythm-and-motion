@@ -192,6 +192,13 @@ export const structure: StructureResolver = (S) =>
           ]),
         ),
       S.listItem()
+        .title("Teachers")
+        .child(
+          S.documentTypeList("teacher").defaultOrdering([
+            { field: "_createdAt", direction: "asc" },
+          ]),
+        ),
+      S.listItem()
         .title("Site Settings")
         .child(
           S.list()

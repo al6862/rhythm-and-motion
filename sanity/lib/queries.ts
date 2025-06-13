@@ -176,7 +176,7 @@ const teachersData = `{
     header,
     'bgColor': bgColor.hex,    
     image ${imageData},
-    "teachers": teachers[] | order(name asc) ${teacherData},
+    'teachers': *[_type == 'teacher'] | order(name asc) ${teacherData},
 }`;
 
 const communityEventData = `{
@@ -205,8 +205,7 @@ const communityData = `{
         ${linkTypeData},
     },
     image ${imageData},
-    events[] -> ${communityEventData},
-
+    'events': *[_type == 'communityEvent'] ${communityEventData}
 }`;
 
 const timelineData = `{

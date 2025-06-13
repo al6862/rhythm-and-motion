@@ -31,16 +31,5 @@ export const community = defineType({
         enableText: true,
       },
     }),
-    defineField({
-      name: "events",
-      title: "Community Events",
-      type: "array",
-      of: [
-        {
-          type: "reference",
-          to: [{ type: "communityEvent" }],
-        },
-      ],
-    }),
   ],
 });

@@ -9,7 +9,8 @@ export const partners = defineType({
       name: "title",
       title: "Title",
       type: "string",
-      description: 'This module displays all partners listed under the "Partners" tab.',
+      description:
+        'This module displays all partners listed under the "Partners" tab.',
       validation: (Rule) => Rule.required(),
     }),
     defineField({

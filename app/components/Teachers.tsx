@@ -142,7 +142,7 @@ export default function Teachers({ content }: TeachersProps) {
       </div>
 
       <div
-        className={`z-5 no-scrollbar md:r-0 relative overflow-y-scroll transition-all after:bg-white md:w-1/3 md:min-w-[493px] md:py-[100px] md:pb-[16px] md:pl-[16px] md:pr-[30px]`}
+        className={`z-5 no-scrollbar md:r-0 relative overflow-y-scroll transition-all after:bg-white md:w-1/3 md:min-w-[493px] md:pb-[1.6rem] md:pl-[16px] md:pr-[30px] md:pt-[13.4rem]`}
         style={{
           backgroundColor: activeTeacher ? bgColor || "#ADAFA8" : "white",
         }}
@@ -213,10 +213,10 @@ export default function Teachers({ content }: TeachersProps) {
           ))}
         </div>
         <div
-          className={`mt-32 flex flex-col gap-12 px-8 pb-8 transition-all duration-500 ease-in-out md:mt-[80px] md:py-0`}
+          className={`flex flex-col gap-12 transition-all duration-500 ease-in-out max-md:px-[1.6rem] max-md:pb-[1.6rem]`}
         >
           <h1
-            className={`pb-20 pt-32 text-center text-black md:hidden ${activeTeacher ? "hidden" : "block"}`}
+            className={`pb-20 pt-[17rem] text-center text-black md:hidden ${activeTeacher ? "hidden" : "block"}`}
           >
             {header}
           </h1>

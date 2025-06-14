@@ -264,7 +264,7 @@ export default function Community({ content }: CommunityProps) {
           className={`col-start-1 row-start-1 w-full xl:static xl:left-0 xl:top-0 xl:min-h-screen xl:min-w-[493px] xl:pb-[16px] xl:pl-[16px] xl:pr-[30px] xl:pt-[134px] ${activeCommunityEvent ? "bg-gray bg-opacity-[0.4] backdrop-blur-lg backdrop-brightness-[40%] backdrop-saturate-[1000%]" : "bg-blue"} `}
         >
           <div
-            className={`relative z-10 pt-[100px] transition-all duration-500 ease-in-out xl:static xl:pt-0 ${!activeCommunityEvent ? "opacity-0" : "opacity-100"}`}
+            className={`relative z-10 pt-[94px] transition-all duration-500 ease-in-out xl:static xl:pt-0 ${!activeCommunityEvent ? "opacity-0" : "opacity-100"}`}
           >
             {activeCommunityEvent && (
               <div
@@ -339,7 +339,7 @@ export default function Community({ content }: CommunityProps) {
             )}
           </div>
           <div
-            className={`relative z-10 flex flex-col gap-12 transition-all duration-500 ease-in-out max-xl:px-[0.8rem] max-xl:pb-[1.6rem] xl:static xl:py-0 ${activeCommunityEvent ? "pt-0" : "opacity-100"}`}
+            className={`relative z-10 flex flex-col gap-12 transition-all duration-500 ease-in-out max-xl:px-[1.6rem] max-xl:pb-[1.6rem] xl:static xl:py-0 ${activeCommunityEvent ? "pt-0" : "opacity-100"}`}
           >
             <h1
               className={`py-[80px] text-center text-white xl:hidden ${

@@ -38,13 +38,6 @@ export const seo = defineType({
       title: "OpenGraph Image",
       type: "image",
       description: "Recommended size is 1200x630. No larger than 1mb.",
-      fields: [
-        {
-          name: "alt",
-          type: "string",
-          title: "Alt Text",
-        },
-      ],
     }),
   ],
 });

@@ -1,15 +1,16 @@
-import { ImageIcon } from "@sanity/icons";
-import { defineField, defineType, defineArrayMember } from "sanity";
+import { defineField, defineType } from "sanity";
 
 export const partners = defineType({
   name: "partners",
-  title: "Partners",
+  title: "Partners Module",
   type: "document",
   fields: [
     defineField({
       name: "title",
       title: "Title",
       type: "string",
+      description:
+        'This module displays all partners listed under the "Partners" tab.',
       validation: (Rule) => Rule.required(),
     }),
     defineField({

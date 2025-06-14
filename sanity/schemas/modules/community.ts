@@ -2,13 +2,15 @@ import { defineField, defineType } from "sanity";
 
 export const community = defineType({
   name: "community",
-  title: "Community",
+  title: "Community Events Module",
   type: "document",
   fields: [
     defineField({
       name: "title",
       title: "Title",
       type: "string",
+      description:
+        'This module displays all community events listed under the "Community Events" tab.',
       validation: (Rule) => Rule.required(),
     }),
     defineField({

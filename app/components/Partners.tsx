@@ -183,9 +183,9 @@ export default function Partners({ content }: PartnersProps) {
           className={`col-start-1 row-start-1 md:static md:left-0 md:top-0 md:min-h-screen md:w-1/3 md:pb-[16px] md:pl-[16px] md:pr-[30px] md:pt-[134px] ${activeStudio ? "bg-gray bg-opacity-[0.4] backdrop-blur-lg backdrop-brightness-[40%] backdrop-saturate-[1000%]" : "bg-orange-red"} `}
         >
           <div
-            className={`relative z-10 flex flex-col gap-12 transition-all duration-500 ease-in-out max-md:px-[0.8rem] max-md:pb-[1.6rem] md:static md:py-0 ${activeStudio ? "pointer-events-none h-0 overflow-hidden opacity-0" : "opacity-100"}`}
+            className={`relative z-10 flex flex-col gap-12 transition-all duration-500 ease-in-out max-md:px-[1.6rem] max-md:pb-[1.6rem] md:static md:py-0 ${activeStudio ? "pointer-events-none h-0 overflow-hidden opacity-0" : "opacity-100"}`}
           >
-            <h1 className="py-[80px] text-center text-white md:hidden">
+            <h1 className="pb-20 pt-[17rem] text-center text-white md:hidden">
               {header}
             </h1>
             {studiosByLocation &&

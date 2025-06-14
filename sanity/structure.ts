@@ -86,6 +86,30 @@ export const structure: StructureResolver = (S) =>
       ),
 
       S.listItem()
+        .title("Community Events")
+        .child(
+          S.documentTypeList("communityEvent").defaultOrdering([
+            { field: "_createdAt", direction: "asc" },
+          ]),
+        ),
+      S.listItem()
+        .title("Partners")
+        .child(
+          S.documentTypeList("danceStudio").defaultOrdering([
+            { field: "_createdAt", direction: "asc" },
+          ]),
+        ),
+      S.listItem()
+        .title("Teachers")
+        .child(
+          S.documentTypeList("teacher").defaultOrdering([
+            { field: "_createdAt", direction: "asc" },
+          ]),
+        ),
+
+      S.divider(),
+
+      S.listItem()
         .title("Modules")
         .child(
           S.list()
@@ -106,7 +130,7 @@ export const structure: StructureResolver = (S) =>
                   ]),
                 ),
               S.listItem()
-                .title("Community")
+                .title("Community Events Module")
                 .child(
                   S.documentTypeList("community").defaultOrdering([
                     { field: "_createdAt", direction: "asc" },
@@ -134,7 +158,7 @@ export const structure: StructureResolver = (S) =>
                   ]),
                 ),
               S.listItem()
-                .title("Partners")
+                .title("Partners Module")
                 .child(
                   S.documentTypeList("partners").defaultOrdering([
                     { field: "_createdAt", direction: "asc" },
@@ -155,7 +179,7 @@ export const structure: StructureResolver = (S) =>
                   ]),
                 ),
               S.listItem()
-                .title("Teachers")
+                .title("Teachers Module")
                 .child(
                   S.documentTypeList("teachers").defaultOrdering([
                     { field: "_createdAt", direction: "asc" },
@@ -176,27 +200,6 @@ export const structure: StructureResolver = (S) =>
                   ]),
                 ),
             ]),
-        ),
-      S.listItem()
-        .title("Dance Studios")
-        .child(
-          S.documentTypeList("danceStudio").defaultOrdering([
-            { field: "_createdAt", direction: "asc" },
-          ]),
-        ),
-      S.listItem()
-        .title("Community Events")
-        .child(
-          S.documentTypeList("communityEvent").defaultOrdering([
-            { field: "_createdAt", direction: "asc" },
-          ]),
-        ),
-      S.listItem()
-        .title("Teachers")
-        .child(
-          S.documentTypeList("teacher").defaultOrdering([
-            { field: "_createdAt", direction: "asc" },
-          ]),
         ),
       S.listItem()
         .title("Site Settings")

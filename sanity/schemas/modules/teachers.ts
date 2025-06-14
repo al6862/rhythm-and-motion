@@ -2,7 +2,7 @@ import { defineField, defineType, defineArrayMember } from "sanity";
 
 export const teachers = defineType({
   name: "teachers",
-  title: "Teachers",
+  title: "Teachers Module",
   type: "document",
   fields: [
     defineField({

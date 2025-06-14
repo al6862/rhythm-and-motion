@@ -2,7 +2,7 @@ import { defineField, defineType } from "sanity";
 
 export const community = defineType({
   name: "community",
-  title: "Community",
+  title: "Community Events Module",
   type: "document",
   fields: [
     defineField({

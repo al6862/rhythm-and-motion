@@ -1,4 +1,4 @@
-import { defineField, defineType, defineArrayMember } from "sanity";
+import { defineField, defineType } from "sanity";
 
 export const teachers = defineType({
   name: "teachers",
@@ -9,6 +9,7 @@ export const teachers = defineType({
       name: "title",
       title: "Title",
       type: "string",
+      description: 'This module displays all teachers listed under the "Teachers" tab.',
       validation: (Rule) => Rule.required(),
     }),
     defineField({

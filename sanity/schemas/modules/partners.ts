@@ -1,5 +1,4 @@
-import { ImageIcon } from "@sanity/icons";
-import { defineField, defineType, defineArrayMember } from "sanity";
+import { defineField, defineType } from "sanity";
 
 export const partners = defineType({
   name: "partners",
@@ -10,6 +9,7 @@ export const partners = defineType({
       name: "title",
       title: "Title",
       type: "string",
+      description: 'This module displays all partners listed under the "Partners" tab.',
       validation: (Rule) => Rule.required(),
     }),
     defineField({

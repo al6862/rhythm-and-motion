@@ -9,6 +9,7 @@ export const community = defineType({
       name: "title",
       title: "Title",
       type: "string",
+      description: 'This module displays all community events listed under the "Community Events" tab.',
       validation: (Rule) => Rule.required(),
     }),
     defineField({

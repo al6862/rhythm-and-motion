@@ -3,7 +3,7 @@ import { SquareIcon } from "@sanity/icons";
 
 export const danceStudio = defineType({
   name: "danceStudio",
-  title: "Dance Studio",
+  title: "Partner",
   type: "document",
   fields: [
     defineField({
